@@ -1,0 +1,151 @@
+div.dock {
+    position: fixed;
+    left: 12.3%;
+    top: 88.3%;
+    width: 75.4%;
+    height: 9.3%;
+    opacity: 1;
+    border-radius: 16.92px;
+    background: rgba(204, 204, 204, 0.6);
+}
+
+a.button1 {
+    position:absolute;
+    left: 2.4%;    
+    top: 8.5%;     
+    width: 90%;
+    height: 90%;
+    opacity: 1;
+    
+}
+
+a.button2 {
+    position:absolute;
+    left: 10.0%;    /* 136/1448 */
+    top: 11.8%;     /* 12/101 */
+    width: 90%;
+    height: 90%;
+    opacity: 1;
+    
+}
+
+a.button3 {
+    position:fixed;
+    left: 24.6%;    /* 473/1920 */
+    top: 89.5%;     /* 967/1080 */
+    width: 76px;
+    height: 76px;
+    opacity: 1;
+    
+}
+
+a.button4 {
+    position:fixed;
+    left: 32%;    /* 573/1920 */
+    top: 89.5%;     /* 967/1080 */
+    width: 76px;
+    height: 76px;
+    opacity: 1;
+    
+}
+
+a.button5 {
+    position:fixed;
+    left: 35%;      /* 673/1920 */
+    top: 89.5%;     /* 967/1080 */
+    width: 76px;
+    height: 76px;
+    opacity: 1;
+    
+}
+
+a.button6 {
+    position:fixed;
+    left: 40.2%;    /* 773/1920 */
+    top: 89.5%;     /* 967/1080 */
+    width: 76px;
+    height: 76px;
+    opacity: 1;
+    
+}
+
+a.button7 {
+    position:fixed;
+    left: 45.4%;    /* 873/1920 */
+    top: 89.5%;     /* 967/1080 */
+    width: 76px;
+    height: 76px;
+    opacity: 1;
+    
+}
+
+a.button8 {
+    position:fixed;
+    left: 50.6%;    /* 973/1920 */
+    top: 89.5%;     /* 967/1080 */
+    width: 76px;
+    height: 76px;
+    opacity: 1;
+    
+}
+
+a.button9 {
+    position:fixed;
+    left: 55.8%;    /* 1073/1920 */
+    top: 89.5%;     /* 967/1080 */
+    width: 76px;
+    height: 76px;
+    opacity: 1;
+    
+}
+
+a.button10 {
+    position:fixed;
+    left: 61%;      /* 1173/1920 */
+    top: 89.5%;     /* 967/1080 */
+    width: 76px;
+    height: 76px;
+    opacity: 1;
+    
+}
+
+a.button11 {
+    position:fixed;
+    left: 66.2%;    /* 1273/1920 */
+    top: 89.5%;     /* 967/1080 */
+    width: 76px;
+    height: 76px;
+    opacity: 1;
+    
+}
+
+a.button12 {
+    position:fixed;
+    left: 71.4%;    /* 1373/1920 */
+    top: 89.5%;     /* 967/1080 */
+    width: 76px;
+    height: 76px;
+    opacity: 1;
+    
+}
+
+a.button13 {
+    position:fixed;
+    left: 76.6%;    /* 1473/1920 */
+    top: 89.5%;     /* 967/1080 */
+    width: 76px;
+    height: 76px;
+    opacity: 1;
+    
+}
+
+a.button14 {
+    position:fixed;
+    left: 81.8%;    /* 1573/1920 */
+    top: 89.5%;     /* 967/1080 */
+    width: 76px;
+    height: 76px;
+    opacity: 1;
+    
+}
+
