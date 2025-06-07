@@ -1,0 +1,40 @@
+name: Build and Deploy to Vercel
+
+on:
+  push:
+    branches:
+      - main # 监听 main 分支的推送事件
+
+jobs:
+  build:
+    name: Build Angular Universal
+    runs-on: ubuntu-latest
+
+    steps:
+      # 检出代码
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # 设置 Node.js 环境
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22 # 使用 Node.js 22 或更高版本
+
+      # 安装依赖
+      - name: Install Dependencies
+        run: npm install
+
+      # 构建 Angular Universal 应用
+      - name: Build Angular Universal
+        run: |
+          npm run build
+          npm run build:ssr
+
+      # 上传构建产物到 Vercel
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v25
+        with:
+            vercel-token: ${{ secrets.VERCEL_TOKEN }} # 从 GitHub Secrets 获取 Vercel Token
+            vercel-args: "--prod" # 部署到生产环境
+            working-directory: ./ # 项目根目录
