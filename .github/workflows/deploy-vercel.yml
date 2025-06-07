@@ -36,5 +36,5 @@ jobs:
         uses: amondnet/vercel-action@v25
         with:
             vercel-token: ${{ secrets.VERCEL_TOKEN }} # 从 GitHub Secrets 获取 Vercel Token
-            vercel-args: "--prod" # 部署到生产环境
+            vercel-args: "--prod --yes" # 部署到生产环境
             working-directory: ./ # 项目根目录
