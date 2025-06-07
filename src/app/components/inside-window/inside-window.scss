@@ -1,0 +1,94 @@
+:host {
+    // 内部显示（水平+垂直居中）
+    position: fixed;
+    inset: 0;               /* 相当于 top:0; right:0; bottom:0; left:0; */
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center;     /* 垂直居中 */
+
+    width: 100vw;
+    height: 100vh;
+
+    // 窗口样式
+    border-radius: 12px;
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.1), /* 外部阴影 */
+        0 8px 32px rgba(0, 0, 0, 0.08),
+        inset 0 0 10px rgba(0, 0, 0, 0.1); /* 内部阴影 */
+    
+    // 边框效果
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    // 确保内容不会溢出
+    overflow-x: hidden;
+    overflow-y: hidden; /* 允许滚动 */
+
+    // 动画效果
+    animation: windowSlideIn 0.6s ease-out;
+
+    // 确保 z-index 足够高，避免被其他元素覆盖
+    z-index: 1000; 
+}
+
+.left-column {
+    width: 30%; /* 左栏宽度 */
+    height: 70%; /* 高度自适应 */
+    background-color: #f0f0f0; /* 左栏背景色 */
+    box-sizing: border-box;
+    display: flex; /* 用于居中图片 */
+    flex-direction: column; /* 使内容垂直排列 */
+    align-items: center; /* 水平居中 */
+    justify-content: flex-start; /* 从顶部开始对齐 */
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px; /* 左栏圆角 */
+}
+
+.profile-image {
+    width: 100%; /* 图片宽度相对于左栏 */
+    height: 100%; /* 图片宽度相对于左栏 */
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px; /* 左栏圆角 */
+    margin-bottom: 20px; /* 图片下方间距 */
+}
+
+.right-column {
+    width: 50%; /* 右栏宽度 */
+    padding: 20px;
+    height: 70%; /* 高度自适应 */
+    background-color: rgba(255, 255, 255, 0.6); /* 半透明背景色 */
+    backdrop-filter: blur(10px); /* 毛玻璃模糊效果 */
+    box-sizing: border-box;
+    overflow-y: auto; /* 允许右栏内容滚动 */
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px; /* 右栏圆角 */
+
+    &::-webkit-scrollbar {
+        width: 10px; /* 滚动条宽度 */
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: skyblue; /* 滚动条颜色 */
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: rgba(255, 255, 255, 0); /* 半透明背景色 */
+        backdrop-filter: blur(10px); /* 毛玻璃模糊效果 */
+        border-radius: 5px; /* 防止轨道部分溢出 */
+        margin: 15px; /* 添加内边距，避免轨道占满整个滚动条区域 */
+    }
+}
+
+/* 响应式设计：在小屏幕上堆叠显示 */
+@media (max-width: 768px) {
+    .left-column, .right-column {
+        width: 100%;
+        height: auto; /* 高度自适应 */
+    }
+    .left-column {
+        justify-content: center; /* 在小屏幕上垂直居中图片 */
+    }
+    .profile-image {
+        margin-bottom: 10px; /* 调整小屏幕下的间距 */
+    }
+}

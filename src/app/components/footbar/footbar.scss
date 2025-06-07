@@ -1,0 +1,16 @@
+:host {
+    // 底部栏样式
+    position: fixed;
+    bottom: 1.5rem;
+    padding: 1rem; /* 左右内边距 */
+    width: auto; /* 宽度自适应 */
+    height: 3rem; /* 高度固定 */
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    background-color: rgba(255, 255, 255, 0.6); /* 半透明背景色 */
+    backdrop-filter: blur(10px); /* 毛玻璃模糊效果 */
+    border-radius: 10px; /* 圆角 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+    z-index: 1000; /* 确保在最上层 */
+}
