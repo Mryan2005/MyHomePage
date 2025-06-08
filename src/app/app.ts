@@ -1,11 +1,14 @@
 import { AfterViewInit, Component, ElementRef, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { BackgroundService } from './config/background';
+import { Footbar } from './components/footbar/footbar';
+import { InsideWindow } from './components/inside-window/inside-window';
 
 @Component({
+  imports: [Footbar, InsideWindow],
   selector: 'app-root',
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrls: ['./app.scss']
 })
 export class App implements AfterViewInit {
   constructor(
