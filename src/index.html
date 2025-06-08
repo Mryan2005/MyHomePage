@@ -10,18 +10,22 @@
     <script src="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.7.2/js/all.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-        const images = [
-            'assets/images/bg1.png',
-            'assets/images/bg2.png',
-            'assets/images/bg3.jpg',
-            'assets/images/bg4.jpg',
-            'assets/images/bg5.png',
-            'assets/images/bg6.jpg',
-            'assets/images/bg7.jpg',
-            'assets/images/bg8.jpg'
-        ];
-        const randomImage = images[Math.floor(Math.random() * images.length)];
-        document.body.style.backgroundImage = `url('${randomImage}')`;
+            const images = [
+                'https://cdn.example.com/images/bg1.png',
+                'https://cdn.example.com/images/bg2.png',
+                'https://cdn.example.com/images/bg3.jpg',
+                'https://cdn.example.com/images/bg4.jpg',
+                'https://cdn.example.com/images/bg5.png',
+                'https://cdn.example.com/images/bg6.jpg',
+                'https://cdn.example.com/images/bg7.jpg',
+                'https://cdn.example.com/images/bg8.jpg'
+            ];
+            const randomImage = images[Math.floor(Math.random() * images.length)];
+            const img = new Image();
+            img.src = randomImage;
+            img.onload = () => {
+                document.body.style.backgroundImage = `url('${randomImage}')`;
+            };
         });
     </script>
     <style>
