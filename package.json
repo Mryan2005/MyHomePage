@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "build:ssr": "ng build && ng run myhomeIndex:server",
+    "build": "ng build --prod",
+    "build:ssr": "ng build --prod && ng run myhomeIndex:server",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:myhomeIndex": "node dist/myhomeIndex/server/server.mjs",
