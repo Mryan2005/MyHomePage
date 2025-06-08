@@ -1,4 +1,0 @@
-/assets/*    /browser/assets/:splat    200
-/*.js        /browser/:splat.js        200
-/*.css       /browser/:splat.css       200
-/*           /browser/index.html       200
