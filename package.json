@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod",
-    "build:ssr": "ng build --prod && ng run myhomeIndex:server",
+    "build": "ng build --configuration production",
+    "build:ssr": "ng build --configuration production && ng run myhomeIndex:server",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:myhomeIndex": "node dist/myhomeIndex/server/server.mjs",
@@ -36,6 +36,7 @@
     "@angular/cli": "^20.0.0",
     "@angular/compiler-cli": "^20.0.0",
     "@iconify-json/skill-icons": "^1.2.0",
+    "@types/compression": "^1.8.1",
     "@types/express": "^5.0.1",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^20.17.19",
