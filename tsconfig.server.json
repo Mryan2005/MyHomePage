@@ -3,6 +3,7 @@
   "compilerOptions": {
     "outDir": "./out-tsc/server",
     "target": "es2020",
+    "module": "es2020",
     "types": ["node"]
   },
   "files": ["src/main.server.ts"],
