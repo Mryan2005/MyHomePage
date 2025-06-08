@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Inject, PLATFORM_ID } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, PLATFORM_ID, Renderer2 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { BackgroundService } from './config/background';
 import { Footbar } from './components/footbar/footbar';
@@ -12,8 +12,8 @@ import { InsideWindow } from './components/inside-window/inside-window';
 })
 export class App implements AfterViewInit {
   constructor(
+    private renderer: Renderer2,
     public bgService: BackgroundService,
-    public elementRef: ElementRef,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
@@ -21,15 +21,13 @@ export class App implements AfterViewInit {
 
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-      const mainElement = document.querySelector('body') as HTMLElement;
-      if (mainElement) {
-        mainElement.style.transition = 'background-image 1s ease-in-out';
-        mainElement.style.backgroundImage = `url('${this.bgService.getBackgroundImage()}')`;
-        mainElement.style.backgroundSize = 'cover';
-        mainElement.style.backgroundPosition = 'center';
-        mainElement.style.backgroundRepeat = 'no-repeat';
-        mainElement.style.backgroundAttachment = 'fixed';
-      }
+      const backgroundImage = this.bgService.getBackgroundImage();
+      this.renderer.setStyle(document.body, 'transition', 'background-image 1s ease-in-out');
+      this.renderer.setStyle(document.body, 'background-image', `url('${backgroundImage}')`);
+      this.renderer.setStyle(document.body, 'background-size', 'cover');
+      this.renderer.setStyle(document.body, 'background-position', 'center');
+      this.renderer.setStyle(document.body, 'background-repeat', 'no-repeat');
+      this.renderer.setStyle(document.body, 'background-attachment', 'fixed');
     }
   }
 }
