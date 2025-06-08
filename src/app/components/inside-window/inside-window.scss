@@ -11,10 +11,7 @@
 
     // 窗口样式
     border-radius: 12px;
-    box-shadow: 
-        0 20px 40px rgba(0, 0, 0, 0.1), /* 外部阴影 */
-        0 8px 32px rgba(0, 0, 0, 0.08),
-        inset 0 0 10px rgba(0, 0, 0, 0.1); /* 内部阴影 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 阴影效果 */
     
     // 边框效果
     border: 1px solid rgba(255, 255, 255, 0.2);
