@@ -33,6 +33,8 @@ jobs:
 
       # 上传构建产物到 Vercel
       - name: Deploy to Vercel
-        run: npx vercel deploy --prod --yes
+        run: |
+          npx vercel --token ${{ secrets.VERCEL_TOKEN }}
+          npx vercel deploy --prod --yes
         env:
             VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
