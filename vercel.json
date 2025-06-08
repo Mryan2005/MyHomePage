@@ -5,6 +5,16 @@
       "source": "/assets/(.*)",
       "destination": "/browser/assets/$1",
       "permanent": true
+    },
+    {
+      "source": "/(.*)\\.js",
+      "destination": "/browser/$1.js",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)\\.css",
+      "destination": "/browser/$1.css",
+      "permanent": true
     }
   ],
   "rewrites": [
@@ -13,4 +23,5 @@
       "destination": "/browser/index.html"
     }
   ]
+  
 }
