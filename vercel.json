@@ -1,10 +1,4 @@
 {
   "version": 2,
-  "rewrites": [{ "source": "/(.*)", "destination": "/browser/index.html" }],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "dist/myhomeIndex/server/server.mjs"
-    }
-  ]
+  "rewrites": [{ "source": "/(.*)", "destination": "/browser/index.html" }]
 }
