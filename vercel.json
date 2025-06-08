@@ -1,4 +1,16 @@
 {
   "version": 2,
-  "rewrites": [{ "source": "/(.*)", "destination": "/browser/index.html" }]
+  "redirects": [
+    {
+      "source": "/assets/(.*)",
+      "destination": "/browser/assets/$1",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/browser/index.html"
+    }
+  ]
 }
