@@ -20,14 +20,14 @@ export class App implements AfterViewInit {
   protected title = 'myhomeIndex';
 
   ngAfterViewInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      const backgroundImage = this.bgService.getBackgroundImage();
-      this.renderer.setStyle(document.body, 'transition', 'background-image 1s ease-in-out');
-      this.renderer.setStyle(document.body, 'background-image', `url('${backgroundImage}')`);
-      this.renderer.setStyle(document.body, 'background-size', 'cover');
-      this.renderer.setStyle(document.body, 'background-position', 'center');
-      this.renderer.setStyle(document.body, 'background-repeat', 'no-repeat');
-      this.renderer.setStyle(document.body, 'background-attachment', 'fixed');
-    }
+    // if (isPlatformBrowser(this.platformId)) {
+    //   const backgroundImage = this.bgService.getBackgroundImage();
+    //   this.renderer.setStyle(document.body, 'transition', 'background-image 1s ease-in-out');
+    //   this.renderer.setStyle(document.body, 'background-image', `url('${backgroundImage}')`);
+    //   this.renderer.setStyle(document.body, 'background-size', 'cover');
+    //   this.renderer.setStyle(document.body, 'background-position', 'center');
+    //   this.renderer.setStyle(document.body, 'background-repeat', 'no-repeat');
+    //   this.renderer.setStyle(document.body, 'background-attachment', 'fixed');
+    // }
   }
 }
