@@ -3,17 +3,24 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./", // 设置模块解析的基础路径
+    "moduleResolution": "node", // 使用 Node.js 的模块解析方式
+    "paths": {
+      "@angular/*": ["node_modules/@angular/*"] // 确保 Angular 模块路径正确
+    },
+    "allowSyntheticDefaultImports": true, // 允许默认导入
+    "esModuleInterop": true, // 确保与 CommonJS 模块互操作
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "skipLibCheck": true,
+    "skipLibCheck": true, // 跳过库的类型检查
     "isolatedModules": true,
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "ES2022",
-    "module": "preserve"
+    "module": "ES2022" // 确保模块格式为 ES2022
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
