@@ -1,2 +1,3 @@
-/polyfills.js        /polyfills-BUUDEW7V.js        200
-/main.js       /main-K5NYVNFU.js       200
+/polyfills.js        /polyfills-*.js        200
+/main.js             /main-*.js         200
+/styles.css       /styles-*.css       200
