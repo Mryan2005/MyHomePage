@@ -30,6 +30,8 @@
 .left-column {
     width: 30%; /* 左栏宽度 */
     height: 75%; /* 高度自适应 */
+    position: relative;
+    top: -24px;
     background-color: #f0f0f0; /* 左栏背景色 */
     box-sizing: border-box;
     display: flex; /* 用于居中图片 */
@@ -52,6 +54,8 @@
     width: 50%; /* 右栏宽度 */
     padding: 20px;
     height: 75%; /* 高度自适应 */
+    position: relative;
+    top: -24px;
     background-color: rgba(255, 255, 255, 0.6); /* 半透明背景色 */
     backdrop-filter: blur(10px); /* 毛玻璃模糊效果 */
     box-sizing: border-box;
