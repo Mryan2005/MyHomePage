@@ -80,6 +80,16 @@
     }
 }
 
+.portal-link {
+  color: inherit;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.portal-link:hover {
+  color: #1976d2;      /* 蓝色 */
+  text-decoration: underline;
+}
+
 /* 响应式设计：在小屏幕上堆叠显示 */
 @media (max-width: 768px) {
     .left-column, .right-column {
