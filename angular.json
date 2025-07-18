@@ -31,12 +31,7 @@
             ],
             "styles": [
               "src/styles.scss"
-            ],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+            ]
           },
           "configurations": {
             "production": {
@@ -82,25 +77,6 @@
             }
           },
           "defaultConfiguration": "development"
-        },
-        "server": {
-        "builder": "@angular-devkit/build-angular:server",
-        "options": {
-          "outputPath": "dist/myhomeIndex/server",
-          "main": "src/main.server.ts",
-          "tsConfig": "tsconfig.server.json"
-        },
-        "configurations": {
-          "production": {
-            "optimization": true,
-            "sourceMap": false
-          },
-          "development": {
-            "optimization": false,
-            "sourceMap": true
-          }
-        },
-        "defaultConfiguration": "production"
         },
         "extract-i18n": {
           "builder": "@angular/build:extract-i18n"
