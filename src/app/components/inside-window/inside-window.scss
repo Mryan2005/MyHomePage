@@ -57,7 +57,7 @@
     position: relative;
     top: -24px;
     background-color: rgba(255, 255, 255, 0.6); /* 半透明背景色 */
-    backdrop-filter: blur(10px); /* 毛玻璃模糊效果 */
+    backdrop-filter: blur(1px); /* 毛玻璃模糊效果 */
     box-sizing: border-box;
     overflow-y: auto; /* 允许右栏内容滚动 */
     border-bottom-right-radius: 10px;
@@ -74,7 +74,7 @@
 
     &::-webkit-scrollbar-track {
         background-color: rgba(255, 255, 255, 0); /* 半透明背景色 */
-        backdrop-filter: blur(10px); /* 毛玻璃模糊效果 */
+        backdrop-filter: blur(1px); /* 毛玻璃模糊效果 */
         border-radius: 5px; /* 防止轨道部分溢出 */
         margin: 15px; /* 添加内边距，避免轨道占满整个滚动条区域 */
     }
