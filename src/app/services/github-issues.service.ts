@@ -12,7 +12,7 @@ export class GithubIssuesService {
     }
 
     private octokit = new Octokit({
-        auth: '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'
+        auth: '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'
     });
 
     async getIssues(owner: string, repo: string) {
