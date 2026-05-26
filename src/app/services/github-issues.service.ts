@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
-import {map, Observable} from 'rxjs';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {Observable} from 'rxjs';
 import {GithubIssue} from '../interfaces/github-issue';
 
 @Injectable({
@@ -18,6 +18,10 @@ export class GithubIssuesService {
         per_page?: number;
         page?: number;
     }): Observable<GithubIssue[]> {
+        const headers = new HttpHeaders({
+            Authorization: `Bearer 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`
+        });
+
         const labels = Array.isArray(params.labels)
             ? params.labels.join(',')
             : params.labels;
@@ -33,10 +37,9 @@ export class GithubIssuesService {
 
         const url = `https://api.github.com/repos/${params.owner}/${params.repo}/issues`;
 
-        return this.http.get<GithubIssue[]>(url, {params: httpParams}).pipe(
-            map((issues) =>
-                issues.filter((issue) => !issue.pull_request)
-            )
-        );
+        return this.http.get<GithubIssue[]>(url, {
+            params: httpParams,
+            headers
+        });
     }
 }
