@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {GithubDiscussionsService} from '../../services/github-discussions.service';
-import {GithubIssue} from '../../interfaces/github-issue';
+import {GithubDiscussion} from '../../interfaces/github-discussion';
 import {firstValueFrom} from 'rxjs';
 
 @Component({
@@ -13,13 +13,14 @@ import {firstValueFrom} from 'rxjs';
 })
 export class SubIssueListComponent implements OnInit {
 
-    discussions: GithubIssue[] = [];
+    discussions: GithubDiscussion[] = [];
 
     loading = false;
     error = '';
 
     constructor(
-        private githubDiscussionsService: GithubDiscussionsService
+        private githubDiscussionsService: GithubDiscussionsService,
+        public cdr: ChangeDetectorRef
     ) {
     }
 
@@ -33,14 +34,17 @@ export class SubIssueListComponent implements OnInit {
                 await firstValueFrom(
                     this.githubDiscussionsService.getDiscussions()
                 );
-
+            this.cdr.detectChanges();
         } catch (e) {
 
             this.error = '加载失败';
+            this.cdr.detectChanges();
 
         } finally {
 
             this.loading = false;
+            this.cdr.detectChanges();
+
         }
     }
 }

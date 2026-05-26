@@ -12,12 +12,12 @@
     *ngIf="!loading && !error && discussions.length === 0"
     class="empty"
   >
-    No issues found
+    No Status found
   </div>
 
   <div class="issue-list">
 
-    @for(discussion of discussions; track discussion) {
+    @for(discussion of discussions; track discussions) {
       <div class="issue-title">
         {{ discussion.title }}
       </div>
