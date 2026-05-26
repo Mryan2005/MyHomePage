@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {AvatarService} from '../../config/avatar';
 
 @Component({
@@ -9,6 +9,8 @@ import {AvatarService} from '../../config/avatar';
     styleUrl: './inside-window.scss'
 })
 export class InsideWindow {
+    @Input() currentDisplayPart: string = 'Home';
+
     constructor(
         public avatarService: AvatarService
     ) {

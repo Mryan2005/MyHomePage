@@ -1,11 +1,12 @@
-import {AfterViewInit, Component, Inject, PLATFORM_ID, Renderer2} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, Inject, PLATFORM_ID, Renderer2} from '@angular/core';
 import {BackgroundService} from './config/background';
 import {Footbar} from './components/footbar/footbar';
 import {InsideWindow} from './components/inside-window/inside-window';
 import {TopbarComponent} from './components/topbar/topbar.component';
+import {NgIf} from '@angular/common';
 
 @Component({
-    imports: [Footbar, InsideWindow, TopbarComponent],
+    imports: [Footbar, InsideWindow, TopbarComponent, NgIf],
     selector: 'app-root',
     standalone: true,
     templateUrl: './app.html',
@@ -15,11 +16,13 @@ export class App implements AfterViewInit {
     constructor(
         private renderer: Renderer2,
         public bgService: BackgroundService,
+        public cdr: ChangeDetectorRef,
         @Inject(PLATFORM_ID) private platformId: Object
     ) {
     }
 
     title = 'myhomeIndex';
+    currentDisplayPart = 'Home';
 
     ngAfterViewInit(): void {
         // if (isPlatformBrowser(this.platformId)) {
@@ -31,5 +34,10 @@ export class App implements AfterViewInit {
         //   this.renderer.setStyle(document.body, 'background-repeat', 'no-repeat');
         //   this.renderer.setStyle(document.body, 'background-attachment', 'fixed');
         // }
+    }
+
+    processBarButtonClicked(buttonName: string) {
+        this.currentDisplayPart = buttonName;
+        this.cdr.markForCheck();
     }
 }

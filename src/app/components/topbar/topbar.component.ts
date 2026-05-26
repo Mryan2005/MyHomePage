@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, OutputEmitterRef} from '@angular/core';
 
 @Component({
     selector: 'app-topbar',
@@ -11,8 +11,13 @@ import {Component, Input, OnInit} from '@angular/core';
 export class TopbarComponent implements OnInit {
     @Input() currentTime: string = '';
     @Input() barTitle: string = 'Desktop';
+    @Output() clickBarButton = new EventEmitter<string>();
 
     constructor() {
+    }
+
+    clickBarButton1(buttonName: string) {
+        this.clickBarButton.emit(buttonName);
     }
 
     ngOnInit(): void {
