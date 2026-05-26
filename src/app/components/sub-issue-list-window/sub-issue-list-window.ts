@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {GithubIssuesService} from '../../services/github-issues.service';
+import {GithubDiscussionsService} from '../../services/github-discussions.service';
 import {GithubIssue} from '../../interfaces/github-issue';
 import {firstValueFrom} from 'rxjs';
 
@@ -13,13 +13,13 @@ import {firstValueFrom} from 'rxjs';
 })
 export class SubIssueListComponent implements OnInit {
 
-    issues: GithubIssue[] = [];
+    discussions: GithubIssue[] = [];
 
     loading = false;
     error = '';
 
     constructor(
-        private githubIssuesService: GithubIssuesService
+        private githubDiscussionsService: GithubDiscussionsService
     ) {
     }
 
@@ -29,9 +29,9 @@ export class SubIssueListComponent implements OnInit {
 
         try {
 
-            this.issues =
+            this.discussions =
                 await firstValueFrom(
-                    this.githubIssuesService.getIssues()
+                    this.githubDiscussionsService.getDiscussions()
                 );
 
         } catch (e) {
