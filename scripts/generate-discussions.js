@@ -48,7 +48,7 @@ async function generate() {
             method: 'POST',
 
             headers: {
-                Authorization: \`Bearer \${token}\`,
+                Authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json'
             },
 
