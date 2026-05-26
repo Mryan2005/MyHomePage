@@ -17,6 +17,7 @@ export class TopbarComponent implements OnInit {
     }
 
     clickBarButton1(buttonName: string) {
+        console.debug(`TopbarComponent: clickBarButton1 called with buttonName=${buttonName}`);
         this.clickBarButton.emit(buttonName);
     }
 
