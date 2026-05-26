@@ -1,48 +1,57 @@
 :host {
 
     position: fixed;
+
     top: 40px;
+
     left: 0;
 
     display: flex;
+
     justify-content: center;
+
     align-items: center;
 
     width: 100vw;
+
     height: calc(100vh - 40px);
 
     z-index: 1000;
 
-    background-color: rgba(255, 255, 255, 0.08);
+    background-color: rgba(255,255,255,.08);
+
     backdrop-filter: blur(8px);
 
     overflow: hidden;
 
-    animation: windowSlideIn 0.5s ease-out;
+    animation: windowSlideIn .5s ease-out;
 }
 
 .issue-window {
 
     width: 720px;
+
     max-width: 92vw;
 
     height: 640px;
+
     max-height: 88vh;
 
     border-radius: 24px;
 
-    background: rgba(255, 255, 255, 0.72);
+    background: rgba(255,255,255,.72);
 
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255,255,255,.28);
 
     box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.08);
+        0 8px 32px rgba(0,0,0,.08);
 
     backdrop-filter: blur(18px);
 
     overflow: hidden;
 
     display: flex;
+
     flex-direction: column;
 }
 
@@ -55,86 +64,29 @@
     padding: 12px;
 
     display: flex;
+
     flex-direction: column;
+
     gap: 10px;
+
+    scrollbar-width: thin;
+
+    scrollbar-color:
+        rgba(0,0,0,.15)
+        transparent;
 }
 
-.issue-item {
+.issue-list::-webkit-scrollbar {
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    padding: 14px 18px;
-
-    border-radius: 16px;
-
-    text-decoration: none;
-
-    color: #222;
-
-    background: rgba(255, 255, 255, 0.5);
-
-    transition:
-        transform 0.2s ease,
-        background 0.2s ease,
-        box-shadow 0.2s ease;
-
-    border: 1px solid rgba(255, 255, 255, 0.25);
-
-    &:hover {
-
-        transform: translateY(-2px);
-
-        background: rgba(255, 255, 255, 0.85);
-
-        box-shadow:
-            0 4px 12px rgba(0, 0, 0, 0.08);
-    }
+    width: 8px;
 }
 
-.issue-title {
+.issue-list::-webkit-scrollbar-thumb {
 
-    overflow: hidden;
+    background:
+        rgba(0,0,0,.12);
 
-    text-overflow: ellipsis;
-
-    white-space: nowrap;
-    
-    flex: 1;
-
-    margin: 10px;
-
-    font-size: 15px;
-
-    font-weight: 500;
-
-    width: fit-content;
-
-    background-image:
-        linear-gradient(
-            rgba(37,99,235,.6),
-            rgba(37,99,235,.6)
-        );
-
-    background-repeat: no-repeat;
-
-    background-size: 0% 1.5px;
-
-    background-position: left bottom;
-
-    transition:
-        background-size .25s ease,
-        color .25s ease;
-
-    &:hover {
-
-        background-size: 100% 1.5px;
-
-        color: rgb(37,99,235);
-
-        cursor: pointer;
-    }
+    border-radius: 999px;
 }
 
 .issue-row {
@@ -146,6 +98,76 @@
     justify-content: space-between;
 
     gap: 12px;
+
+    padding: 14px 18px;
+
+    border-radius: 18px;
+
+    background:
+        rgba(255,255,255,.5);
+
+    border:
+        1px solid rgba(255,255,255,.24);
+
+    transition:
+        transform .2s ease,
+        background .2s ease,
+        box-shadow .2s ease;
+}
+
+.issue-row:hover {
+
+    transform: translateY(-2px);
+
+    background:
+        rgba(255,255,255,.82);
+
+    box-shadow:
+        0 4px 14px rgba(0,0,0,.08);
+}
+
+.issue-title {
+
+    flex: 1;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    font-size: 15px;
+
+    font-weight: 500;
+
+    color: rgba(0,0,0,.86);
+
+    width: fit-content;
+
+    background-image:
+        linear-gradient(
+            rgba(37,99,235,.65),
+            rgba(37,99,235,.65)
+        );
+
+    background-repeat: no-repeat;
+
+    background-size: 0% 1.5px;
+
+    background-position: left bottom;
+
+    transition:
+        background-size .25s ease,
+        color .25s ease;
+}
+
+.issue-title:hover {
+
+    background-size: 100% 1.5px;
+
+    color: rgb(37,99,235);
+
+    cursor: pointer;
 }
 
 .status {
@@ -153,17 +175,47 @@
     flex-shrink: 0;
 }
 
-.issue-state {
+.badge {
 
-    padding: 4px 10px;
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 78px;
+
+    padding: 5px 12px;
 
     border-radius: 999px;
 
     font-size: 12px;
+
     font-weight: 600;
 
-    background: #dcfce7;
-    color: #15803d;
+    letter-spacing: .2px;
+
+    transition:
+        background .2s ease,
+        color .2s ease;
+}
+
+.done {
+
+    background:
+        rgba(34,197,94,.15);
+
+    color:
+        rgb(21,128,61);
+}
+
+.working {
+
+    background:
+        rgba(59,130,246,.14);
+
+    color:
+        rgb(37,99,235);
 }
 
 .loading,
@@ -174,11 +226,16 @@
 
     text-align: center;
 
-    color: #666;
+    font-size: 14px;
+
+    color:
+        rgba(0,0,0,.55);
 }
 
 .error {
-    color: #dc2626;
+
+    color:
+        rgb(220,38,38);
 }
 
 @keyframes windowSlideIn {
@@ -189,7 +246,7 @@
 
         transform:
             translateY(30px)
-            scale(0.96);
+            scale(.96);
     }
 
     to {
