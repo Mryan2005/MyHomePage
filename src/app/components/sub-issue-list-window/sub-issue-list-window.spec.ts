@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SubIntroduceMyselfWindow } from './sub-issue-list-window';
+import { SubIssueListComponent} from './sub-issue-list-window';
 
 describe('InsideWindow', () => {
-  let component: SubIntroduceMyselfWindow;
-  let fixture: ComponentFixture<SubIntroduceMyselfWindow>;
+  let component: SubIssueListComponent;
+  let fixture: ComponentFixture<SubIssueListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SubIntroduceMyselfWindow]
+      imports: [SubIssueListComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SubIntroduceMyselfWindow);
+    fixture = TestBed.createComponent(SubIssueListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
