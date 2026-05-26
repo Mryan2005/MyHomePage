@@ -17,24 +17,30 @@
 
   <div class="issue-list">
 
-    @for(discussion of discussions; track discussions) {
-      <div class="issue-title">
-        {{ discussion.title }}
+    @for (discussion of discussions; track discussion.url) {
+
+      <div class="issue-row">
+
+        <div class="issue-title">
+          {{ discussion.title }}
+        </div>
+
+        <div class="status">
+
+          <span
+            class="badge"
+            [class.done]="discussion.closed"
+            [class.working]="!discussion.closed"
+          >
+
+            {{ discussion.closed ? 'Done' : 'Ongoing' }}
+
+          </span>
+
+        </div>
+
       </div>
 
-      <div class="status">
-    
-            <span
-                class="badge"
-                [class.done]="discussion.closed"
-                [class.working]="!discussion.closed"
-            >
-        
-                {{ discussion.closed ? 'Done' : 'Ongoing' }}
-        
-            </span>
-    
-        </div>
     }
 
   </div>
