@@ -22,33 +22,25 @@ export class SubIssueListComponent implements OnInit {
     ) {
     }
 
-    ngOnInit(): void {
-        this.loadIssues();
-    }
-
-    loadIssues(): void {
+    async ngOnInit() {
 
         this.loading = true;
 
-        this.githubIssuesService.getIssues({
-            owner: 'Mryan2005',
-            repo: 'MyHomePage',
-            labels: 'status',
-            state: 'open',
-            per_page: 10,
-            page: 1,
-        }).subscribe({
+        try {
 
-            next: (res) => {
-                this.issues = res;
-                this.loading = false;
-            },
+            this.issues =
+                await this.githubIssuesService.getIssues(
+                    'Mryan2005',
+                    'MyHomePage'
+                );
 
-            error: (err) => {
-                this.error = err?.message || '加载失败';
-                this.loading = false;
-            }
+        } catch (e) {
 
-        });
+            this.error = '加载失败';
+
+        } finally {
+
+            this.loading = false;
+        }
     }
 }
