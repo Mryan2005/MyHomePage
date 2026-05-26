@@ -65,11 +65,20 @@ async function generate() {
     const discussions =
         result.data.repository.discussions.nodes
 
-            .sort(
-                (a, b) =>
+            .sort((a, b) => {
+
+                // open 优先
+                if (a.closed !== b.closed) {
+    
+                    return a.closed - b.closed;
+                }
+    
+                // 再按时间倒序
+                return (
                     new Date(b.createdAt) -
                     new Date(a.createdAt)
-            )
+                );
+            })
 
             .slice(0, 10);
 
