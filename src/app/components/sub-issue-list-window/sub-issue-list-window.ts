@@ -4,7 +4,7 @@ import {GithubIssuesService} from '../../services/github-issues.service';
 import {GithubIssue} from '../../interfaces/github-issue';
 
 @Component({
-    selector: 'app-issue-list',
+    selector: 'app-sub-issue-list-window',
     standalone: true,
     imports: [CommonModule],
     templateUrl: './sub-issue-list-window.html',
