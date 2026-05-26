@@ -4,7 +4,7 @@
     "url": "https://github.com/Mryan2005/MyHomePage/discussions/30",
     "createdAt": "2026-05-26T15:57:13Z",
     "closed": false,
-    "body": "8小时睡眠",
+    "body": "如果从0:00睡觉，那么就是要到7:30~8:00起床",
     "category": {
       "name": "Announcements"
     },
@@ -39,32 +39,6 @@
     }
   },
   {
-    "title": "线性代数",
-    "url": "https://github.com/Mryan2005/MyHomePage/discussions/27",
-    "createdAt": "2026-05-26T14:59:36Z",
-    "closed": true,
-    "body": "线性代数看完了",
-    "category": {
-      "name": "Announcements"
-    },
-    "author": {
-      "login": "Mryan2005"
-    }
-  },
-  {
-    "title": "重新“估值”后，数学的内容完成率为56%，预估之前相比，减少15%",
-    "url": "https://github.com/Mryan2005/MyHomePage/discussions/26",
-    "createdAt": "2026-05-26T13:38:25Z",
-    "closed": true,
-    "body": "重新“估值”后，数学的内容完成率为56%，预估之前相比，减少15%",
-    "category": {
-      "name": "Announcements"
-    },
-    "author": {
-      "login": "Mryan2005"
-    }
-  },
-  {
     "title": "Focusing on Postgraduate entrance examination",
     "url": "https://github.com/Mryan2005/MyHomePage/discussions/25",
     "createdAt": "2026-05-26T13:37:01Z",
@@ -83,6 +57,32 @@
     "createdAt": "2026-05-26T13:33:14Z",
     "closed": false,
     "body": "Focusing on CET-6",
+    "category": {
+      "name": "Announcements"
+    },
+    "author": {
+      "login": "Mryan2005"
+    }
+  },
+  {
+    "title": "线性代数",
+    "url": "https://github.com/Mryan2005/MyHomePage/discussions/27",
+    "createdAt": "2026-05-26T14:59:36Z",
+    "closed": true,
+    "body": "线性代数看完了",
+    "category": {
+      "name": "Announcements"
+    },
+    "author": {
+      "login": "Mryan2005"
+    }
+  },
+  {
+    "title": "重新“估值”后，数学的内容完成率为56%，预估之前相比，减少15%",
+    "url": "https://github.com/Mryan2005/MyHomePage/discussions/26",
+    "createdAt": "2026-05-26T13:38:25Z",
+    "closed": true,
+    "body": "重新“估值”后，数学的内容完成率为56%，预估之前相比，减少15%",
     "category": {
       "name": "Announcements"
     },
