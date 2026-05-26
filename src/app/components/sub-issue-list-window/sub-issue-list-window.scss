@@ -96,11 +96,43 @@
 .issue-title {
 
     overflow: hidden;
+
     text-overflow: ellipsis;
+
     white-space: nowrap;
 
+    padding: 10px;
+
     font-size: 15px;
+
     font-weight: 500;
+
+    width: fit-content;
+
+    background-image:
+        linear-gradient(
+            rgba(37,99,235,.6),
+            rgba(37,99,235,.6)
+        );
+
+    background-repeat: no-repeat;
+
+    background-size: 0% 1.5px;
+
+    background-position: left bottom;
+
+    transition:
+        background-size .25s ease,
+        color .25s ease;
+
+    &:hover {
+
+        background-size: 100% 1.5px;
+
+        color: rgb(37,99,235);
+
+        cursor: pointer;
+    }
 }
 
 .issue-state {

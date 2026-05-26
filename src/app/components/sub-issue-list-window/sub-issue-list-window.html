@@ -9,30 +9,19 @@
   </div>
 
   <div
-    *ngIf="!loading && !error && issues.length === 0"
+    *ngIf="!loading && !error && discussions.length === 0"
     class="empty"
   >
-    No issues found
+    No Status found
   </div>
 
   <div class="issue-list">
 
-    <a
-      *ngFor="let issue of issues"
-      [href]="issue.html_url"
-      target="_blank"
-      class="issue-item"
-    >
-
+    @for(discussion of discussions; track discussions) {
       <div class="issue-title">
-        {{ issue.title }}
+        {{ discussion.title }}
       </div>
-
-      <div class="issue-state">
-        {{ issue.state }}
-      </div>
-
-    </a>
+    }
 
   </div>
 
