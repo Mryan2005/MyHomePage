@@ -21,22 +21,22 @@
       <div class="issue-title">
         {{ discussion.title }}
       </div>
+
+      <div class="status">
+    
+            <span
+                class="badge"
+                [class.done]="discussion.closed"
+                [class.working]="!discussion.closed"
+            >
+        
+                {{ discussion.closed ? 'Done' : 'Ongoing' }}
+        
+            </span>
+    
+        </div>
     }
 
   </div>
-
-    <div class="status">
-
-        <span
-            class="badge"
-            [class.done]="discussion.closed"
-            [class.working]="!discussion.closed"
-        >
-    
-            {{ discussion.closed ? 'Done' : 'Ongoing' }}
-    
-        </span>
-
-    </div>
 
 </div>
