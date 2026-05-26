@@ -1,5 +1,18 @@
 [
   {
+    "title": "高等数学",
+    "url": "https://github.com/Mryan2005/MyHomePage/discussions/28",
+    "createdAt": "2026-05-26T15:35:51Z",
+    "closed": false,
+    "body": "高等数学",
+    "category": {
+      "name": "Announcements"
+    },
+    "author": {
+      "login": "Mryan2005"
+    }
+  },
+  {
     "title": "线性代数",
     "url": "https://github.com/Mryan2005/MyHomePage/discussions/27",
     "createdAt": "2026-05-26T14:59:36Z",
