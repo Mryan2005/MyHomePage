@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {GithubIssuesService} from '../../services/github-issues.service';
 import {GithubIssue} from '../../interfaces/github-issue';
+import {firstValueFrom} from 'rxjs';
 
 @Component({
     selector: 'app-sub-issue-list-window',
@@ -29,9 +30,8 @@ export class SubIssueListComponent implements OnInit {
         try {
 
             this.issues =
-                await this.githubIssuesService.getIssues(
-                    'Mryan2005',
-                    'MyHomePage'
+                await firstValueFrom(
+                    this.githubIssuesService.getIssues()
                 );
 
         } catch (e) {
