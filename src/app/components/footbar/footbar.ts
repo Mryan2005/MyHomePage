@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
-  selector: 'app-footbar',
-  imports: [],
-  templateUrl: './footbar.html',
-  styleUrl: './footbar.scss'
+    selector: 'app-footbar',
+    imports: [],
+    standalone: true,
+    templateUrl: './footbar.html',
+    styleUrl: './footbar.scss'
 })
 export class Footbar {
 

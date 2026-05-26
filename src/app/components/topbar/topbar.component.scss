@@ -1,0 +1,274 @@
+.bar {
+    display: flex;
+    align-items: center;
+    padding: 0.5px 6px 0 6px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 0.519481px solid rgba(255, 255, 255, 0.18);
+    box-sizing: border-box;
+    -webkit-user-drag: none;
+    user-select: none;
+}
+
+.appleDivBar {
+    padding: 0px 0px 0px;
+    width: 16px;
+    height: 16px;
+}
+
+.appleDivBar {
+    padding: 0px 0px 0.5px;
+    height: 16px;
+    border-left: 1px solid black;
+}
+
+.bar_div {
+    padding: 0px 10px;
+    height: 16px;
+    background: transparent;
+    transition: all 0.35s;
+    align-items: center;
+    -webkit-user-drag: none;
+    justify-content: flex-start;
+}
+
+.barItem4word {
+    display: flex;
+    height: 25px;
+    width: 45px;
+    flex-wrap: wrap;
+    border-radius: 5px;
+    align-content: center !important;
+    justify-content: center !important;
+}
+
+.barItem2word {
+    display: flex;
+    height: 25px;
+    width: 40px;
+    flex-wrap: wrap;
+    border-radius: 5px;
+    align-content: center;
+    justify-content: center;
+}
+
+.barItemIconMain {
+    display: flex;
+    height: 25px;
+    width: 30px;
+    flex-wrap: wrap;
+    border-radius: 5px;
+    align-content: center;
+    justify-content: center;
+}
+
+.barItemIcon {
+    display: flex;
+    height: 25px;
+    width: 36px;
+    flex-wrap: wrap;
+    border-radius: 5px;
+    align-content: center;
+    justify-content: center;
+}
+
+.barItem9word {
+    display: flex;
+    height: 25px;
+    width: 85px;
+    flex-wrap: wrap;
+    border-radius: 5px;
+    align-content: center;
+    justify-content: center;
+}
+
+.barItem11word {
+    display: flex;
+    height: 25px;
+    width: 100px;
+    flex-wrap: wrap;
+    border-radius: 5px;
+    align-content: center;
+    justify-content: center;
+}
+
+.barItem10word {
+    display: flex;
+    height: 25px;
+    width: 90px;
+    flex-wrap: wrap;
+    border-radius: 5px;
+    align-content: center;
+    justify-content: center;
+}
+
+.barItem8word {
+    display: flex;
+    height: 25px;
+    width: 70px;
+    flex-wrap: wrap;
+    border-radius: 5px;
+    align-content: center;
+    justify-content: center;
+}
+
+.barItem6word {
+    display: flex;
+    height: 25px;
+    width: 60px;
+    flex-wrap: wrap;
+    border-radius: 5px;
+    align-content: center;
+    justify-content: center;
+}
+
+.barItemBox {
+    display: flex;
+    border-radius: 5px;
+    align-content: center;
+    justify-content: center;
+    margin-left: 0.125rem;
+    margin-right: 0.125rem;
+    padding: 4.51px 8px;
+}
+
+.barItemBox-no-hover {
+    display: flex;
+    border-radius: 5px;
+    align-content: center;
+    justify-content: center;
+    margin-left: 0.125rem;
+    margin-right: 0.125rem;
+    padding: 4.51px 8px;
+}
+
+.barItemBox:hover {
+    border: 0.519481px solid rgba(128, 128, 128, 0.21);
+    background-color: rgba(128, 128, 128, 0.2);
+}
+
+.barItem:active {
+    border: 0.519481px solid rgba(128, 128, 128, 0.21);
+    background-color: rgba(128, 128, 128, 0.2);
+}
+
+.barItemIconMain:hover {
+    border: 0.519481px solid rgba(128, 128, 128, 0.21);
+    background-color: rgba(128, 128, 128, 0.2);
+}
+
+.barItemIconMain:active {
+    border: 0.519481px solid rgba(128, 128, 128, 0.21);
+    background-color: rgba(128, 128, 128, 0.2);
+}
+
+.OtherManageBoxInThePositionOfFile {
+    display: none;
+}
+
+.bar_right {
+    margin-left: auto;
+    align-items: center;
+    padding: 0px 10px;
+}
+
+.appleItemDiv {
+    justify-content: flex-end;
+    padding: 0px 2px;
+    height: 20px;
+    background: transparent;
+    transition: all 0.35s;
+    align-items: center;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.appleItem {
+    display: inline-block;
+    padding: 0 0px;
+    width: auto;
+    justify-content: flex-end;
+    align-items: center;
+    -webkit-user-drag: none;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+}
+
+.appleItemTime {
+    font-size: 13px;
+    padding: 0px 0px 4.5px;
+    height: 16px;
+}
+
+.appleItemSiri {
+    padding: 0px 0px 0px;
+    width: 16px;
+    height: 16px;
+}
+
+.appleItemSizeDefault {
+    width: 18px;
+    height: 16px;
+}
+
+.appleItemInfo {
+    padding: 0px 0px 0px;
+    width: 16px;
+    height: 16px;
+}
+
+.appleItemSearch {
+    width: 16px;
+    height: 16px;
+}
+
+.appleItemBattery {
+    padding: 0px 0px 0.5px;
+    width: 25px;
+    height: 22px;
+}
+
+.appleItemDiv {
+    justify-content: flex-end;
+    padding: 0px 2px;
+    height: 20px;
+    background: transparent;
+    transition: all 0.35s;
+    align-items: center;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.bar_p {
+    height: 16px;
+    font-size: 13px;
+    -webkit-user-drag: none;
+    cursor: pointer;
+    user-select: none;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.apple_logo {
+    -webkit-user-drag: none;
+    cursor: pointer;
+    user-select: none;
+    justify-content: flex-start;
+    width: 16px;
+    height: 16px;
+    border-radius: 10px;
+}
+
+.bar_title {
+    height: 16px;
+    font-weight: 700;
+    align-items: center;
+    justify-content: flex-start;
+    -webkit-user-drag: none;
+    cursor: pointer;
+    user-select: none;
+}
