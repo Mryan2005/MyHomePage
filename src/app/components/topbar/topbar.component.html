@@ -1,69 +1,18 @@
 <header id="topbar">
     <div class="bar items-center">
-        <div class="barItemIconMain" id="barItemIconMain">
-            <div style="position:relative; top: 2px;">
-                <img src="/assets/icons/Apple.png" alt="icon" class="apple_logo">
-            </div>
-        </div>
-        <div class="barItemBox" id="barTitleBox">
+        <div class="barItemBox" id="barTitleBox" (click)="clickBarButton1('Home')">
             <div class="bar_title bar_p">{{ barTitle }}</div>
         </div>
-        <div class="barItemBox" id="barFileBox">
-            <div class="bar_p">File</div>
+        <div class="barItemBox" id="barWorksBox" (click)="clickBarButton1('Works')">
+            <div class="bar_p">Works</div>
         </div>
-        <div class="barItemBox OtherManageBoxInThePositionOfFile" id="barUserManageBox">
-            <div class="bar_p">User</div>
+        <div class="barItemBox OtherManageBoxInThePositionOfFile" id="barTravelBox" (click)="clickBarButton1('Travel')">
+            <div class="bar_p">Travel</div>
         </div>
-        <div class="barItemBox OtherManageBoxInThePositionOfFile" id="barEntryManageBox">
-            <div class="bar_p">Entry</div>
-        </div>
-        <div class="barItemBox" id="barEditBox">
-            <div class="bar_p">Edit</div>
-        </div>
-        <div class="barItemBox" id="barViewBox">
-            <div class="bar_p">View</div>
-        </div>
-        <div class="barItem2word" id="barGoBox">
-            <div class="bar_p">Go</div>
-        </div>
-        <div class="barItemBox" id="barWindowBox">
-            <div class="bar_p">Window</div>
-        </div>
-        <div class="barItemBox" id="barHelpBox">
+        <div class="barItemBox" id="barHelpBox" (click)="clickBarButton1('Help')">
             <div class="bar_p">Help</div>
         </div>
         <div class="bar_right"></div>
-        <div class="barItemIcon" id="barStatusBox">
-            <div class="appleItem">
-                <img src="/assets/icons/wifi.png" alt="icon" class="appleItem appleItemSizeDefault">
-            </div>
-        </div>
-        <div class="appleItemDiv" style="padding: 0 1px;"></div>
-        <div class="barItemIcon" id="barMassageBox">
-            <div class="appleItem">
-                <img src="/assets/icons/massage.png" alt="icon" class="appleItem appleItemSizeDefault"
-                     style="width: auto;height: 19px;position: relative;">
-            </div>
-        </div>
-        <div class="appleItemDiv" style="padding: 0 1px;"></div>
-        <div class="barItemIcon" id="barUserBox">
-            <div class="appleItem">
-                <img src="/assets/icons/User.png" alt="icon" class="appleItem appleItemSearch" id="appleSearch"
-                     style="width: auto;height: 19px;position: relative;">
-            </div>
-        </div>
-        <div class="appleItemDiv" style="padding: 0 1px;"></div>
-        <div class="barItemIcon" id="barInfoBox">
-            <div class="appleItem">
-                <img src="/assets/icons/info.png" alt="icon" class="appleItem appleItemInfo">
-            </div>
-        </div>
-        <div class="appleItemDiv" style="padding: 0 1px;"></div>
-        <div class="barItemIcon" style="width: 24px !important;">
-            <div class="appleItem" id="barSiriBox">
-                <img src="/assets/icons/siri.webp" alt="icon" class="appleItem appleItemSiri">
-            </div>
-        </div>
         <div class="appleItemDiv" style="padding: 0 1px; margin: 0 0.1rem"></div>
         <div class="barItemBox">
             <div class="appleItem">
