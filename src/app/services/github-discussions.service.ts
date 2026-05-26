@@ -4,13 +4,14 @@ import {HttpClient} from '@angular/common/http';
 @Injectable({
     providedIn: 'root',
 })
-export class GithubIssuesService {
+export class GithubDiscussionsService {
     constructor(private http: HttpClient) {
     }
 
-    getIssues() {
+    getDiscussions() {
+
         return this.http.get<any[]>(
-            '/assets/issues.json'
+            '/assets/discussions.json'
         );
     }
 }
