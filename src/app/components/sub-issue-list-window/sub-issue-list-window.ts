@@ -7,8 +7,8 @@ import {GithubIssue} from '../../interfaces/github-issue';
     selector: 'app-issue-list',
     standalone: true,
     imports: [CommonModule],
-    templateUrl: './sub-issue-list.component.html',
-    styleUrl: './sub-issue-list.component.scss'
+    templateUrl: './sub-issue-list-window.html',
+    styleUrl: './sub-issue-list-window.scss'
 })
 export class SubIssueListComponent implements OnInit {
 
