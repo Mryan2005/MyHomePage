@@ -9,7 +9,7 @@ async function generate() {
   repository(owner: "Mryan2005", name: "MyHomePage") {
 
     discussions(
-      first: 10,
+      first: 30,
       categoryId: "DIC_kwDOMuiJU84C94Ga"
     ) {
 
@@ -48,7 +48,7 @@ async function generate() {
             method: 'POST',
 
             headers: {
-                Authorization: `Bearer ${token}`,
+                Authorization: \`Bearer \${token}\`,
                 'Content-Type': 'application/json'
             },
 
@@ -64,7 +64,13 @@ async function generate() {
 
     const discussions =
         result.data.repository.discussions.nodes
-            .filter(d => !d.closed)
+
+            .sort(
+                (a, b) =>
+                    new Date(b.createdAt) -
+                    new Date(a.createdAt)
+            )
+
             .slice(0, 10);
 
     fs.writeFileSync(
