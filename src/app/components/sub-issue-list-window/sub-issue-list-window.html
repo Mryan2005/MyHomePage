@@ -20,11 +20,11 @@
     @for (discussion of discussions; track discussion.url) {
 
       <div class="issue-row">
-
-        <div class="issue-title">
-          {{ discussion.title }}
-        </div>
-
+        <a herf="{{ discussion.url }}">
+            <div class="issue-title">
+              {{ discussion.title }}
+            </div>
+        </a>
         <div class="status">
 
           <span
