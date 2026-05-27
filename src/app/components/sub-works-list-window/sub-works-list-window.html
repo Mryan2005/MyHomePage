@@ -1,28 +1,30 @@
-<div class="issue-list">
-@for (work of works; track work.url) {
-
-    <div class="issue-row">
-    <a href="{{ work.url }}">
-        <div class="issue-title">
-            {{ work.title }}
+<div class="issue-window">
+    <div class="issue-list">
+    @for (work of works; track work.url) {
+    
+        <div class="issue-row">
+        <a href="{{ work.url }}">
+            <div class="issue-title">
+                {{ work.title }}
+            </div>
+        </a>
+        <div class="status">
+    
+            <span
+            class="badge"
+            [class.done]="work.public"
+            [class.working]="!work.public"
+            >
+    
+            {{ work.public ? 'Public' : 'Private' }}
+    
+            </span>
+    
         </div>
-    </a>
-    <div class="status">
-
-        <span
-        class="badge"
-        [class.done]="work.public"
-        [class.working]="!work.public"
-        >
-
-        {{ work.public ? 'Public' : 'Private' }}
-
-        </span>
-
+    
+        </div>
+    
+    }
+    
     </div>
-
-    </div>
-
-}
-
 </div>
