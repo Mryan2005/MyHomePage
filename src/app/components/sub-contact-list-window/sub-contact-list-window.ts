@@ -8,6 +8,6 @@ import { Contact } from 'src/app/interfaces/Contact';
   templateUrl: './sub-contact-list-window.html',
   styleUrl: './sub-contact-list-window.scss',
 })
-export class SubWorksListWindow {
+export class SubContactListWindow {
   contacts: Contact[] = contactslist;
 }
