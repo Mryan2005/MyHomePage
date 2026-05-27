@@ -1,0 +1,30 @@
+<div class="issue-window">
+    <div class="issue-list">
+    @for (contact of contacts; track contact.url) {
+    
+        <div class="issue-row">
+        <a href="{{ contact.url }}">
+            <div class="issue-title">
+                {{ contact.title }}
+            </div>
+        </a>
+        <div class="status">
+    
+            <span
+            class="badge"
+            [class.done]="contact.valid"
+            [class.working]="!contact.valid"
+            >
+    
+            {{ contact.valid ? 'Valid' : 'Not Valid' }}
+    
+            </span>
+    
+        </div>
+    
+        </div>
+    
+    }
+    
+    </div>
+</div>

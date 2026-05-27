@@ -4,6 +4,7 @@ import {SubTravellingWindow} from '../sub-travelling-window/sub-travelling-windo
 import {SubIntroduceMyselfWindow} from '../sub-introduce-myself-window/sub-introduce-myself-window';
 import {SubIssueListComponent} from '../sub-issue-list-window/sub-issue-list-window';
 import {SubWorksListWindow} from '../sub-works-list-window/sub-works-list-window';
+import {SubContactListWindow} from '../sub-contact-list-window/sub-contact-list-window';
 
 @Component({
     selector: 'app-inside-window',
@@ -11,7 +12,8 @@ import {SubWorksListWindow} from '../sub-works-list-window/sub-works-list-window
         SubTravellingWindow,
         SubIntroduceMyselfWindow,
         SubIssueListComponent,
-        SubWorksListWindow 
+        SubWorksListWindow,
+        SubContactListWindow
     ],
     standalone: true,
     templateUrl: './inside-window.html',
