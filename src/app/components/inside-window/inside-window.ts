@@ -3,13 +3,15 @@ import {AvatarService} from '../../config/avatar';
 import {SubTravellingWindow} from '../sub-travelling-window/sub-travelling-window';
 import {SubIntroduceMyselfWindow} from '../sub-introduce-myself-window/sub-introduce-myself-window';
 import {SubIssueListComponent} from '../sub-issue-list-window/sub-issue-list-window';
+import {SubWorksListWindow} from '../sub-issue-list-window/sub-works-list-window';
 
 @Component({
     selector: 'app-inside-window',
     imports: [
         SubTravellingWindow,
         SubIntroduceMyselfWindow,
-        SubIssueListComponent
+        SubIssueListComponent,
+        SubWorksListWindow 
     ],
     standalone: true,
     templateUrl: './inside-window.html',
