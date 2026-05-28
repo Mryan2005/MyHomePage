@@ -1,10 +1,13 @@
 import {Injectable} from '@angular/core';
+import {ChangeDetectorRef} from '@angular/core';
 
 @Injectable({
     providedIn: 'root',
 })
 export class WebsitePramasService {
-    constructor() {
+    constructor(
+        public cdr: ChangeDetectorRef
+    ) {
     }
 
     private _currentDisplayPart: string = 'Home';
@@ -15,5 +18,6 @@ export class WebsitePramasService {
 
     set currentDisplayPart(value: string) {
         this._currentDisplayPart = value;
+        this.cdr.detectChanges();
     }
 }
