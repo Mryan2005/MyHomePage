@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AvatarService} from '../../config/avatar';
 import {SubTravellingWindow} from '../sub-travelling-window/sub-travelling-window';
 import {SubIntroduceMyselfWindow} from '../sub-introduce-myself-window/sub-introduce-myself-window';
@@ -6,7 +6,7 @@ import {SubIssueListComponent} from '../sub-issue-list-window/sub-issue-list-win
 import {SubWorksListWindow} from '../sub-works-list-window/sub-works-list-window';
 import {SubContactListWindow} from '../sub-contact-list-window/sub-contact-list-window';
 import {WebsitePramasService} from '../../services/Website-pramas';
-import {OnInit} from '@angular/core';
+import {Subscription} from 'rxjs';
 
 @Component({
     selector: 'app-inside-window',
@@ -21,7 +21,7 @@ import {OnInit} from '@angular/core';
     templateUrl: './inside-window.html',
     styleUrl: './inside-window.scss'
 })
-export class InsideWindow implements OnInit {
+export class InsideWindow implements OnInit, OnDestroy {
     constructor(
         public avatarService: AvatarService,
         public websitePramas: WebsitePramasService
@@ -29,8 +29,17 @@ export class InsideWindow implements OnInit {
     }
 
     public currentDisplayPart: string = 'Home';
+    private displayPartSubscription?: Subscription;
 
     ngOnInit() {
-        this.currentDisplayPart = this.websitePramas.currentDisplayPart;
+        this.displayPartSubscription = this.websitePramas.currentDisplayPart$.subscribe(
+            (value) => {
+                this.currentDisplayPart = value;
+            }
+        );
+    }
+
+    ngOnDestroy(): void {
+        this.displayPartSubscription?.unsubscribe();
     }
 }

@@ -14,7 +14,7 @@ export class SubIntroduceMyselfWindow implements OnInit {
     public currentDisplayPart: string = 'Home';
 
     openPortal() {
-        this.websitePramas.currentDisplayPart = 'works';
+        this.websitePramas.currentDisplayPart = 'Works';
     }
 
     constructor(
