@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output, OutputEmitterRef} from '@angular/core';
-import {WebsitePramas} from '../../services/Website-pramas';
+import {WebsitePramasService} from '../../services/Website-pramas';
 
 @Component({
     selector: 'app-topbar',
@@ -15,7 +15,7 @@ export class TopbarComponent implements OnInit {
     @Output() clickBarButton = new EventEmitter<string>();
 
     constructor(
-        public websitePramas: WebsitePramas
+        public websitePramas: WebsitePramasService
     ) {
     }
 

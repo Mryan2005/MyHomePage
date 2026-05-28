@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {AvatarService} from '../../config/avatar';
-import {WebsitePramas} from '../../services/Website-pramas';
+import {WebsitePramasService} from '../../services/Website-pramas';
 
 @Component({
     selector: 'app-sub-introduce-myself-window',
@@ -18,7 +18,7 @@ export class SubIntroduceMyselfWindow {
 
     constructor(
         public avatarService: AvatarService,
-        public websitePramas: WebsitePramas
+        public websitePramas: WebsitePramasService
     ) {
     }
 }
