@@ -1,23 +1,21 @@
 import {Injectable} from '@angular/core';
-import {ChangeDetectorRef} from '@angular/core';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
 })
 export class WebsitePramasService {
-    constructor(
-        public cdr: ChangeDetectorRef
-    ) {
+    private currentDisplayPartSubject = new BehaviorSubject<string>('Home');
+
+    get currentDisplayPart$(): Observable<string> {
+        return this.currentDisplayPartSubject.asObservable();
     }
 
-    private _currentDisplayPart: string = 'Home';
-
     get currentDisplayPart(): string {
-        return this._currentDisplayPart;
+        return this.currentDisplayPartSubject.value;
     }
 
     set currentDisplayPart(value: string) {
-        this._currentDisplayPart = value;
-        this.cdr.detectChanges();
+        this.currentDisplayPartSubject.next(value);
     }
 }
