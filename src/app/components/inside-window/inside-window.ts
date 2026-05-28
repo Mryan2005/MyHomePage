@@ -6,6 +6,7 @@ import {SubIssueListComponent} from '../sub-issue-list-window/sub-issue-list-win
 import {SubWorksListWindow} from '../sub-works-list-window/sub-works-list-window';
 import {SubContactListWindow} from '../sub-contact-list-window/sub-contact-list-window';
 import {WebsitePramasService} from '../../services/Website-pramas';
+import {OnInit} from '@angular/core';
 
 @Component({
     selector: 'app-inside-window',
@@ -20,12 +21,15 @@ import {WebsitePramasService} from '../../services/Website-pramas';
     templateUrl: './inside-window.html',
     styleUrl: './inside-window.scss'
 })
-export class InsideWindow {
-    public currentDisplayPart: string = this.websitePramas.currentDisplayPart;
-
+export class InsideWindow implements OnInit {
     constructor(
         public avatarService: AvatarService,
         public websitePramas: WebsitePramasService
     ) {
     }
+
+    public currentDisplayPart: string = 'Home';
+
+    onInit() {
+        this.currentDisplayPart = this.websitePramas.currentDisplayPart;
 }
