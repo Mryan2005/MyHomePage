@@ -32,4 +32,5 @@ export class InsideWindow implements OnInit {
 
     onInit() {
         this.currentDisplayPart = this.websitePramas.currentDisplayPart;
+    }
 }
