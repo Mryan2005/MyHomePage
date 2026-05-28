@@ -5,6 +5,7 @@ import {SubIntroduceMyselfWindow} from '../sub-introduce-myself-window/sub-intro
 import {SubIssueListComponent} from '../sub-issue-list-window/sub-issue-list-window';
 import {SubWorksListWindow} from '../sub-works-list-window/sub-works-list-window';
 import {SubContactListWindow} from '../sub-contact-list-window/sub-contact-list-window';
+import {WebsitePramas} from '../../services/Website-pramas';
 
 @Component({
     selector: 'app-inside-window',
@@ -20,10 +21,11 @@ import {SubContactListWindow} from '../sub-contact-list-window/sub-contact-list-
     styleUrl: './inside-window.scss'
 })
 export class InsideWindow {
-    @Input() currentDisplayPart: string = 'Home';
+    public currentDisplayPart: string = this.websitePramas.currentDisplayPart;
 
     constructor(
-        public avatarService: AvatarService
+        public avatarService: AvatarService,
+        public websitePramas: WebsitePramas
     ) {
     }
 }

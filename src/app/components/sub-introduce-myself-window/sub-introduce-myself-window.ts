@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {AvatarService} from '../../config/avatar';
+import {WebsitePramas} from '../../services/Website-pramas';
 
 @Component({
     selector: 'app-sub-introduce-myself-window',
@@ -9,10 +10,15 @@ import {AvatarService} from '../../config/avatar';
     styleUrl: './sub-introduce-myself-window.scss',
 })
 export class SubIntroduceMyselfWindow {
-    @Input() currentDisplayPart: string = 'Home';
+    public currentDisplayPart: string = this.websitePramas.currentDisplayPart;
+
+    openPortal() {
+        this.websitePramas.currentDisplayPart = 'works';
+    }
 
     constructor(
-        public avatarService: AvatarService
+        public avatarService: AvatarService,
+        public websitePramas: WebsitePramas
     ) {
     }
 }

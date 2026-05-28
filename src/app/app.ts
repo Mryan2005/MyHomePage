@@ -22,7 +22,6 @@ export class App implements AfterViewInit {
     }
 
     title = 'myhomeIndex';
-    currentDisplayPart = 'Home';
 
     ngAfterViewInit(): void {
         // if (isPlatformBrowser(this.platformId)) {
@@ -37,7 +36,7 @@ export class App implements AfterViewInit {
     }
 
     processBarButtonClicked(buttonName: string) {
-        this.currentDisplayPart = buttonName;
+        // this.currentDisplayPart = buttonName;
         this.cdr.markForCheck();
     }
 }

@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output, OutputEmitterRef} from '@angular/core';
+import {WebsitePramas} from '../../services/Website-pramas';
 
 @Component({
     selector: 'app-topbar',
@@ -13,12 +14,14 @@ export class TopbarComponent implements OnInit {
     @Input() barTitle: string = 'Desktop';
     @Output() clickBarButton = new EventEmitter<string>();
 
-    constructor() {
+    constructor(
+        public websitePramas: WebsitePramas
+    ) {
     }
 
     clickBarButton1(buttonName: string) {
         console.debug(`TopbarComponent: clickBarButton1 called with buttonName=${buttonName}`);
-        this.clickBarButton.emit(buttonName);
+        this.websitePramas.currentDisplayPart = buttonName;
     }
 
     ngOnInit(): void {
