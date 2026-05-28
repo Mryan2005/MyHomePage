@@ -23,7 +23,7 @@ export class SubIntroduceMyselfWindow implements OnInit {
     ) {
     }
 
-    onInit() {
+    ngOnInit() {
         this.currentDisplayPart = this.websitePramas.currentDisplayPart;
     }
 }

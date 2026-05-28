@@ -30,7 +30,7 @@ export class InsideWindow implements OnInit {
 
     public currentDisplayPart: string = 'Home';
 
-    onInit() {
+    ngOnInit() {
         this.currentDisplayPart = this.websitePramas.currentDisplayPart;
     }
 }
