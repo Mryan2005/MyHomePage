@@ -13,7 +13,7 @@ export const workslist: Work[] = [
     },
     {
         title: 'Where have I been in my life?',
-        url: 'https://github.com/Mryan2005/Where-have-I-been-in-my-life',
+        url: 'https://where-have-i-been-in-my-life.mryan2005.top/',
         public: true
     },
     {
