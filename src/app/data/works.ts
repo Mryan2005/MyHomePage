@@ -17,8 +17,8 @@ export const workslist: Work[] = [
         public: true
     },
     {
-        title: 'IsaacSimPlusROS2',
-        url: 'https://github.com/IsaacSimPlusROS2',
+        title: 'IsaacSimPlusROS2 研究手稿',
+        url: 'https://isaacsimplusros2.mryan2005.top/',
         public: true
     },
     {
