@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PhotoPreviewComponent } from './photo-preview.component';
+import { PhotoPreviewComponent } from './photo-viewer.component';
 
 describe('PhotoPreviewComponent', () => {
 

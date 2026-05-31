@@ -9,8 +9,8 @@ import {
 @Component({
   selector: 'app-photo-preview',
   standalone: true,
-  templateUrl: './photo-preview.component.html',
-  styleUrls: ['./photo-preview.component.scss']
+  templateUrl: './photo-viewer.component.html',
+  styleUrls: ['./photo-viewer.component.scss']
 })
 export class PhotoPreviewComponent {
 

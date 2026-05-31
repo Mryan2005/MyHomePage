@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Overlay } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { PhotoPreviewComponent } from '../components/photo-preview/photo-preview.component';
+import { PhotoPreviewComponent } from '../components/photo-viewer/photo-preview.component';
 
 @Injectable({
   providedIn: 'root'
