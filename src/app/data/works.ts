@@ -2,7 +2,7 @@ import { Work } from "../interfaces/Work";
 
 export const workslist: Work[] = [
     {
-        title: 'SSPUBot',
+        title: 'SSPUBot: 专注于整理二工大信息的机器人',
         url: 'https://github.com/Mryan2005/SSPU-Bot',
         public: true
     },
@@ -27,7 +27,7 @@ export const workslist: Work[] = [
         public: true
     },
     {
-        title: 'My Home Page',
+        title: 'My Home Page：如你所见，就是这个网站',
         url: 'https://github.com/Mryan2005/MyHomePage',
         public: true
     },
