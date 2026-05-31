@@ -81,18 +81,26 @@
 }
 
 .portal-link {
-  background: linear-gradient(90deg, #ff7e5f, #feb47b);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  background: linear-gradient(
+    90deg,
+    #ff7e5f,
+    #feb47b
+  );
+
   background-clip: text;
-  text-fill-color: transparent;
-  cursor: pointer;
-  transition: all 0.3s;
+  -webkit-background-clip: text;
+
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+
+  transition:
+    transform .3s ease,
+    filter .3s ease;
 }
+
 .portal-link:hover {
-  background: none;
-  color: #000307;
-  text-decoration: underline;
+  filter: brightness(1.15);
+  transform: translateY(-1px);
 }
 
 /* 响应式设计：在小屏幕上堆叠显示 */
