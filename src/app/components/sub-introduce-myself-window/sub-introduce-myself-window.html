@@ -418,4 +418,12 @@
     </div>
     <h2 class="text-xl mb-2 mt-2">项目经历</h2>
     <p class="text-base mb-2 portal-link" (click)="openPortal()">传送门</p>
+    <p class="text-base mb-2">
+        或许，你在想前面的介绍的“原告”会是谁？
+    </p>
+    <img
+        [src]="adam_smith_avatar"
+        class="preview-image"
+        (click)="photoViewer.open(adam_smith_avatar)"
+    >
 </div>

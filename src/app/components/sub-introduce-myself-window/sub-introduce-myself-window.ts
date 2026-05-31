@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {AvatarService} from '../../config/avatar';
 import {WebsitePramasService} from '../../services/Website-pramas';
 import {OnInit} from '@angular/core';
+import {PhotoViewerService} from '../../services/photo-viewer.service';
 
 @Component({
     selector: 'app-sub-introduce-myself-window',
@@ -12,6 +13,7 @@ import {OnInit} from '@angular/core';
 })
 export class SubIntroduceMyselfWindow implements OnInit {
     public currentDisplayPart: string = 'Home';
+    public adam_smith_avatar: string = '/assets/images/7646049331687920481(20260531-213655).png'
 
     openPortal() {
         this.websitePramas.currentDisplayPart = 'Works';
@@ -19,7 +21,8 @@ export class SubIntroduceMyselfWindow implements OnInit {
 
     constructor(
         public avatarService: AvatarService,
-        public websitePramas: WebsitePramasService
+        public websitePramas: WebsitePramasService,
+        public photoViewer: PhotoViewerService
     ) {
     }
 
