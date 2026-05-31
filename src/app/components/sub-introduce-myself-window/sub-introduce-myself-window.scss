@@ -81,26 +81,40 @@
 }
 
 .portal-link {
-  background: linear-gradient(
-    90deg,
-    #ff7e5f,
-    #feb47b
-  );
+  position: relative;
 
+  background: linear-gradient(90deg, #ff7e5f, #feb47b);
   background-clip: text;
   -webkit-background-clip: text;
 
   color: transparent;
   -webkit-text-fill-color: transparent;
 
-  transition:
-    transform .3s ease,
-    filter .3s ease;
+  font-weight: 700;
 }
 
-.portal-link:hover {
-  filter: brightness(1.15);
-  transform: translateY(-1px);
+.portal-link::after {
+  content: '';
+
+  position: absolute;
+
+  left: 0;
+  bottom: -2px;
+
+  width: 0;
+  height: 2px;
+
+  background: linear-gradient(
+    90deg,
+    #ff7e5f,
+    #feb47b
+  );
+
+  transition: width .25s ease;
+}
+
+.portal-link:hover::after {
+  width: 100%;
 }
 
 /* 响应式设计：在小屏幕上堆叠显示 */
