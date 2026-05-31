@@ -22,13 +22,18 @@ export const workslist: Work[] = [
         public: true
     },
     {
-        title: 'Novel Manager：只支持编写单个小说的小说管理器',
+        title: 'Novel Manager：小说管理器',
         url: 'https://novel-manager.mryan2005.top',
         public: true
     },
     {
         title: 'My Home Page',
         url: 'https://github.com/Mryan2005/MyHomePage',
+        public: true
+    },
+    {
+        title: 'Ai Chat Room：Ai聊天室',
+        url: 'https://ai-chat-room.mryan2005.top/',
         public: true
     }
 ]
