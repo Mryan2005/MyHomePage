@@ -56,8 +56,8 @@
     height: 75%; /* 高度自适应 */
     position: relative;
     top: -45px;
-    background-color: rgba(255, 255, 255, 0.18); /* 半透明背景色 */
-    backdrop-filter: blur(24px); /* 毛玻璃模糊效果 */
+    background: rgba(255,255,255,.16);
+    backdrop-filter: blur(2px);
     box-sizing: border-box;
     overflow-y: auto; /* 允许右栏内容滚动 */
     border-bottom-right-radius: 10px;
@@ -78,6 +78,23 @@
         border-radius: 5px; /* 防止轨道部分溢出 */
         margin: 15px; /* 添加内边距，避免轨道占满整个滚动条区域 */
     }
+}
+
+.intro-text {
+
+    transition:
+        transform .2s ease,
+        background .2s ease,
+        box-shadow .2s ease;
+}
+
+.intro-text:hover {
+
+    background:
+        rgba(255,255,255,.82);
+
+    box-shadow:
+        0 4px 14px rgba(0,0,0,.08);
 }
 
 .portal-link {
