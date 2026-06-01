@@ -24,7 +24,7 @@ export class SubIntroduceMyselfWindow implements OnInit {
         const mean = (this.ciallo_image.length - 1) / 2;
         const stdDev = this.ciallo_image.length / 5; // 控制集中程度（越小越集中）
 
-        let index = Math.round(gaussianRandom(mean, stdDev));
+        let index = Math.round(this.gaussianRandom(mean, stdDev));
 
         // 边界保护
         index = Math.max(0, Math.min(this.ciallo_image.length - 1, index));
