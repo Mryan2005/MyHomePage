@@ -10,7 +10,8 @@
     },
     "author": {
       "login": "Mryan2005"
-    }
+    },
+    "labels": []
   },
   {
     "title": "计算机组成原理",
@@ -23,7 +24,12 @@
     },
     "author": {
       "login": "Mryan2005"
-    }
+    },
+    "labels": [
+      {
+        "name": "Pause"
+      }
+    ]
   },
   {
     "title": "学习高等数学",
@@ -36,7 +42,8 @@
     },
     "author": {
       "login": "Mryan2005"
-    }
+    },
+    "labels": []
   },
   {
     "title": "Focusing on Postgraduate entrance examination",
@@ -49,7 +56,8 @@
     },
     "author": {
       "login": "Mryan2005"
-    }
+    },
+    "labels": []
   },
   {
     "title": "Focusing on CET-6",
@@ -62,7 +70,8 @@
     },
     "author": {
       "login": "Mryan2005"
-    }
+    },
+    "labels": []
   },
   {
     "title": "学习线性代数",
@@ -75,7 +84,8 @@
     },
     "author": {
       "login": "Mryan2005"
-    }
+    },
+    "labels": []
   },
   {
     "title": "重新“估值”后，数学的内容完成率为56%，预估之前相比，减少15%",
@@ -88,7 +98,8 @@
     },
     "author": {
       "login": "Mryan2005"
-    }
+    },
+    "labels": []
   },
   {
     "title": "Ciallo～(∠・ω< )⌒☆",
@@ -101,6 +112,7 @@
     },
     "author": {
       "login": "Mryan2005"
-    }
+    },
+    "labels": []
   }
 ]
