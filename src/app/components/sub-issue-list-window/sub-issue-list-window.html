@@ -29,11 +29,12 @@
 
           <span
             class="badge"
-            [class.done]="discussion.closed"
             [class.working]="!discussion.closed"
+            [class.pause]="discussion.closed && discussion.labels?.length"
+            [class.done]="discussion.closed && !discussion.labels?.length"
           >
 
-            {{ discussion.closed ? 'Done' : 'Ongoing' }}
+            {{ !discussion.closed ? 'Ongoing' : (discussion.labels?.length ? 'pause' : 'Done') }}
 
           </span>
 
