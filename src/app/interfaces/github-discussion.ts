@@ -22,4 +22,10 @@ export interface GithubDiscussion {
 
     };
 
+    labels: {
+
+        name: string;
+
+    }[];
+
 }

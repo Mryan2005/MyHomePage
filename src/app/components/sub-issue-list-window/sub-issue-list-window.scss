@@ -196,6 +196,45 @@
         rgb(21,128,61);
 }
 
+.pause {
+
+    background:
+        rgba(234,179,8,.14);
+
+    color:
+        rgb(161,98,7);
+
+    box-shadow:
+        0 0 12px rgba(234,179,8,.35),
+        0 0 24px rgba(234,179,8,.12);
+
+    animation: glowPause 2.2s ease-in-out infinite;
+}
+
+@keyframes glowPause {
+
+    0% {
+
+        box-shadow:
+            0 0 8px rgba(234,179,8,.2),
+            0 0 18px rgba(234,179,8,.08);
+    }
+
+    50% {
+
+        box-shadow:
+            0 0 14px rgba(234,179,8,.5),
+            0 0 28px rgba(234,179,8,.2);
+    }
+
+    100% {
+
+        box-shadow:
+            0 0 8px rgba(234,179,8,.2),
+            0 0 18px rgba(234,179,8,.08);
+    }
+}
+
 .working {
 
     background:

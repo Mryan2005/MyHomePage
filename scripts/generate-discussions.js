@@ -33,6 +33,12 @@ async function generate() {
           login
         }
 
+        labels(first: 10) {
+          nodes {
+            name
+          }
+        }
+
       }
 
     }
@@ -64,6 +70,11 @@ async function generate() {
 
     const discussions =
         result.data.repository.discussions.nodes
+
+            .map(d => ({
+                ...d,
+                labels: d.labels?.nodes || []
+            }))
 
             .sort((a, b) => {
 
