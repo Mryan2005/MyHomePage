@@ -35,5 +35,10 @@ export const workslist: Work[] = [
         title: 'Ai Chat Room：Ai聊天室',
         url: 'https://ai-chat-room.mryan2005.top/',
         public: true
+    },
+    {
+        title: '基于Flask的影视项目全流程辅助系统：计算机设计大赛的作品',
+        url: 'https://www.bilibili.com/video/BV1f6dPY4ESn/?share_source=copy_web&vd_source=9b73e0ab8f960f18cc0783c2664a8c2b',
+        public: true
     }
 ]
