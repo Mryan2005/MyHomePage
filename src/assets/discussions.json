@@ -56,6 +56,24 @@
     "labels": []
   },
   {
+    "title": "复习软件工程",
+    "url": "https://github.com/Mryan2005/MyHomePage/discussions/37",
+    "createdAt": "2026-06-02T12:15:07Z",
+    "closed": false,
+    "body": "复习软件工程",
+    "category": {
+      "name": "Announcements"
+    },
+    "author": {
+      "login": "Mryan2005"
+    },
+    "labels": [
+      {
+        "name": "Pause"
+      }
+    ]
+  },
+  {
     "title": "完成深度学习大作业ing",
     "url": "https://github.com/Mryan2005/MyHomePage/discussions/36",
     "createdAt": "2026-06-02T12:14:30Z",
