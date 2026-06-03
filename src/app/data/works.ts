@@ -37,8 +37,13 @@ export const workslist: Work[] = [
         public: true
     },
     {
-        title: '基于Flask的影视项目全流程辅助系统：计算机设计大赛的作品',
+        title: '基于Flask的影视项目全流程辅助系统：计算机设计大赛省赛的作品',
         url: 'https://www.bilibili.com/video/BV1f6dPY4ESn/?share_source=copy_web&vd_source=9b73e0ab8f960f18cc0783c2664a8c2b',
+        public: false
+    },
+    {
+        title: '基于Flask的AI生活管家平台：大学生创新创业作品',
+        url: 'https://github.com/Mryan2005/Ai-Task',
         public: false
     }
 ]
