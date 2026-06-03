@@ -3,8 +3,8 @@ import { Work } from "../interfaces/Work";
 export const workslist: Work[] = [
     {
         title: 'SSPUBot: 专注于整理二工大信息的机器人',
-        url: 'https://github.com/Mryan2005/SSPU-Bot',
-        public: false
+        url: 'https://github.com/YohooSoft/SSPUBot-Public',
+        public: true
     },
     {
         title: 'Cantonese Language Dictionary Website',
