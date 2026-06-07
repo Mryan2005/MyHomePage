@@ -10,17 +10,18 @@ on:
       - labeled
       - unlabeled
 
+concurrency:
+  group: refresh-discussions
+  cancel-in-progress: true
+
 jobs:
-
   update-discussions:
-
     runs-on: ubuntu-latest
 
     permissions:
       contents: write
 
     steps:
-
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
@@ -34,7 +35,6 @@ jobs:
 
       - name: Commit JSON
         run: |
-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
