@@ -12,7 +12,7 @@ export const contactslist: Contact[] = [
         valid: true
     },
     {
-        title: 'Blog',
+        title: 'Blog: Mryan2005\'s blog',
         url: 'https://blog.mryan2005.top',
         valid: true
     },
