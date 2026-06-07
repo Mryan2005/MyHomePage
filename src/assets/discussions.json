@@ -56,6 +56,20 @@
     "labels": []
   },
   {
+    "title": "复习计算机组成原理",
+    "url": "https://github.com/Mryan2005/MyHomePage/discussions/29",
+    "createdAt": "2026-05-26T15:38:03Z",
+    "closed": false,
+    "body": "计算机组成原理",
+    "category": {
+      "name": "Announcements"
+    },
+    "author": {
+      "login": "Mryan2005"
+    },
+    "labels": []
+  },
+  {
     "title": "Focusing on Postgraduate entrance examination",
     "url": "https://github.com/Mryan2005/MyHomePage/discussions/25",
     "createdAt": "2026-05-26T13:37:01Z",
@@ -82,24 +96,6 @@
       "login": "Mryan2005"
     },
     "labels": []
-  },
-  {
-    "title": "复习计算机组成原理",
-    "url": "https://github.com/Mryan2005/MyHomePage/discussions/29",
-    "createdAt": "2026-05-26T15:38:03Z",
-    "closed": false,
-    "body": "计算机组成原理",
-    "category": {
-      "name": "Announcements"
-    },
-    "author": {
-      "login": "Mryan2005"
-    },
-    "labels": [
-      {
-        "name": "Pause"
-      }
-    ]
   },
   {
     "title": "学习高等数学：截止目前，数一已完成71%",
