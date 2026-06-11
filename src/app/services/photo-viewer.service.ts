@@ -12,7 +12,10 @@ export class PhotoViewerService {
     private overlay: Overlay
   ) {}
 
-  open(url: string) {
+  open(
+    imageUrl: string,
+    musicUrl?: string
+  ) {
 
     const overlayRef = this.overlay.create({
       hasBackdrop: true,
@@ -23,7 +26,8 @@ export class PhotoViewerService {
       new ComponentPortal(PhotoPreviewComponent)
     );
 
-    componentRef.instance.imageUrl = url;
+    componentRef.instance.imageUrl = imageUrl;
+    componentRef.instance.musicUrl = musicUrl;
 
     overlayRef.backdropClick()
       .subscribe(() => overlayRef.dispose());

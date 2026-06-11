@@ -29,7 +29,7 @@ export class SubIntroduceMyselfWindow implements OnInit {
         // 边界保护
         index = Math.max(0, Math.min(this.ciallo_image.length - 1, index));
 
-        this.photoViewer.open(this.ciallo_image[index]);
+        this.photoViewer.open(this.ciallo_image[index], '/assets/music/恋ひ恋う縁 .以恋结缘.-KOTOKO.mp3');
     }
 
     gaussianRandom(mean = 0, stdDev = 1): number {
