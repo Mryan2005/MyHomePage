@@ -84,20 +84,6 @@
     "labels": []
   },
   {
-    "title": "Focusing on CET-6",
-    "url": "https://github.com/Mryan2005/MyHomePage/discussions/24",
-    "createdAt": "2026-05-26T13:33:14Z",
-    "closed": false,
-    "body": "Focusing on CET-6",
-    "category": {
-      "name": "Announcements"
-    },
-    "author": {
-      "login": "Mryan2005"
-    },
-    "labels": []
-  },
-  {
     "title": "学习高等数学：截止目前，数一已完成71%",
     "url": "https://github.com/Mryan2005/MyHomePage/discussions/28",
     "createdAt": "2026-05-26T15:35:51Z",
@@ -135,6 +121,20 @@
     "createdAt": "2026-05-26T13:38:25Z",
     "closed": true,
     "body": "重新“估值”后，数学的内容完成率为56%，预估之前相比，减少15%",
+    "category": {
+      "name": "Announcements"
+    },
+    "author": {
+      "login": "Mryan2005"
+    },
+    "labels": []
+  },
+  {
+    "title": "Focusing on CET-6",
+    "url": "https://github.com/Mryan2005/MyHomePage/discussions/24",
+    "createdAt": "2026-05-26T13:33:14Z",
+    "closed": true,
+    "body": "Focusing on CET-6\n\n",
     "category": {
       "name": "Announcements"
     },
