@@ -45,5 +45,10 @@ export const workslist: Work[] = [
         title: '基于Flask的AI生活管家平台：大学生创新创业作品',
         url: 'https://github.com/Mryan2005/Ai-Task',
         public: false
+    },
+    {
+        title: '基于DeepCTR的影视推荐系统：深度学习大作业',
+        url: 'https://github.com/Mryan2005/Movie-Recommendation-System',
+        public: false
     }
 ]
