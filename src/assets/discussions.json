@@ -56,25 +56,29 @@
     "labels": []
   },
   {
-    "title": "Focusing on Postgraduate entrance examination",
-    "url": "https://github.com/Mryan2005/MyHomePage/discussions/25",
-    "createdAt": "2026-05-26T13:37:01Z",
+    "title": "学习高等数学：截止目前，数一已完成71%",
+    "url": "https://github.com/Mryan2005/MyHomePage/discussions/28",
+    "createdAt": "2026-05-26T15:35:51Z",
     "closed": false,
-    "body": "Focusing on Postgraduate entrance examination",
+    "body": "高等数学",
     "category": {
       "name": "Announcements"
     },
     "author": {
       "login": "Mryan2005"
     },
-    "labels": []
+    "labels": [
+      {
+        "name": "Pause"
+      }
+    ]
   },
   {
-    "title": "学习高等数学：截止目前，数一已完成71%",
-    "url": "https://github.com/Mryan2005/MyHomePage/discussions/28",
-    "createdAt": "2026-05-26T15:35:51Z",
+    "title": "Focusing on Postgraduate entrance examination",
+    "url": "https://github.com/Mryan2005/MyHomePage/discussions/25",
+    "createdAt": "2026-05-26T13:37:01Z",
     "closed": false,
-    "body": "高等数学",
+    "body": "Focusing on Postgraduate entrance examination",
     "category": {
       "name": "Announcements"
     },
