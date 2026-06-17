@@ -22,7 +22,8 @@ export class App implements AfterViewInit {
     }
 
     title = 'myhomeIndex';
-
+    isTargetDomain: boolean = false;
+    
     ngAfterViewInit(): void {
         // if (isPlatformBrowser(this.platformId)) {
         //   const backgroundImage = this.bgService.getBackgroundImage();
@@ -33,6 +34,9 @@ export class App implements AfterViewInit {
         //   this.renderer.setStyle(document.body, 'background-repeat', 'no-repeat');
         //   this.renderer.setStyle(document.body, 'background-attachment', 'fixed');
         // }
+        const currentDomain = window.location.hostname;
+        this.isTargetDomain = (currentDomain === 'index.mryan2005.top');
+        this.cdr.markForCheck();
     }
 
     processBarButtonClicked(buttonName: string) {
