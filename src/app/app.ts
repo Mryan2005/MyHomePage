@@ -36,6 +36,7 @@ export class App implements AfterViewInit {
         // }
         const currentDomain = window.location.hostname;
         this.isTargetDomain = (currentDomain === 'index.mryan2005.top');
+        console.info("currentDomain:",  currentDomain)
         this.cdr.markForCheck();
     }
 
