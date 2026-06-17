@@ -2,5 +2,5 @@
 <main class="main">
     <app-inside-window></app-inside-window>
     <!-- <router-outlet /> -->
-    <app-footbar></app-footbar>
+    <app-footbar *ngIf="!isTargetDomain"></app-footbar>
 </main>
