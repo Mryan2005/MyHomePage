@@ -15,5 +15,10 @@ export const fileslist: File[] = [
         title: '软件工程概论作业: 结构化设计建模',
         url: 'https://365.kdocs.cn/l/clEUoQ59Dp8p',
         canOpen: true
+    },
+    {
+        title: '期末复习: 计算机组成原理',
+        url: 'https://365.kdocs.cn/l/csSpWI6sQwvj',
+        canOpen: true
     }
 ]
