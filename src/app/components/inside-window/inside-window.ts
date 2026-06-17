@@ -7,6 +7,7 @@ import {SubWorksListWindow} from '../sub-works-list-window/sub-works-list-window
 import {SubContactListWindow} from '../sub-contact-list-window/sub-contact-list-window';
 import {WebsitePramasService} from '../../services/Website-pramas';
 import {Subscription} from 'rxjs';
+import {SubFilesListWindow} from '../sub-files-list-window/sub-files-list-window';
 
 @Component({
     selector: 'app-inside-window',
@@ -15,7 +16,8 @@ import {Subscription} from 'rxjs';
         SubIntroduceMyselfWindow,
         SubIssueListComponent,
         SubWorksListWindow,
-        SubContactListWindow
+        SubContactListWindow,
+        SubFilesListWindow
     ],
     standalone: true,
     templateUrl: './inside-window.html',

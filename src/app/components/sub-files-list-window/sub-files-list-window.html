@@ -1,0 +1,30 @@
+<div class="issue-window">
+    <div class="issue-list">
+    @for (file of files; track file.url) {
+    
+        <div class="issue-row">
+        <a href="{{ file.url }}">
+            <div class="issue-title">
+                {{ file.title }}
+            </div>
+        </a>
+        <div class="status">
+    
+            <span
+            class="badge"
+            [class.done]="file.canOpen"
+            [class.working]="!file.canOpen"
+            >
+    
+            {{ file.canOpen ? 'Can Open' : 'Cannot Open' }}
+    
+            </span>
+    
+        </div>
+    
+        </div>
+    
+    }
+    
+    </div>
+</div>
