@@ -2,17 +2,17 @@ import { File } from "../interfaces/File";
 
 export const fileslist: File[] = [
     {
-        title: '资格和水平考试的考务处理系统（Claude Opus 4.7）',
+        title: '软件工程概论作业: 资格和水平考试的考务处理系统（Claude Opus 4.7）',
         url: 'https://365.kdocs.cn/l/ctuGpX8FsmWe',
         canOpen: true
     },
     {
-        title: '结构化分析与设计需求分析建模',
+        title: '软件工程概论作业: 结构化分析与设计需求分析建模',
         url: 'https://365.kdocs.cn/l/ch088Xne5Rrs',
         canOpen: true
     },
     {
-        title: '结构化设计建模',
+        title: '软件工程概论作业: 结构化设计建模',
         url: 'https://365.kdocs.cn/l/clEUoQ59Dp8p',
         canOpen: true
     }
