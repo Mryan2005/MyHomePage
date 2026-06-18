@@ -9,7 +9,6 @@ import { File } from 'src/app/interfaces/File';
   styleUrl: './sub-files-list-window.scss',
 })
 export class SubFilesListWindow implements OnInit {
-  // 浅拷贝一份初始数据，防止直接修改只读的静态 fileslist
   files: File[] = [...fileslist];
 
   ngOnInit() {
@@ -18,7 +17,7 @@ export class SubFilesListWindow implements OnInit {
   
   async checkUrls() {
     let TrueFiles: File[] = this.files;
-    console.log('开始通过 <iframe> 隐藏探测文件 URL 连通性...');
+    console.log('开始通过智能弹窗探测连通性...');
 
     for (const file of TrueFiles) {
       if (!file.url) {
@@ -28,55 +27,62 @@ export class SubFilesListWindow implements OnInit {
       }
       
       try {
-        // 核心修改：通过 await 等待 iframe 挂载、加载并返回结果
-        const isAlive = await this.probeUrlViaIframe(file.url);
+        // 使用 window.open 的小窗口探测模式
+        const isAlive = await this.probeUrlViaWindow(file.url);
         
         if (isAlive) {
-          console.log(`✅ 可访问 (iframe 成功加载): ${file.url}`);
+          console.log(`✅ 可访问: ${file.url}`);
           file.canOpen = true;
         } else {
-          console.error(`❌ 无法访问 (iframe 加载超时或触发错误): ${file.url}`);
+          console.error(`❌ 无法访问: ${file.url}`);
           file.canOpen = false;
         }
       } catch (error) {
-        console.error(`❌ 探测过程发生意外异常: ${file.url}`, error);
         file.canOpen = false;
       }
 
-      // 关键改动：每检查完一个文件就刷新一次数组引用，触发 Angular 变更检测
-      // 这样前端 HTML 页面就能实时看到打勾/打叉的状态变化
+      // 动态更新界面
       this.files = [...TrueFiles];
     }
   }
 
-  probeUrlViaIframe(url: string): Promise<boolean> {
+  probeUrlViaWindow(url: string): Promise<boolean> {
     return new Promise((resolve) => {
-      const iframe = document.createElement('iframe');
-      iframe.style.display = 'none'; // 隐藏 iframe
-      iframe.src = url;
-  
-      // 设置一个 6 秒超时（金山文档是单页应用，加载稍微需要一点时间，给 6 秒更保险）
-      const timeout = setTimeout(() => {
-        cleanup();
-        resolve(false); 
-      }, 6000);
-  
-      const cleanup = () => {
-        clearTimeout(timeout);
-        iframe.remove(); // 探测完毕后销毁 DOM，释放内存
+      // 弹出一个几乎不可见的超小窗口（部分浏览器会强制限制最小尺寸，但这不影响探测）
+      const checkWin = window.open(
+        url, 
+        '_blank', 
+        'width=10,height=10,left=10000,top=10000,menubar=no,status=no,toolbar=no'
+      );
+
+      // 如果被浏览器阻止了弹窗（Pop-up blocker）
+      if (!checkWin) {
+        console.warn('检测到浏览器阻止了弹窗，请允许当前页面的弹窗权限以完成检测。');
+        resolve(false);
+        return;
+      }
+
+      // 设定一个 3.5 秒的保底心跳探测
+      // 只要窗口能存活并且没有报错跳转，由于它不是 iframe 嵌套，金山文档可以正常加载
+      const timer = setTimeout(() => {
+        cleanup(true); // 3.5秒内窗口正常且没崩，代表链接有效
+      }, 3500);
+
+      // 监听窗口是否被意外关闭或崩溃
+      const crashCheck = setInterval(() => {
+        if (checkWin.closed) {
+          cleanup(false); // 用户或系统异常关闭了
+        }
+      }, 500);
+
+      const cleanup = (result: boolean) => {
+        clearTimeout(timer);
+        clearInterval(crashCheck);
+        if (checkWin && !checkWin.closed) {
+          checkWin.close(); // 优雅关闭探测窗口
+        }
+        resolve(result);
       };
-  
-      iframe.onload = () => {
-        cleanup();
-        resolve(true); // 页面成功加载
-      };
-  
-      iframe.onerror = () => {
-        cleanup();
-        resolve(false); // 触发错误
-      };
-  
-      document.body.appendChild(iframe);
     });
   }
 }
