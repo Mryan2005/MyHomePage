@@ -1,4 +1,4 @@
-import {AfterViewInit, ChangeDetectorRef, Component, Inject, PLATFORM_ID, Renderer2} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, Inject, PLATFORM_ID, Renderer2, OnInit} from '@angular/core';
 import {BackgroundService} from './config/background';
 import {Footbar} from './components/footbar/footbar';
 import {InsideWindow} from './components/inside-window/inside-window';
@@ -12,7 +12,7 @@ import {NgIf} from '@angular/common';
     templateUrl: './app.html',
     styleUrls: ['./app.scss']
 })
-export class App implements AfterViewInit {
+export class App implements AfterViewInit, OnInit {
     constructor(
         private renderer: Renderer2,
         public bgService: BackgroundService,
@@ -34,6 +34,9 @@ export class App implements AfterViewInit {
         //   this.renderer.setStyle(document.body, 'background-repeat', 'no-repeat');
         //   this.renderer.setStyle(document.body, 'background-attachment', 'fixed');
         // }
+    }
+
+    ngOnInit() {
         const currentDomain = window.location.hostname;
         this.isTargetDomain = (currentDomain === 'index.mryan2005.top');
         console.info("currentDomain:",  currentDomain)
