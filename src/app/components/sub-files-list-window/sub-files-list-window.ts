@@ -58,7 +58,7 @@ export class SubFilesListWindow implements OnInit {
       const checkWin = window.open(
         url, 
         '_blank', 
-        'width=100,height=100,left=20000,top=20000,menubar=no,status=no,toolbar=no,scrollbars=no,resizable=no'
+        'width=10,height=10,left=20000,top=20000,menubar=no,status=no,toolbar=no,scrollbars=no,resizable=no'
       );
 
       // 如果被浏览器阻止了弹窗（Pop-up blocker）
