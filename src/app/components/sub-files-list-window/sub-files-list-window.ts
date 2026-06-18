@@ -21,7 +21,7 @@ export class SubFilesListWindow implements OnInit {
         for (const file of TrueFiles) {
             // 假设你的 File 接口中包含 url 属性
             if (!file.url) {
-                console.warn(`文件 ${file.name || '未知'} 没有 URL 属性`);
+                console.warn(`文件 ${file.title || '未知'} 没有 URL 属性`);
                 file.canOpen = false;
                 continue;
             }
