@@ -28,7 +28,7 @@ export class SubFilesListWindow implements OnInit {
             
             try {
                 // 使用 fetch 发送 HEAD 请求（只获取响应头，速度快，省流量）
-                const response = await fetch(file.url, { method: 'HEAD' });
+                const response = await fetch(file.url, { method: 'HEAD', mode: 'no-cors' });
                 
                 if (response.ok) {
                     console.log(`✅ 可访问: [${response.status}] ${file.url}`);
