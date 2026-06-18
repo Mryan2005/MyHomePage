@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { fileslist } from 'src/app/data/files';
 import { File } from 'src/app/interfaces/File';
 
@@ -9,11 +9,16 @@ import { File } from 'src/app/interfaces/File';
   styleUrl: './sub-files-list-window.scss',
 })
 export class SubFilesListWindow implements OnInit {
-  files: File[] = [...fileslist];
+    files: File[] = [...fileslist];
 
-  ngOnInit() {
-    this.checkUrls();
-  }
+    constructor(
+        public cdr: ChangeDetectorRef,
+    ) {
+    }
+
+    ngOnInit() {
+        this.checkUrls();
+    }
   
   async checkUrls() {
     let TrueFiles: File[] = this.files;
@@ -43,6 +48,7 @@ export class SubFilesListWindow implements OnInit {
 
       // 动态更新界面
       this.files = [...TrueFiles];
+        this.cdr.markForCheck();
     }
   }
 
