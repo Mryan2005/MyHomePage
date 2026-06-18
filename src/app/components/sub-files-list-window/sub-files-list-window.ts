@@ -9,42 +9,74 @@ import { File } from 'src/app/interfaces/File';
   styleUrl: './sub-files-list-window.scss',
 })
 export class SubFilesListWindow implements OnInit {
-    files: File[] = fileslist;
+  // 浅拷贝一份初始数据，防止直接修改只读的静态 fileslist
+  files: File[] = [...fileslist];
 
-    ngOnInit() {
-        this.checkUrls();
-    }
-    
-    async checkUrls() {
-        let TrueFiles: File[] = fileslist;
-        console.log('开始检查文件 URL 连通性...');
-        for (const file of TrueFiles) {
-            // 假设你的 File 接口中包含 url 属性
-            if (!file.url) {
-                console.warn(`文件 ${file.title || '未知'} 没有 URL 属性`);
-                file.canOpen = false;
-                continue;
-            }
-            
-            const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(file.url)}`;
-            
-            try {
-                // 使用 fetch 发送 HEAD 请求（只获取响应头，速度快，省流量）
-                const response = await fetch(proxyUrl, { method: 'HEAD', mode: 'no-cors' });
-                
-                if (response.ok) {
-                    console.log(`✅ 可访问: [${response.status}] ${file.url}`);
-                    file.canOpen = true;
-                } else {
-                    console.error(`❌ 无法访问: [${response.status}] ${file.url}`);
-                    file.canOpen = false;
-                }
-            } catch (error) {
-                // 网络错误或跨域问题 (CORS) 会走到这里
-                console.error(`❌ 访问失败 (网络错误/跨域): ${file.url}`, error);
-                file.canOpen = false;
-            }
+  ngOnInit() {
+    this.checkUrls();
+  }
+  
+  async checkUrls() {
+    let TrueFiles: File[] = this.files;
+    console.log('开始通过 <iframe> 隐藏探测文件 URL 连通性...');
+
+    for (const file of TrueFiles) {
+      if (!file.url) {
+        console.warn(`文件 ${file.title || '未知'} 没有 URL 属性`);
+        file.canOpen = false;
+        continue;
+      }
+      
+      try {
+        // 核心修改：通过 await 等待 iframe 挂载、加载并返回结果
+        const isAlive = await this.probeUrlViaIframe(file.url);
+        
+        if (isAlive) {
+          console.log(`✅ 可访问 (iframe 成功加载): ${file.url}`);
+          file.canOpen = true;
+        } else {
+          console.error(`❌ 无法访问 (iframe 加载超时或触发错误): ${file.url}`);
+          file.canOpen = false;
         }
-        this.files = TrueFiles;
+      } catch (error) {
+        console.error(`❌ 探测过程发生意外异常: ${file.url}`, error);
+        file.canOpen = false;
+      }
+
+      // 关键改动：每检查完一个文件就刷新一次数组引用，触发 Angular 变更检测
+      // 这样前端 HTML 页面就能实时看到打勾/打叉的状态变化
+      this.files = [...TrueFiles];
     }
+  }
+
+  probeUrlViaIframe(url: string): Promise<boolean> {
+    return new Promise((resolve) => {
+      const iframe = document.createElement('iframe');
+      iframe.style.display = 'none'; // 隐藏 iframe
+      iframe.src = url;
+  
+      // 设置一个 6 秒超时（金山文档是单页应用，加载稍微需要一点时间，给 6 秒更保险）
+      const timeout = setTimeout(() => {
+        cleanup();
+        resolve(false); 
+      }, 6000);
+  
+      const cleanup = () => {
+        clearTimeout(timeout);
+        iframe.remove(); // 探测完毕后销毁 DOM，释放内存
+      };
+  
+      iframe.onload = () => {
+        cleanup();
+        resolve(true); // 页面成功加载
+      };
+  
+      iframe.onerror = () => {
+        cleanup();
+        resolve(false); // 触发错误
+      };
+  
+      document.body.appendChild(iframe);
+    });
+  }
 }
