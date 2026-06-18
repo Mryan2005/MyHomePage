@@ -18,7 +18,7 @@ export class SubFilesListWindow implements OnInit {
     async checkUrls() {
         let TrueFiles: File[] = fileslist;
         console.log('开始检查文件 URL 连通性...');
-        for (const file of this.TrueFiles) {
+        for (const file of TrueFiles) {
             // 假设你的 File 接口中包含 url 属性
             if (!file.url) {
                 console.warn(`文件 ${file.name || '未知'} 没有 URL 属性`);
