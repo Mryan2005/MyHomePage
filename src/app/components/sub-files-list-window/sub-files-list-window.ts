@@ -26,9 +26,11 @@ export class SubFilesListWindow implements OnInit {
                 continue;
             }
             
+            const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(file.url)}`;
+            
             try {
                 // 使用 fetch 发送 HEAD 请求（只获取响应头，速度快，省流量）
-                const response = await fetch(file.url, { method: 'HEAD', mode: 'no-cors' });
+                const response = await fetch(proxyUrl, { method: 'HEAD', mode: 'no-cors' });
                 
                 if (response.ok) {
                     console.log(`✅ 可访问: [${response.status}] ${file.url}`);
