@@ -25,5 +25,10 @@ export const fileslist: File[] = [
         title: '期末复习: 软件工程概论',
         url: 'https://365.kdocs.cn/l/cqZ9qiwCCHYV',
         canOpen: true
+    },
+    {
+        title: '期末复习: 深度学习',
+        url: 'https://365.kdocs.cn/l/ciRbu7EKh815',
+        canOpen: true
     }
 ]
