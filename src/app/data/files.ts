@@ -30,5 +30,20 @@ export const fileslist: File[] = [
         title: '期末复习: 深度学习',
         url: 'https://365.kdocs.cn/l/ciRbu7EKh815',
         canOpen: true
+    },
+    {
+        title: '英语遣词造句日常',
+        url: 'https://365.kdocs.cn/l/crXEh8kH5C1T',
+        canOpen: false
+    },
+    {
+        title: '日语遣词造句日常',
+        url: 'https://365.kdocs.cn/l/cvrqZ9mwE7CU',
+        canOpen: false
+    },
+    {
+        title: '广东话遣词造句日常',
+        url: 'https://365.kdocs.cn/l/cbPUgJY4btpJ',
+        canOpen: false
     }
 ]
