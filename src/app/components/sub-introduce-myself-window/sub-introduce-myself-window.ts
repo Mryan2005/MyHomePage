@@ -56,7 +56,7 @@ export class SubIntroduceMyselfWindow implements OnInit, AfterViewInit {
 
     ngAfterViewInit() {
         liquidGL({
-            target: ".right-column",
+            target: ".glass",
             snapshot: "body",
             resolution:2,
             refraction:0.01,
@@ -65,7 +65,7 @@ export class SubIntroduceMyselfWindow implements OnInit, AfterViewInit {
             frost:2,
             shadow:true,
             specular:true,
-            reveal:"fade",
+            reveal:false,
             tilt:false,
             magnify:1
         });
