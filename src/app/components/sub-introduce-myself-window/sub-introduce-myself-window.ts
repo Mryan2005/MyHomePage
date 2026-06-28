@@ -64,18 +64,31 @@ export class SubIntroduceMyselfWindow implements OnInit, AfterViewInit {
                 }
 
                 liquid({
+
                     target: ".glass",
+
                     snapshot: "body",
+
                     resolution: 2,
-                    refraction: 0.02,
-                    bevelDepth: 0.02,
-                    bevelWidth: 0.02,
+
+                    refraction: 0.05,
+
+                    bevelDepth: 0.08,
+
+                    bevelWidth: 0.15,
+
                     frost: 2,
-                    shadow: false,
+
+                    shadow: true,
+
                     specular: true,
-                    reveal: false,
+
+                    reveal: "fade",
+
                     tilt: false,
+
                     magnify: 1
+
                 });
             });
         });
