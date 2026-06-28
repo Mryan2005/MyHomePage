@@ -32,6 +32,11 @@ export const fileslist: File[] = [
         canOpen: true
     },
     {
+        title: 'folder: 考研',
+        url: 'https://365.kdocs.cn/folder/cihkLsdXgsAy',
+        canOpen: false
+    },
+    {
         title: '英语遣词造句日常',
         url: 'https://365.kdocs.cn/l/crXEh8kH5C1T',
         canOpen: false
