@@ -76,6 +76,6 @@ export class SubIntroduceMyselfWindow implements OnInit, AfterViewInit {
                 tilt: false,
                 magnify: 1
             });
-        }
+        });
     }
 }
