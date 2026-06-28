@@ -93,6 +93,7 @@
               },
               "src/favicon.ico",
               "src/assets",
+              "src/assets/js/liquidGL.js",
               "src/_redirects"
             ],
             "styles": [
