@@ -50,5 +50,10 @@ export const workslist: Work[] = [
         title: '基于DeepCTR的影视推荐系统：深度学习大作业',
         url: 'https://github.com/Mryan2005/Movie-Recommendation-System',
         public: false
+    },
+    {
+        title: '基于 ROS 2 的智能仓储机器人调度平台',
+        url: 'https://github.com/RobotLessonGroup/Group-Project',
+        public: false
     }
 ]
