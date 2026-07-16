@@ -5,7 +5,7 @@
 
     <div *ngIf="!loading && !error && discussions.length" class="status-layout">
         <section class="list-panel">
-            <div class="list-title">进行中任务</div>
+            <div class="list-title">进行中任务（地球 Online 的任务）</div>
             <div class="issue-list">
                 @for (discussion of discussions; track discussion.url) {
                     <button
@@ -15,7 +15,7 @@
                         (click)="selectDiscussion(discussion)"
                     >
                         <div class="row-main">
-                            <div class="issue-title">{{ discussion.title }}</div>
+                            <div class="issue-title" style="width: 100%;">{{ discussion.title }}</div>
                             <div class="issue-time">{{ getTimeAgo(discussion.createdAt) }}</div>
                         </div>
                         <span
