@@ -155,10 +155,16 @@
 
   height: max-content;
 
-  background: rgba(255,255,255,.08);
+  background: linear-gradient(
+      160deg,
+      rgba(255, 255, 255, .34),
+      rgba(255, 255, 255, .16)
+  );
+  border: 1px solid rgba(255, 255, 255, .4);
+  box-shadow: 0 12px 30px rgba(72, 104, 141, .14);
 
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
 
   z-index: 1;
 }
