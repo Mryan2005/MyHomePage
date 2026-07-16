@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output, OutputEmitterRef} from '@angular/core';
 import {WebsitePramasService} from '../../services/Website-pramas';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-topbar',
@@ -15,13 +16,24 @@ export class TopbarComponent implements OnInit {
     @Output() clickBarButton = new EventEmitter<string>();
 
     constructor(
-        public websitePramas: WebsitePramasService
+        public websitePramas: WebsitePramasService,
+        private router: Router
     ) {
     }
 
     clickBarButton1(buttonName: string) {
         console.debug(`TopbarComponent: clickBarButton1 called with buttonName=${buttonName}`);
         this.websitePramas.currentDisplayPart = buttonName;
+        const routeMap: Record<string, string> = {
+            Home: 'home',
+            Works: 'works',
+            Travel: 'travel',
+            Status: 'status',
+            Files: 'files',
+            Contact: 'contact',
+            Help: 'help'
+        };
+        this.router.navigate([routeMap[buttonName] ?? 'home']);
     }
 
     ngOnInit(): void {
