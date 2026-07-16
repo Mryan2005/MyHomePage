@@ -1,12 +1,12 @@
 import {AfterViewInit, ChangeDetectorRef, Component, Inject, PLATFORM_ID, Renderer2, OnInit} from '@angular/core';
 import {BackgroundService} from './config/background';
 import {Footbar} from './components/footbar/footbar';
-import {InsideWindow} from './components/inside-window/inside-window';
 import {TopbarComponent} from './components/topbar/topbar.component';
 import {NgIf} from '@angular/common';
+import {RouterOutlet} from '@angular/router';
 
 @Component({
-    imports: [Footbar, InsideWindow, TopbarComponent, NgIf],
+    imports: [Footbar, TopbarComponent, NgIf, RouterOutlet],
     selector: 'app-root',
     standalone: true,
     templateUrl: './app.html',

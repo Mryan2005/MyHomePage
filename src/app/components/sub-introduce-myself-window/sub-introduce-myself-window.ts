@@ -3,6 +3,7 @@ import {AvatarService} from '../../config/avatar';
 import {WebsitePramasService} from '../../services/Website-pramas';
 import {OnInit} from '@angular/core';
 import {PhotoViewerService} from '../../services/photo-viewer.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-sub-introduce-myself-window',
@@ -18,6 +19,7 @@ export class SubIntroduceMyselfWindow implements OnInit, AfterViewInit {
 
     openPortal() {
         this.websitePramas.currentDisplayPart = 'Works';
+        this.router.navigate(['/works']);
     }
 
     openCialloImage() {
@@ -45,7 +47,8 @@ export class SubIntroduceMyselfWindow implements OnInit, AfterViewInit {
     constructor(
         public avatarService: AvatarService,
         public websitePramas: WebsitePramasService,
-        public photoViewer: PhotoViewerService
+        public photoViewer: PhotoViewerService,
+        private router: Router
     ) {
     }
 

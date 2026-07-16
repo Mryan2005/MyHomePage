@@ -43,7 +43,7 @@
 
 .list-title {
     color: #d8be8b;
-    font-size: 30px;
+    font-size: 15px;
     font-weight: 700;
     padding: 18px 22px 10px;
     border-bottom: 1px solid rgba(216, 190, 139, .2);
@@ -105,8 +105,8 @@
 }
 
 .issue-title {
-    font-size: 30px;
-    font-weight: 700;
+    font-size: 15px;
+    font-weight: 500;
     color: rgba(255, 255, 255, .92);
     overflow: hidden;
     text-overflow: ellipsis;
@@ -114,7 +114,7 @@
 }
 
 .issue-time {
-    font-size: 24px;
+    font-size: 12px;
     color: rgba(225, 223, 230, .64);
 }
 
@@ -129,8 +129,8 @@
     min-width: 86px;
     padding: 7px 12px;
     border-radius: 999px;
-    font-size: 15px;
-    font-weight: 700;
+    font-size: 12px;
+    font-weight: 600;
     text-align: center;
 }
 
@@ -161,8 +161,8 @@
 .detail-header h2 {
     margin: 0;
     color: #f4eee2;
-    font-size: 48px;
-    font-weight: 700;
+    font-size: 15px;
+    font-weight: 500;
     line-height: 1.1;
 }
 
@@ -170,14 +170,14 @@
     margin-top: 12px;
     display: flex;
     gap: 8px;
-    font-size: 24px;
+    font-size: 12px;
     color: rgba(225, 204, 166, .9);
 }
 
 .body-text {
     margin-top: 22px;
     color: rgba(245, 244, 247, .92);
-    font-size: 34px;
+    font-size: 15px;
     line-height: 1.45;
     min-height: 0;
     flex: 1;
@@ -196,8 +196,8 @@
     background: linear-gradient(180deg, #f4ecbf, #e9de9f);
     color: #b18833;
     text-decoration: none;
-    font-size: 34px;
-    font-weight: 700;
+    font-size: 15px;
+    font-weight: 600;
     transition: filter .2s ease, transform .2s ease;
 }
 
@@ -236,26 +236,26 @@
     }
 
     .detail-header h2 {
-        font-size: 36px;
+        font-size: 15px;
     }
 
     .body-text {
-        font-size: 26px;
+        font-size: 15px;
     }
 
     .issue-title {
-        font-size: 24px;
+        font-size: 15px;
     }
 
     .issue-time {
-        font-size: 18px;
+        font-size: 12px;
     }
 
     .meta-line {
-        font-size: 18px;
+        font-size: 12px;
     }
 
     .target-btn {
-        font-size: 26px;
+        font-size: 15px;
     }
 }
