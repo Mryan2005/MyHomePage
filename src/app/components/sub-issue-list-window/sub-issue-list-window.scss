@@ -1,316 +1,261 @@
 :host {
-
     height: 80%;
     width: 85%;
 
     position: fixed;
-    top: 55px;               /* 相当于 top:0; right:0; bottom:0; left:0; */
+    top: 55px;
     display: flex;
-    justify-content: center; /* 水平居中 */
-    align-items: center;     /* 垂直居中 */
+    justify-content: center;
+    align-items: center;
 
     overflow: hidden;
 
     animation: windowSlideIn .5s ease-out;
 }
 
-.issue-window {
-
-    width: 720px;
-
-    max-width: 92vw;
-
+.status-window {
+    width: min(1320px, 95vw);
     height: 95%;
-    
-    max-width: 80%;
-
-    border-radius: 24px;
-
-    background: rgba(255,255,255,.16);
-
-    border: 1px solid rgba(255,255,255,.24);
-
-    box-shadow:
-        0 8px 32px rgba(0,0,0,.08);
-
-    backdrop-filter: blur(2px);
-
+    border-radius: 22px;
+    background: linear-gradient(180deg, rgba(38, 32, 52, .48), rgba(25, 25, 40, .38));
+    border: 1px solid rgba(246, 226, 185, .24);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, .22);
+    backdrop-filter: blur(8px);
     overflow: hidden;
+    padding: 18px;
+}
 
-    display: flex;
+.status-layout {
+    display: grid;
+    grid-template-columns: 42% 58%;
+    gap: 18px;
+    height: 100%;
+}
 
-    flex-direction: column;
+.list-panel,
+.detail-panel {
+    border-radius: 14px;
+    border: 1px solid rgba(250, 233, 202, .2);
+    background: rgba(19, 28, 55, .45);
+    overflow: hidden;
+    min-height: 0;
+}
+
+.list-title {
+    color: #d8be8b;
+    font-size: 30px;
+    font-weight: 700;
+    padding: 18px 22px 10px;
+    border-bottom: 1px solid rgba(216, 190, 139, .2);
 }
 
 .issue-list {
-
-    flex: 1;
-
-    overflow-y: auto;
-
-    padding: 12px;
-
+    padding: 14px;
     display: flex;
-
     flex-direction: column;
-
     gap: 10px;
-
-    scrollbar-width: none;
-
-    scrollbar-color:
-        rgba(0,0,0,.15)
-        transparent;
+    max-height: calc(100% - 74px);
+    overflow-y: auto;
 }
 
 .issue-list::-webkit-scrollbar {
-
-    width: 8px;
+    width: 6px;
 }
 
 .issue-list::-webkit-scrollbar-thumb {
-
-    background:
-        rgba(0,0,0,.12);
-
     border-radius: 999px;
+    background: rgba(216, 190, 139, .32);
 }
 
 .issue-row {
-
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, .12);
+    background: rgba(20, 35, 66, .72);
+    border-radius: 10px;
+    padding: 14px 16px;
     display: flex;
-
-    align-items: center;
-
     justify-content: space-between;
-
+    align-items: center;
     gap: 12px;
-
-    padding: 14px 18px;
-
-    border-radius: 18px;
-
-    background:
-        rgba(255,255,255,.16);
-
-    border:
-        1px solid rgba(255,255,255,.24);
-
-    transition:
-        transform .2s ease,
-        background .2s ease,
-        box-shadow .2s ease;
+    cursor: pointer;
+    transition: background .2s ease, border-color .2s ease, transform .2s ease;
 }
 
 .issue-row:hover {
-
     transform: translateY(-2px);
+    border-color: rgba(216, 190, 139, .5);
+}
 
-    background:
-        rgba(255,255,255,.82);
+.issue-row.active {
+    background: rgba(237, 229, 213, .94);
+    border-color: rgba(255, 255, 255, .65);
+}
 
-    box-shadow:
-        0 4px 14px rgba(0,0,0,.08);
+.issue-row.active .issue-title,
+.issue-row.active .issue-time {
+    color: #2e2d33;
+}
+
+.row-main {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    min-width: 0;
 }
 
 .issue-title {
-
-    flex: 1;
-
+    font-size: 30px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, .92);
     overflow: hidden;
-
     text-overflow: ellipsis;
-
     white-space: nowrap;
-
-    font-size: 15px;
-
-    font-weight: 500;
-
-    color: rgba(0,0,0,.86);
-
-    width: fit-content;
-
-    background-image:
-        linear-gradient(
-            rgba(37,99,235,.65),
-            rgba(37,99,235,.65)
-        );
-
-    background-repeat: no-repeat;
-
-    background-size: 0% 1.5px;
-
-    background-position: left bottom;
-
-    transition:
-        background-size .25s ease,
-        color .25s ease;
 }
 
-.issue-title:hover {
-
-    background-size: 100% 1.5px;
-
-    color: rgb(37,99,235);
-
-    cursor: pointer;
+.issue-time {
+    font-size: 24px;
+    color: rgba(225, 223, 230, .64);
 }
 
-.status {
-
-    flex-shrink: 0;
+.detail-panel {
+    padding: 34px 34px 26px;
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 245, 224, .08);
 }
 
 .badge {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    min-width: 78px;
-
-    padding: 5px 12px;
-
+    min-width: 86px;
+    padding: 7px 12px;
     border-radius: 999px;
-
-    font-size: 12px;
-
-    font-weight: 600;
-
-    letter-spacing: .2px;
-
-    transition:
-        background .2s ease,
-        color .2s ease;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
 }
 
 .done {
-
-    background:
-        rgba(34,197,94,.15);
-
-    color:
-        rgb(21,128,61);
+    color: #4a3f2d;
+    background: rgba(229, 205, 147, .78);
 }
 
 .pause {
-
-    background:
-        rgba(234,179,8,.14);
-
-    color:
-        rgb(161,98,7);
-
-    box-shadow:
-        0 0 12px rgba(234,179,8,.35),
-        0 0 24px rgba(234,179,8,.12);
-
-    animation: glowPause 2.2s ease-in-out infinite;
-}
-
-@keyframes glowPause {
-
-    0% {
-
-        box-shadow:
-            0 0 8px rgba(234,179,8,.2),
-            0 0 18px rgba(234,179,8,.08);
-    }
-
-    50% {
-
-        box-shadow:
-            0 0 14px rgba(234,179,8,.5),
-            0 0 28px rgba(234,179,8,.2);
-    }
-
-    100% {
-
-        box-shadow:
-            0 0 8px rgba(234,179,8,.2),
-            0 0 18px rgba(234,179,8,.08);
-    }
+    color: #f6d58a;
+    background: rgba(78, 55, 34, .72);
 }
 
 .working {
-
-    background:
-        rgba(59,130,246,.14);
-
-    color:
-        rgb(37,99,235);
-
-    box-shadow:
-        0 0 12px rgba(59,130,246,.45),
-        0 0 24px rgba(59,130,246,.18);
-
-    animation: glow 1.8s ease-in-out infinite;
+    color: #e8ca95;
+    background: rgba(95, 78, 56, .72);
 }
 
-@keyframes glow {
+.detail-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(216, 190, 139, .22);
+}
 
-    0% {
+.detail-header h2 {
+    margin: 0;
+    color: #f4eee2;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.1;
+}
 
-        box-shadow:
-            0 0 8px rgba(59,130,246,.25),
-            0 0 18px rgba(59,130,246,.12);
-    }
+.meta-line {
+    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+    font-size: 24px;
+    color: rgba(225, 204, 166, .9);
+}
 
-    50% {
+.body-text {
+    margin-top: 22px;
+    color: rgba(245, 244, 247, .92);
+    font-size: 34px;
+    line-height: 1.45;
+    min-height: 0;
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 18px;
+    border-radius: 10px;
+    background: rgba(31, 32, 47, .35);
+}
 
-        box-shadow:
-            0 0 16px rgba(59,130,246,.6),
-            0 0 32px rgba(59,130,246,.28);
-    }
+.target-btn {
+    margin-top: 22px;
+    align-self: flex-end;
+    padding: 12px 46px;
+    border-radius: 999px;
+    border: 1px solid rgba(223, 197, 138, .78);
+    background: linear-gradient(180deg, #f4ecbf, #e9de9f);
+    color: #b18833;
+    text-decoration: none;
+    font-size: 34px;
+    font-weight: 700;
+    transition: filter .2s ease, transform .2s ease;
+}
 
-    100% {
-
-        box-shadow:
-            0 0 8px rgba(59,130,246,.25),
-            0 0 18px rgba(59,130,246,.12);
-    }
+.target-btn:hover {
+    filter: brightness(1.05);
+    transform: translateY(-1px);
 }
 
 .loading,
 .error,
 .empty {
-
-    padding: 24px;
-
+    padding: 24px 0;
     text-align: center;
-
     font-size: 14px;
-
-    color:
-        rgba(0,0,0,.55);
+    color: rgba(255, 255, 255, .88);
 }
 
 .error {
-
-    color:
-        rgb(220,38,38);
+    color: rgb(252, 157, 157);
 }
 
 @keyframes windowSlideIn {
-
     from {
-
         opacity: 0;
+        transform: translateY(30px) scale(.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
 
-        transform:
-            translateY(30px)
-            scale(.96);
+@media (max-width: 1200px) {
+    .status-layout {
+        grid-template-columns: 1fr;
     }
 
-    to {
+    .detail-header h2 {
+        font-size: 36px;
+    }
 
-        opacity: 1;
+    .body-text {
+        font-size: 26px;
+    }
 
-        transform:
-            translateY(0)
-            scale(1);
+    .issue-title {
+        font-size: 24px;
+    }
+
+    .issue-time {
+        font-size: 18px;
+    }
+
+    .meta-line {
+        font-size: 18px;
+    }
+
+    .target-btn {
+        font-size: 26px;
     }
 }
