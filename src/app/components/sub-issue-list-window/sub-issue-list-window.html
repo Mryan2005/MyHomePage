@@ -1,49 +1,59 @@
-<div class="issue-window">
+<div class="status-window">
+    <div *ngIf="loading" class="loading">Loading...</div>
+    <div *ngIf="error" class="error">{{ error }}</div>
+    <div *ngIf="!loading && !error && discussions.length === 0" class="empty">No Status found</div>
 
-  <div *ngIf="loading" class="loading">
-    Loading...
-  </div>
-
-  <div *ngIf="error" class="error">
-    {{ error }}
-  </div>
-
-  <div
-    *ngIf="!loading && !error && discussions.length === 0"
-    class="empty"
-  >
-    No Status found
-  </div>
-
-  <div class="issue-list">
-
-    @for (discussion of discussions; track discussion.url) {
-
-      <div class="issue-row">
-        <a href="{{ discussion.url }}">
-            <div class="issue-title">
-              {{ discussion.title }}
+    <div *ngIf="!loading && !error && discussions.length" class="status-layout">
+        <section class="list-panel">
+            <div class="list-title">进行中任务</div>
+            <div class="issue-list">
+                @for (discussion of discussions; track discussion.url) {
+                    <button
+                        type="button"
+                        class="issue-row"
+                        [class.active]="selectedDiscussion?.url === discussion.url"
+                        (click)="selectDiscussion(discussion)"
+                    >
+                        <div class="row-main">
+                            <div class="issue-title">{{ discussion.title }}</div>
+                            <div class="issue-time">{{ getTimeAgo(discussion.createdAt) }}</div>
+                        </div>
+                        <span
+                            class="badge"
+                            [class.pause]="getStatus(discussion) === 'Pause'"
+                            [class.working]="getStatus(discussion) === 'Ongoing'"
+                            [class.done]="getStatus(discussion) === 'Done'"
+                        >
+                            {{ getStatus(discussion) }}
+                        </span>
+                    </button>
+                }
             </div>
-        </a>
-        <div class="status">
+        </section>
 
-          <span
-            class="badge"
-            [class.pause]="discussion.labels?.length"
-            [class.working]="!discussion.closed && !discussion.labels?.length"
-            [class.done]="discussion.closed && !discussion.labels?.length"
-          >
-
-            {{ discussion.labels?.length ? 'Pause' : (!discussion.closed ? 'Ongoing' : 'Done') }}
-
-          </span>
-
-        </div>
-
-      </div>
-
-    }
-
-  </div>
-
+        <section class="detail-panel">
+            <div class="detail-header">
+                <h2>{{ selectedDiscussion?.title }}</h2>
+                <span
+                    class="badge"
+                    [class.pause]="selectedDiscussion && getStatus(selectedDiscussion) === 'Pause'"
+                    [class.working]="selectedDiscussion && getStatus(selectedDiscussion) === 'Ongoing'"
+                    [class.done]="selectedDiscussion && getStatus(selectedDiscussion) === 'Done'"
+                >
+                    {{ selectedDiscussion ? getStatus(selectedDiscussion) : '' }}
+                </span>
+            </div>
+            <div class="meta-line">
+                <span>{{ selectedDiscussion?.category?.name }}</span>
+                <span>·</span>
+                <span>@{{ selectedDiscussion?.author?.login }}</span>
+            </div>
+            <div class="body-text">
+                {{ selectedDiscussion?.body || '暂无详情描述' }}
+            </div>
+            <a class="target-btn" [href]="selectedDiscussion?.url" target="_blank" rel="noopener noreferrer">
+                追踪目标
+            </a>
+        </section>
+    </div>
 </div>
