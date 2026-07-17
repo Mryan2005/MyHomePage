@@ -190,6 +190,33 @@
     background: rgba(255, 255, 255, .52);
 }
 
+.body-text :where(p, ul, ol, blockquote, pre, h1, h2, h3, h4, h5, h6) {
+    margin: 0 0 12px;
+}
+
+.body-text :where(ul, ol) {
+    padding-left: 20px;
+}
+
+.body-text :where(pre, code) {
+    font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+}
+
+.body-text :where(pre) {
+    padding: 10px 12px;
+    border-radius: 8px;
+    overflow-x: auto;
+    background: rgba(47, 58, 78, .08);
+}
+
+.body-text :where(a) {
+    color: #5f7cb0;
+}
+
+.body-text > :last-child {
+    margin-bottom: 0;
+}
+
 .target-btn {
     margin-top: 22px;
     align-self: flex-end;
