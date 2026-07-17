@@ -56,6 +56,24 @@
     "labels": []
   },
   {
+    "title": "财富之章：登顶",
+    "url": "https://github.com/Mryan2005/MyHomePage/discussions/45",
+    "createdAt": "2026-07-17T10:03:03Z",
+    "closed": false,
+    "body": "终章：登顶",
+    "category": {
+      "name": "Announcements"
+    },
+    "author": {
+      "login": "Mryan2005"
+    },
+    "labels": [
+      {
+        "name": "Pause"
+      }
+    ]
+  },
+  {
     "title": "财富之章：成塔",
     "url": "https://github.com/Mryan2005/MyHomePage/discussions/44",
     "createdAt": "2026-07-17T10:02:22Z",
@@ -129,20 +147,6 @@
     "createdAt": "2026-06-02T12:14:30Z",
     "closed": true,
     "body": "完成深度学习大作业ing\r\n\r\n",
-    "category": {
-      "name": "Announcements"
-    },
-    "author": {
-      "login": "Mryan2005"
-    },
-    "labels": []
-  },
-  {
-    "title": "复习计算机组成原理",
-    "url": "https://github.com/Mryan2005/MyHomePage/discussions/29",
-    "createdAt": "2026-05-26T15:38:03Z",
-    "closed": true,
-    "body": "计算机组成原理",
     "category": {
       "name": "Announcements"
     },
