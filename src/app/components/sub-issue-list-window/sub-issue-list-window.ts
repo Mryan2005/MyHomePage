@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {GithubDiscussionsService} from '../../services/github-discussions.service';
 import {GithubDiscussion} from '../../interfaces/github-discussion';
 import {firstValueFrom} from 'rxjs';
+import {marked} from 'marked';
 
 @Component({
     selector: 'app-sub-issue-list-window',
@@ -15,6 +16,7 @@ export class SubIssueListComponent implements OnInit {
 
     discussions: GithubDiscussion[] = [];
     selectedDiscussion?: GithubDiscussion;
+    selectedDiscussionBodyHtml = '';
 
     loading = false;
     error = '';
@@ -36,6 +38,7 @@ export class SubIssueListComponent implements OnInit {
                     this.githubDiscussionsService.getDiscussions()
                 );
             this.selectedDiscussion = this.discussions[0];
+            this.updateSelectedDiscussionBody();
             this.cdr.detectChanges();
         } catch (e) {
 
@@ -52,6 +55,7 @@ export class SubIssueListComponent implements OnInit {
 
     selectDiscussion(discussion: GithubDiscussion): void {
         this.selectedDiscussion = discussion;
+        this.updateSelectedDiscussionBody();
     }
 
     getStatus(discussion: GithubDiscussion): 'Pause' | 'Ongoing' | 'Done' {
@@ -77,5 +81,10 @@ export class SubIssueListComponent implements OnInit {
 
         const diffDays = Math.floor(diffHours / 24);
         return `${diffDays}d`;
+    }
+
+    private updateSelectedDiscussionBody(): void {
+        const content = this.selectedDiscussion?.body?.trim() || '暂无详情描述';
+        this.selectedDiscussionBodyHtml = marked.parse(content, {async: false}) as string;
     }
 }

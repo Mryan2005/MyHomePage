@@ -45,9 +45,7 @@
             </div>
             <div class="meta-line">
             </div>
-            <div class="body-text">
-                {{ selectedDiscussion?.body || '暂无详情描述' }}
-            </div>
+            <div class="body-text" [innerHTML]="selectedDiscussionBodyHtml"></div>
             <a class="target-btn" [href]="selectedDiscussion?.url" target="_blank" rel="noopener noreferrer">
                 追踪目标
             </a>
