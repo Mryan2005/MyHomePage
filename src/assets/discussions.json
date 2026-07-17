@@ -56,6 +56,24 @@
     "labels": []
   },
   {
+    "title": "财富之章：成塔",
+    "url": "https://github.com/Mryan2005/MyHomePage/discussions/44",
+    "createdAt": "2026-07-17T10:02:22Z",
+    "closed": false,
+    "body": "第三幕：成塔",
+    "category": {
+      "name": "Announcements"
+    },
+    "author": {
+      "login": "Mryan2005"
+    },
+    "labels": [
+      {
+        "name": "Pause"
+      }
+    ]
+  },
+  {
     "title": "财富之章：聚沙",
     "url": "https://github.com/Mryan2005/MyHomePage/discussions/43",
     "createdAt": "2026-07-17T10:01:33Z",
@@ -125,20 +143,6 @@
     "createdAt": "2026-05-26T15:38:03Z",
     "closed": true,
     "body": "计算机组成原理",
-    "category": {
-      "name": "Announcements"
-    },
-    "author": {
-      "login": "Mryan2005"
-    },
-    "labels": []
-  },
-  {
-    "title": "完成高等数学的学习",
-    "url": "https://github.com/Mryan2005/MyHomePage/discussions/28",
-    "createdAt": "2026-05-26T15:35:51Z",
-    "closed": true,
-    "body": "高等数学 ",
     "category": {
       "name": "Announcements"
     },
