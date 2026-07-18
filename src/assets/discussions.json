@@ -1,5 +1,19 @@
 [
   {
+    "title": "汇丰银行账户开立与启用",
+    "url": "https://github.com/Mryan2005/MyHomePage/discussions/46",
+    "createdAt": "2026-07-18T07:29:37Z",
+    "closed": false,
+    "body": "建立并完善汇丰银行账户体系，完成账户开立、数字银行服务配置、首次资金存入及账户功能验证，构建满足跨境资金流转、多币种管理与国际金融服务需求的个人银行账户基础设施。",
+    "category": {
+      "name": "Announcements"
+    },
+    "author": {
+      "login": "Mryan2005"
+    },
+    "labels": []
+  },
+  {
     "title": "学习概率与统计：数学（一）要完成 100%",
     "url": "https://github.com/Mryan2005/MyHomePage/discussions/39",
     "createdAt": "2026-07-07T08:44:56Z",
@@ -133,20 +147,6 @@
     "createdAt": "2026-06-02T12:15:07Z",
     "closed": true,
     "body": "复习软件工程 ",
-    "category": {
-      "name": "Announcements"
-    },
-    "author": {
-      "login": "Mryan2005"
-    },
-    "labels": []
-  },
-  {
-    "title": "完成深度学习大作业ing",
-    "url": "https://github.com/Mryan2005/MyHomePage/discussions/36",
-    "createdAt": "2026-06-02T12:14:30Z",
-    "closed": true,
-    "body": "完成深度学习大作业ing\r\n\r\n",
     "category": {
       "name": "Announcements"
     },
