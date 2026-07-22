@@ -152,6 +152,7 @@
     border: 1px solid rgba(255, 255, 255, .42);
     background: linear-gradient(140deg, rgba(255, 255, 255, .34), rgba(223, 197, 138, .14));
     backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     box-shadow: 0 8px 18px rgba(95, 78, 56, .16);
 }
 
@@ -229,6 +230,7 @@
     background: linear-gradient(140deg, rgba(255, 255, 255, .38), rgba(223, 197, 138, .18));
     color: #7f6033;
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 10px 22px rgba(95, 78, 56, .16);
     text-decoration: none;
     font-size: 15px;

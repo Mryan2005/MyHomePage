@@ -57,42 +57,37 @@ export class SubIntroduceMyselfWindow implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
+        this.initGlassLiquid();
+    }
+
+    private initGlassLiquid(retryCount: number = 6) {
+        if (typeof window === 'undefined') {
+            return;
+        }
+
         requestAnimationFrame(() => {
-            window.addEventListener('load', () => {
-                const liquid = (window as any).liquidGL;
+            const liquid = (window as any).liquidGL;
 
-                if (!liquid) {
-                    console.error("liquidGL 未加载");
-                    return;
+            if (typeof liquid !== 'function') {
+                if (retryCount > 0) {
+                    setTimeout(() => this.initGlassLiquid(retryCount - 1), 60);
                 }
+                return;
+            }
 
-                liquid({
-
-                    target: ".glass",
-
-                    snapshot: "body",
-
-                    resolution: 2,
-
-                    refraction: 0.05,
-
-                    bevelDepth: 0.08,
-
-                    bevelWidth: 0.15,
-
-                    frost: 2,
-
-                    shadow: true,
-
-                    specular: true,
-
-                    reveal: "fade",
-
-                    tilt: false,
-
-                    magnify: 1
-
-                });
+            liquid({
+                target: ".glass",
+                snapshot: "body",
+                resolution: 2,
+                refraction: 0.05,
+                bevelDepth: 0.08,
+                bevelWidth: 0.15,
+                frost: 1,
+                shadow: true,
+                specular: true,
+                reveal: "fade",
+                tilt: false,
+                magnify: 1
             });
         });
     }
