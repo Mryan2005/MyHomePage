@@ -7,8 +7,8 @@
     font-weight: 600;
     overflow: hidden;
     color: black;
-    border: 1px solid rgba(255, 255, 255, 0.46);
-    box-shadow: 0 14px 34px rgba(9, 13, 23, 0.2), 0 0 30px rgba(255, 255, 255, 0.08) inset;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
 }
 
@@ -16,10 +16,11 @@
     position: absolute;
     z-index: 0;
     inset: 0;
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(18px) saturate(180%) contrast(105%);
-    -webkit-backdrop-filter: blur(18px) saturate(180%) contrast(105%);
+    border-radius: inherit;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
     filter: url(#glass-distortion);
+    -webkit-filter: url('#glass-distortion');
     overflow: hidden;
     isolation: isolate;
     pointer-events: none;
@@ -29,7 +30,9 @@
     z-index: 1;
     position: absolute;
     inset: 0;
-    background: linear-gradient(150deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.1) 45%, rgba(255, 255, 255, 0.2));
+    border-radius: inherit;
+    box-shadow: inset 0 0 20px -5px rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.08);
     pointer-events: none;
 }
 
@@ -37,9 +40,10 @@
     position: absolute;
     inset: 0;
     z-index: 2;
+    border-radius: inherit;
     overflow: hidden;
-    background: radial-gradient(130% 72% at 10% 0%, rgba(255, 255, 255, 0.44), rgba(255, 255, 255, 0));
-    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.72), inset -1px -1px 0 rgba(255, 255, 255, 0.45);
+    background: linear-gradient(140deg, rgba(255, 255, 255, 0.38), rgba(255, 255, 255, 0.14) 40%, rgba(255, 255, 255, 0.02) 65%);
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.78), inset -1px -1px 0 rgba(255, 255, 255, 0.46);
     pointer-events: none;
 }
 
