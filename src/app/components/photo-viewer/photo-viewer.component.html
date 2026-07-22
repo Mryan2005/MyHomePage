@@ -1,14 +1,17 @@
 <div class="viewer">
+    <button class="close-btn liquidGlass-wrapper" (click)="close()">
+        <div class="liquidGlass-effect"></div>
+        <div class="liquidGlass-tint"></div>
+        <div class="liquidGlass-shine"></div>
+        <span class="liquidGlass-text">✕</span>
+    </button>
 
-  <button
-    class="close-btn"
-    (click)="close()">
-    ✕
-  </button>
-
-  <img
-    [src]="imageUrl"
-    alt=""
-  >
-
+    <div class="photo-frame liquidGlass-wrapper">
+        <div class="liquidGlass-effect"></div>
+        <div class="liquidGlass-tint"></div>
+        <div class="liquidGlass-shine"></div>
+        <div class="liquidGlass-text photo-content">
+            <img [src]="imageUrl" alt="" />
+        </div>
+    </div>
 </div>
