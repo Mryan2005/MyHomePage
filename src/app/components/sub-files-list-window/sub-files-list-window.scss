@@ -40,6 +40,12 @@
     flex-direction: column;
 }
 
+.issue-window-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
 .issue-list {
 
     flex: 1;

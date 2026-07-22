@@ -1,54 +1,60 @@
-<div class="status-window">
-    <div *ngIf="loading" class="loading">Loading...</div>
-    <div *ngIf="error" class="error">{{ error }}</div>
-    <div *ngIf="!loading && !error && discussions.length === 0" class="empty">No Status found</div>
+<div class="status-window liquidGlass-wrapper">
+    <div class="liquidGlass-effect"></div>
+    <div class="liquidGlass-tint"></div>
+    <div class="liquidGlass-shine"></div>
+    <div class="liquidGlass-text status-window-content">
+        <div *ngIf="loading" class="loading">Loading...</div>
+        <div *ngIf="error" class="error">{{ error }}</div>
+        <div *ngIf="!loading && !error && discussions.length === 0" class="empty">No Status found</div>
 
-    <div *ngIf="!loading && !error && discussions.length" class="status-layout">
-        <section class="list-panel">
-            <div class="list-title">进行中任务（地球 Online 的任务）</div>
-            <div class="issue-list">
-                @for (discussion of discussions; track discussion.url) {
-                    <button
-                        type="button"
-                        class="issue-row"
-                        [class.active]="selectedDiscussion?.url === discussion.url"
-                        (click)="selectDiscussion(discussion)"
-                    >
-                        <div class="row-main">
-                            <div class="issue-title" style="width: 100%;">{{ discussion.title }}</div>
-                            <div class="issue-time">{{ getTimeAgo(discussion.createdAt) }}</div>
-                        </div>
-                        <span
-                            class="badge"
-                            [class.pause]="getStatus(discussion) === 'Pause'"
-                            [class.working]="getStatus(discussion) === 'Ongoing'"
-                            [class.done]="getStatus(discussion) === 'Done'"
+        <div *ngIf="!loading && !error && discussions.length" class="status-layout">
+            <section class="list-panel">
+                <div class="list-title">进行中任务（地球 Online 的任务）</div>
+                <div class="issue-list">
+                    @for (discussion of discussions; track discussion.url) {
+                        <button
+                            type="button"
+                            class="issue-row"
+                            [class.active]="selectedDiscussion?.url === discussion.url"
+                            (click)="selectDiscussion(discussion)"
                         >
-                            {{ getStatus(discussion) }}
-                        </span>
-                    </button>
-                }
-            </div>
-        </section>
+                            <div class="row-main">
+                                <div class="issue-title" style="width: 100%;">{{ discussion.title }}</div>
+                                <div class="issue-time">{{ getTimeAgo(discussion.createdAt) }}</div>
+                            </div>
+                            <span
+                                class="badge"
+                                [class.pause]="getStatus(discussion) === 'Pause'"
+                                [class.working]="getStatus(discussion) === 'Ongoing'"
+                                [class.done]="getStatus(discussion) === 'Done'"
+                            >
+                                {{ getStatus(discussion) }}
+                            </span>
+                        </button>
+                    }
+                </div>
+            </section>
 
-        <section class="detail-panel">
-            <div class="detail-header">
-                <h2>{{ selectedDiscussion?.title }}</h2>
-                <span
-                    class="badge"
-                    [class.pause]="selectedDiscussion && getStatus(selectedDiscussion) === 'Pause'"
-                    [class.working]="selectedDiscussion && getStatus(selectedDiscussion) === 'Ongoing'"
-                    [class.done]="selectedDiscussion && getStatus(selectedDiscussion) === 'Done'"
-                >
-                    {{ selectedDiscussion ? getStatus(selectedDiscussion) : '' }}
-                </span>
+            <section class="detail-panel">
+                <div class="detail-header">
+                    <h2>{{ selectedDiscussion?.title }}</h2>
+                    <span
+                        class="badge"
+                        [class.pause]="selectedDiscussion && getStatus(selectedDiscussion) === 'Pause'"
+                        [class.working]="selectedDiscussion && getStatus(selectedDiscussion) === 'Ongoing'"
+                        [class.done]="selectedDiscussion && getStatus(selectedDiscussion) === 'Done'"
+                    >
+                        {{ selectedDiscussion ? getStatus(selectedDiscussion) : '' }}
+                    </span>
+                </div>
+                <div class="meta-line">
+                </div>
+                <div class="body-text" [innerHTML]="selectedDiscussionBodyHtml"></div>
+                <a class="target-btn" [href]="selectedDiscussion?.url" target="_blank" rel="noopener noreferrer">
+                    追踪目标
+                </a>
             </div>
-            <div class="meta-line">
-            </div>
-            <div class="body-text" [innerHTML]="selectedDiscussionBodyHtml"></div>
-            <a class="target-btn" [href]="selectedDiscussion?.url" target="_blank" rel="noopener noreferrer">
-                追踪目标
-            </a>
-        </section>
+            </section>
+        </div>
     </div>
 </div>

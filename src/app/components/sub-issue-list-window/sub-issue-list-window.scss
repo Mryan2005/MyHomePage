@@ -28,6 +28,12 @@
     padding: 18px;
 }
 
+.status-window-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
 .status-layout {
     display: grid;
     grid-template-columns: 41.9% 56.5%;

@@ -1,3 +1,9 @@
+<svg aria-hidden="true" width="0" height="0" style="position: absolute">
+    <filter id="glass-distortion">
+        <feTurbulence type="fractalNoise" baseFrequency="0.008 0.008" numOctaves="2" seed="2" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="40" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+</svg>
 <app-topbar></app-topbar>
 <main class="main">
     <router-outlet />

@@ -1,7 +1,6 @@
-import {Component, Input, AfterViewInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AvatarService} from '../../config/avatar';
 import {WebsitePramasService} from '../../services/Website-pramas';
-import {OnInit} from '@angular/core';
 import {PhotoViewerService} from '../../services/photo-viewer.service';
 import {Router} from '@angular/router';
 
@@ -12,7 +11,7 @@ import {Router} from '@angular/router';
     templateUrl: './sub-introduce-myself-window.html',
     styleUrl: './sub-introduce-myself-window.scss',
 })
-export class SubIntroduceMyselfWindow implements OnInit, AfterViewInit {
+export class SubIntroduceMyselfWindow implements OnInit {
     public currentDisplayPart: string = 'Home';
     public adam_smith_avatar: string = '/assets/images/7646049331687920481(20260531-213655).png'
     public ciallo_image = ['/assets/images/ciallo/Murasame_ciallo.png', '/assets/images/ciallo/Yoshino_Ciallo.png'];
@@ -56,39 +55,4 @@ export class SubIntroduceMyselfWindow implements OnInit, AfterViewInit {
         this.currentDisplayPart = this.websitePramas.currentDisplayPart;
     }
 
-    ngAfterViewInit() {
-        this.initGlassLiquid();
-    }
-
-    private initGlassLiquid(retryCount: number = 6) {
-        if (typeof window === 'undefined') {
-            return;
-        }
-
-        requestAnimationFrame(() => {
-            const liquid = (window as any).liquidGL;
-
-            if (typeof liquid !== 'function') {
-                if (retryCount > 0) {
-                    setTimeout(() => this.initGlassLiquid(retryCount - 1), 60);
-                }
-                return;
-            }
-
-            liquid({
-                target: ".glass",
-                snapshot: "body",
-                resolution: 2,
-                refraction: 0.05,
-                bevelDepth: 0.08,
-                bevelWidth: 0.15,
-                frost: 1,
-                shadow: true,
-                specular: true,
-                reveal: "fade",
-                tilt: false,
-                magnify: 1
-            });
-        });
-    }
 }
