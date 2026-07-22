@@ -76,7 +76,7 @@ export class SubIntroduceMyselfWindow implements OnInit, AfterViewInit {
             }
 
             liquid({
-                target: ".content",
+                target: ".glass",
                 snapshot: "body",
                 resolution: 2,
                 refraction: 0.05,
