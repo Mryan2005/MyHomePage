@@ -1,6 +1,8 @@
 :host {
     position: fixed;
     bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,11 +12,23 @@
 .footbar-shell {
     min-height: 3rem;
     width: auto;
-    border-radius: 10px;
+    border-radius: 999px;
 }
 
 .footbar-content {
     display: flex;
     align-items: center;
-    padding: 1rem;
+    padding: 0.95rem 1.35rem;
+    white-space: nowrap;
+    color: rgba(255, 255, 255, 0.96);
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
+}
+
+.footbar-content a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.footbar-content a:hover {
+    text-decoration: underline;
 }
