@@ -1,35 +1,40 @@
 <header id="topbar">
-    <div class="bar items-center">
-        <div class="barItemBox" id="barTitleBox" (click)="clickBarButton1('Home')">
-            <div class="bar_title bar_p">Home</div>
-        </div>
-        <div class="barItemBox" id="barWorksBox" (click)="clickBarButton1('Works')">
-            <div class="bar_p">Works</div>
-        </div>
-        <div class="barItemBox" id="barTravelBox" (click)="clickBarButton1('Travel')">
-            <div class="bar_p">Travel</div>
-        </div>
-        <div class="barItemBox" id="barStatusBox" (click)="clickBarButton1('Status')">
-            <div class="bar_p">Status</div>
-        </div>
-        <div class="barItemBox" id="barContactBox" (click)="clickBarButton1('Files')">
-            <div class="bar_p">Files</div>
-        </div>
-        <div class="barItemBox" id="barContactBox" (click)="clickBarButton1('Contact')">
-            <div class="bar_p">Contact</div>
-        </div>
-        <div class="barItemBox" id="barHelpBox" (click)="clickBarButton1('Help')">
-            <div class="bar_p">Help</div>
-        </div>
-        <div class="bar_right"></div>
-        <div class="appleItemDiv" style="padding: 0 1px; margin: 0 0.1rem"></div>
-        <div class="barItemBox">
-            <div class="appleItem">
-                <p class="bar_p">{{ currentTime }}</p>
+    <div class="bar items-center liquidGlass-wrapper">
+        <div class="liquidGlass-effect"></div>
+        <div class="liquidGlass-tint"></div>
+        <div class="liquidGlass-shine"></div>
+        <div class="bar-content liquidGlass-text">
+            <div class="barItemBox" id="barTitleBox" (click)="clickBarButton1('Home')">
+                <div class="bar_title bar_p">Home</div>
             </div>
-        </div>
-        <div class="barItemBox ping-button" (click)="pingFiles()">
-            <div class="bar_p">Ping</div>
+            <div class="barItemBox" id="barWorksBox" (click)="clickBarButton1('Works')">
+                <div class="bar_p">Works</div>
+            </div>
+            <div class="barItemBox" id="barTravelBox" (click)="clickBarButton1('Travel')">
+                <div class="bar_p">Travel</div>
+            </div>
+            <div class="barItemBox" id="barStatusBox" (click)="clickBarButton1('Status')">
+                <div class="bar_p">Status</div>
+            </div>
+            <div class="barItemBox" id="barContactBox" (click)="clickBarButton1('Files')">
+                <div class="bar_p">Files</div>
+            </div>
+            <div class="barItemBox" id="barContactBox" (click)="clickBarButton1('Contact')">
+                <div class="bar_p">Contact</div>
+            </div>
+            <div class="barItemBox" id="barHelpBox" (click)="clickBarButton1('Help')">
+                <div class="bar_p">Help</div>
+            </div>
+            <div class="bar_right"></div>
+            <div class="appleItemDiv" style="padding: 0 1px; margin: 0 0.1rem"></div>
+            <div class="barItemBox">
+                <div class="appleItem">
+                    <p class="bar_p">{{ currentTime }}</p>
+                </div>
+            </div>
+            <div class="barItemBox ping-button" (click)="pingFiles()">
+                <div class="bar_p">Ping</div>
+            </div>
         </div>
     </div>
 </header>
