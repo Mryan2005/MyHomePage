@@ -26,9 +26,9 @@
 
     border-radius: 24px;
 
-    background: rgba(255,255,255,.16);
+    background: rgba(255,255,255,.1);
 
-    border: 1px solid rgba(255,255,255,.24);
+    border: 1px solid rgba(255,255,255,.18);
 
     box-shadow:
         0 8px 32px rgba(0,0,0,.08);
@@ -39,6 +39,12 @@
 
     display: flex;
 
+    flex-direction: column;
+}
+
+.issue-window-content {
+    height: 100%;
+    display: flex;
     flex-direction: column;
 }
 
@@ -91,10 +97,10 @@
     border-radius: 18px;
 
     background:
-        rgba(255,255,255,.16);
+        rgba(255,255,255,.1);
 
     border:
-        1px solid rgba(255,255,255,.24);
+        1px solid rgba(255,255,255,.18);
 
     transition:
         transform .2s ease,
@@ -107,7 +113,7 @@
     transform: translateY(-2px);
 
     background:
-        rgba(255,255,255,.82);
+        rgba(255,255,255,.62);
 
     box-shadow:
         0 4px 14px rgba(0,0,0,.08);

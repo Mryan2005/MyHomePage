@@ -1,6 +1,8 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import {Component, OnDestroy, OnInit, ChangeDetectorRef} from '@angular/core';
 import { fileslist } from 'src/app/data/files';
 import { File } from 'src/app/interfaces/File';
+import {WebsitePramasService} from '../../services/Website-pramas';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-sub-files-list-window',
@@ -8,19 +10,33 @@ import { File } from 'src/app/interfaces/File';
   templateUrl: './sub-files-list-window.html',
   styleUrl: './sub-files-list-window.scss',
 })
-export class SubFilesListWindow implements OnInit {
+export class SubFilesListWindow implements OnInit, OnDestroy {
     files: File[] = [...fileslist];
+    private filesPingSubscription?: Subscription;
+    private isPinging = false;
 
     constructor(
         public cdr: ChangeDetectorRef,
+        public websitePramas: WebsitePramasService
     ) {
     }
 
     ngOnInit() {
-        this.checkUrls();
+        this.filesPingSubscription = this.websitePramas.filesPingRequested$.subscribe(() => {
+            this.checkUrls();
+        });
+    }
+
+    ngOnDestroy(): void {
+        this.filesPingSubscription?.unsubscribe();
     }
   
   async checkUrls() {
+    if (this.isPinging) {
+      return;
+    }
+
+    this.isPinging = true;
     let TrueFiles: File[] = this.files;
     console.log('开始通过智能弹窗探测连通性...');
 
@@ -50,6 +66,8 @@ export class SubFilesListWindow implements OnInit {
       this.files = [...TrueFiles];
         this.cdr.markForCheck();
     }
+
+    this.isPinging = false;
   }
 
   probeUrlViaWindow(url: string): Promise<boolean> {

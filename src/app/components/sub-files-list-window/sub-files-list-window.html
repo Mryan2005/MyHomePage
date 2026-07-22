@@ -1,30 +1,35 @@
-<div class="issue-window">
-    <div class="issue-list">
-    @for (file of files; track file.url) {
-    
-        <div class="issue-row">
-        <a href="{{ file.url }}">
-            <div class="issue-title">
-                {{ file.title }}
+<div class="issue-window liquidGlass-wrapper">
+    <div class="liquidGlass-effect"></div>
+    <div class="liquidGlass-tint"></div>
+    <div class="liquidGlass-shine"></div>
+    <div class="liquidGlass-text issue-window-content">
+        <div class="issue-list">
+        @for (file of files; track file.url) {
+
+            <div class="issue-row">
+            <a href="{{ file.url }}">
+                <div class="issue-title">
+                    {{ file.title }}
+                </div>
+            </a>
+            <div class="status">
+
+                <span
+                class="badge"
+                [class.done]="file.canOpen"
+                [class.working]="!file.canOpen"
+                >
+
+                {{ file.canOpen ? 'Can Open' : 'Cannot Open' }}
+
+                </span>
+
             </div>
-        </a>
-        <div class="status">
-    
-            <span
-            class="badge"
-            [class.done]="file.canOpen"
-            [class.working]="!file.canOpen"
-            >
-    
-            {{ file.canOpen ? 'Can Open' : 'Cannot Open' }}
-    
-            </span>
-    
+
+            </div>
+
+        }
+
         </div>
-    
-        </div>
-    
-    }
-    
     </div>
 </div>

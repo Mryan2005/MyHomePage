@@ -39,4 +39,8 @@ export class TopbarComponent implements OnInit {
     ngOnInit(): void {
     }
 
+    pingFiles(): void {
+        this.websitePramas.requestFilesPing();
+    }
+
 }

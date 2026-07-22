@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AvatarService} from '../../config/avatar';
 import {SubTravellingWindow} from '../sub-travelling-window/sub-travelling-window';
 import {SubIntroduceMyselfWindow} from '../sub-introduce-myself-window/sub-introduce-myself-window';
@@ -8,8 +8,6 @@ import {SubContactListWindow} from '../sub-contact-list-window/sub-contact-list-
 import {WebsitePramasService} from '../../services/Website-pramas';
 import {Subscription} from 'rxjs';
 import {SubFilesListWindow} from '../sub-files-list-window/sub-files-list-window';
-
-declare const liquidGL: any;
 @Component({
     selector: 'app-inside-window',
     imports: [

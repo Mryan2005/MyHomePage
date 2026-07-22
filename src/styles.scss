@@ -1,2 +1,57 @@
 /* You can add global styles to this file, and also import other style files */
 @use './app/app.scss';
+
+.liquidGlass-wrapper {
+    position: relative;
+    display: flex;
+    font-weight: 600;
+    overflow: hidden;
+    color: black;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+}
+
+.liquidGlass-effect {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    border-radius: inherit;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    filter: url(#glass-distortion);
+    -webkit-filter: url('#glass-distortion');
+    overflow: hidden;
+    isolation: isolate;
+    pointer-events: none;
+}
+
+.liquidGlass-tint {
+    z-index: 1;
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: inset 0 0 20px -5px rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.08);
+    pointer-events: none;
+}
+
+.liquidGlass-shine {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-radius: inherit;
+    overflow: hidden;
+    background: linear-gradient(140deg, rgba(255, 255, 255, 0.38), rgba(255, 255, 255, 0.14) 40%, rgba(255, 255, 255, 0.02) 65%);
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.78), inset -1px -1px 0 rgba(255, 255, 255, 0.46);
+    pointer-events: none;
+}
+
+.liquidGlass-text {
+    position: relative;
+    z-index: 3;
+    font-size: inherit;
+    color: inherit;
+    width: 100%;
+    height: 100%;
+}
