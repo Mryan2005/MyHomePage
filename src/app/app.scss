@@ -5,17 +5,6 @@
     height: 100% !important;
 }
 
-.liquid-webgl-layer {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.32;
-    mix-blend-mode: screen;
-}
-
 app-topbar,
 .main,
 app-footbar {
@@ -25,11 +14,11 @@ app-footbar {
 
 .main {
     display: flex;
-    justify-content: center; /* 水平居中 */
-    align-items: center;     /* 垂直居中 */
-    height: 100%;           /* 占满整个视口高度 */
-    width: 100%;            /* 占满整个视口宽度 */
-    margin: 0;               /* 去除默认外边距 */
-    padding: 0;              /* 去除默认内边距 */
-    box-sizing: border-box;  /* 确保 padding 和 border 不影响布局 */
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }

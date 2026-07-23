@@ -1,9 +1,19 @@
-import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, Inject, OnDestroy, OnInit, PLATFORM_ID, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, Inject, OnDestroy, OnInit, PLATFORM_ID} from '@angular/core';
 import {BackgroundService} from './config/background';
 import {Footbar} from './components/footbar/footbar';
 import {TopbarComponent} from './components/topbar/topbar.component';
 import {isPlatformBrowser, NgIf} from '@angular/common';
 import {RouterOutlet} from '@angular/router';
+
+interface LiquidGlassLayer {
+    canvas: HTMLCanvasElement;
+    gl: WebGLRenderingContext;
+    shaderProgram: WebGLProgram;
+    positionBuffer: WebGLBuffer;
+    aPosition: number;
+    uResolution: WebGLUniformLocation | null;
+    uTime: WebGLUniformLocation | null;
+}
 
 @Component({
     imports: [Footbar, TopbarComponent, NgIf, RouterOutlet],
@@ -13,17 +23,10 @@ import {RouterOutlet} from '@angular/router';
     styleUrls: ['./app.scss']
 })
 export class App implements AfterViewInit, OnInit, OnDestroy {
-    @ViewChild('liquidWebglCanvas') liquidWebglCanvas?: ElementRef<HTMLCanvasElement>;
-
-    private gl: WebGLRenderingContext | null = null;
-    private shaderProgram: WebGLProgram | null = null;
-    private positionBuffer: WebGLBuffer | null = null;
+    private readonly glassLayers = new Map<HTMLCanvasElement, LiquidGlassLayer>();
     private frameId: number | null = null;
     private startTime: number = 0;
     private resizeListener?: () => void;
-    private uResolution: WebGLUniformLocation | null = null;
-    private uTime: WebGLUniformLocation | null = null;
-    private aPosition = -1;
 
     constructor(
         public bgService: BackgroundService,
@@ -34,14 +37,14 @@ export class App implements AfterViewInit, OnInit, OnDestroy {
 
     title = 'myhomeIndex';
     isTargetDomain: boolean = false;
-    
+
     ngAfterViewInit(): void {
         if (!isPlatformBrowser(this.platformId)) {
             return;
         }
 
-        this.initWebglLayer();
-        this.resizeListener = () => this.resizeWebglCanvas();
+        this.syncLiquidGlassLayers();
+        this.resizeListener = () => this.resizeAllLiquidGlassCanvases();
         window.addEventListener('resize', this.resizeListener, {passive: true});
         this.frameId = window.requestAnimationFrame(this.renderWebglFrame);
     }
@@ -52,7 +55,7 @@ export class App implements AfterViewInit, OnInit, OnDestroy {
         }
         const currentDomain = window.location.hostname;
         this.isTargetDomain = (currentDomain === 'index.mryan2005.top');
-        console.info("currentDomain:",  currentDomain)
+        console.info('currentDomain:', currentDomain);
         this.cdr.markForCheck();
     }
 
@@ -66,22 +69,47 @@ export class App implements AfterViewInit, OnInit, OnDestroy {
             window.removeEventListener('resize', this.resizeListener);
             this.resizeListener = undefined;
         }
+
+        this.glassLayers.forEach((layer) => {
+            layer.gl.deleteBuffer(layer.positionBuffer);
+            layer.gl.deleteProgram(layer.shaderProgram);
+        });
+        this.glassLayers.clear();
     }
 
-    private initWebglLayer(): void {
-        const canvas = this.liquidWebglCanvas?.nativeElement;
-        if (!canvas) {
-            return;
+    private syncLiquidGlassLayers(): void {
+        const canvases = Array.from(document.querySelectorAll<HTMLCanvasElement>('canvas.liquidGlass-shader'));
+
+        for (const canvas of canvases) {
+            if (!this.glassLayers.has(canvas)) {
+                const layer = this.initWebglLayer(canvas);
+                if (layer) {
+                    this.glassLayers.set(canvas, layer);
+                }
+            }
         }
 
+        for (const [canvas, layer] of this.glassLayers.entries()) {
+            if (!canvas.isConnected) {
+                layer.gl.deleteBuffer(layer.positionBuffer);
+                layer.gl.deleteProgram(layer.shaderProgram);
+                this.glassLayers.delete(canvas);
+            }
+        }
+    }
+
+    private initWebglLayer(canvas: HTMLCanvasElement): LiquidGlassLayer | null {
         const gl = canvas.getContext('webgl', {alpha: true, antialias: true});
         if (!gl) {
-            return;
+            return null;
         }
 
         const vertexShaderSource = `
             attribute vec2 a_position;
+            varying vec2 v_uv;
+
             void main() {
+                v_uv = a_position * 0.5 + 0.5;
                 gl_Position = vec4(a_position, 0.0, 1.0);
             }
         `;
@@ -90,6 +118,7 @@ export class App implements AfterViewInit, OnInit, OnDestroy {
             precision mediump float;
             uniform vec2 u_resolution;
             uniform float u_time;
+            varying vec2 v_uv;
 
             float hash(vec2 p) {
                 return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
@@ -118,27 +147,26 @@ export class App implements AfterViewInit, OnInit, OnDestroy {
             }
 
             void main() {
-                vec2 uv = gl_FragCoord.xy / u_resolution.xy;
-                vec2 p = uv * 2.0 - 1.0;
-                p.x *= u_resolution.x / u_resolution.y;
-                float t = u_time * 0.16;
+                vec2 uv = v_uv;
+                vec2 aspect = vec2(u_resolution.x / max(u_resolution.y, 1.0), 1.0);
+                vec2 p = (uv - 0.5) * aspect;
+                float t = u_time * 0.35;
 
-                float n1 = fbm(uv * 4.0 + vec2(t, -t * 0.8));
-                float n2 = fbm(uv * 8.5 - vec2(t * 1.3, t * 0.45));
-                float n3 = fbm(uv * 12.0 + vec2(-t * 0.7, t * 0.9));
+                float n1 = fbm(uv * 4.5 + vec2(t, -t * 0.7));
+                float n2 = fbm(uv * 9.0 - vec2(t * 1.2, t * 0.45));
+                float n3 = fbm(uv * 15.0 + vec2(-t * 0.6, t * 0.8));
+                float rim = smoothstep(0.7, 0.12, length(p));
 
                 vec3 col = vec3(
-                    0.46 + 0.30 * n1 + 0.12 * n3,
-                    0.57 + 0.26 * n2,
-                    0.74 + 0.24 * (n1 - n2)
+                    0.65 + 0.18 * n1 + 0.08 * n3,
+                    0.74 + 0.16 * n2,
+                    0.88 + 0.2 * (n1 - n2)
                 );
 
-                float bloom = smoothstep(0.55, 1.0, n1);
-                col += vec3(0.22, 0.18, 0.15) * bloom * 0.55;
+                col += vec3(0.14, 0.12, 0.1) * smoothstep(0.52, 1.0, n1) * 0.45;
+                col += vec3(0.12) * rim;
 
-                float vignette = smoothstep(1.25, 0.08, length(p));
-                float alpha = 0.28 * vignette;
-
+                float alpha = 0.34 + 0.28 * rim;
                 gl_FragColor = vec4(col, alpha);
             }
         `;
@@ -146,78 +174,94 @@ export class App implements AfterViewInit, OnInit, OnDestroy {
         const vertexShader = this.createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
         const fragmentShader = this.createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
         if (!vertexShader || !fragmentShader) {
-            return;
+            return null;
         }
 
         const shaderProgram = this.createProgram(gl, vertexShader, fragmentShader);
+        gl.deleteShader(vertexShader);
+        gl.deleteShader(fragmentShader);
         if (!shaderProgram) {
-            return;
+            return null;
         }
 
-        this.gl = gl;
-        this.shaderProgram = shaderProgram;
-
-        this.positionBuffer = gl.createBuffer();
-        if (!this.positionBuffer) {
-            return;
+        const positionBuffer = gl.createBuffer();
+        if (!positionBuffer) {
+            gl.deleteProgram(shaderProgram);
+            return null;
         }
 
-        gl.bindBuffer(gl.ARRAY_BUFFER, this.positionBuffer);
+        gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
         gl.bufferData(
             gl.ARRAY_BUFFER,
             new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]),
             gl.STATIC_DRAW
         );
 
-        this.aPosition = gl.getAttribLocation(shaderProgram, 'a_position');
-        this.uResolution = gl.getUniformLocation(shaderProgram, 'u_resolution');
-        this.uTime = gl.getUniformLocation(shaderProgram, 'u_time');
-        this.resizeWebglCanvas();
+        const aPosition = gl.getAttribLocation(shaderProgram, 'a_position');
+        const uResolution = gl.getUniformLocation(shaderProgram, 'u_resolution');
+        const uTime = gl.getUniformLocation(shaderProgram, 'u_time');
+
+        return {
+            canvas,
+            gl,
+            shaderProgram,
+            positionBuffer,
+            aPosition,
+            uResolution,
+            uTime
+        };
     }
 
     private readonly renderWebglFrame = (timestamp: number): void => {
-        if (!this.gl || !this.shaderProgram || !this.positionBuffer) {
-            return;
-        }
+        this.syncLiquidGlassLayers();
 
         if (this.startTime === 0) {
             this.startTime = timestamp;
         }
-
-        const gl = this.gl;
         const elapsed = (timestamp - this.startTime) / 1000;
 
-        this.resizeWebglCanvas();
+        for (const layer of this.glassLayers.values()) {
+            this.resizeLiquidGlassCanvas(layer);
+            this.drawLiquidGlassLayer(layer, elapsed);
+        }
+
+        this.frameId = window.requestAnimationFrame(this.renderWebglFrame);
+    };
+
+    private drawLiquidGlassLayer(layer: LiquidGlassLayer, elapsed: number): void {
+        const {gl, shaderProgram, positionBuffer, aPosition, uResolution, uTime} = layer;
+
         gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
         gl.clearColor(0, 0, 0, 0);
         gl.clear(gl.COLOR_BUFFER_BIT);
 
-        gl.useProgram(this.shaderProgram);
-        gl.bindBuffer(gl.ARRAY_BUFFER, this.positionBuffer);
-        gl.enableVertexAttribArray(this.aPosition);
-        gl.vertexAttribPointer(this.aPosition, 2, gl.FLOAT, false, 0, 0);
+        gl.useProgram(shaderProgram);
+        gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+        gl.enableVertexAttribArray(aPosition);
+        gl.vertexAttribPointer(aPosition, 2, gl.FLOAT, false, 0, 0);
 
-        if (this.uResolution) {
-            gl.uniform2f(this.uResolution, gl.drawingBufferWidth, gl.drawingBufferHeight);
+        if (uResolution) {
+            gl.uniform2f(uResolution, gl.drawingBufferWidth, gl.drawingBufferHeight);
         }
-        if (this.uTime) {
-            gl.uniform1f(this.uTime, elapsed);
+        if (uTime) {
+            gl.uniform1f(uTime, elapsed);
         }
 
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-        this.frameId = window.requestAnimationFrame(this.renderWebglFrame);
-    };
+    }
 
-    private resizeWebglCanvas(): void {
-        const canvas = this.liquidWebglCanvas?.nativeElement;
-        const gl = this.gl;
-        if (!canvas || !gl) {
-            return;
+    private resizeAllLiquidGlassCanvases(): void {
+        for (const layer of this.glassLayers.values()) {
+            this.resizeLiquidGlassCanvas(layer);
         }
+    }
 
+    private resizeLiquidGlassCanvas(layer: LiquidGlassLayer): void {
+        const {canvas} = layer;
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
-        const width = Math.floor(window.innerWidth * dpr);
-        const height = Math.floor(window.innerHeight * dpr);
+        const rect = canvas.getBoundingClientRect();
+        const width = Math.max(1, Math.floor(rect.width * dpr));
+        const height = Math.max(1, Math.floor(rect.height * dpr));
 
         if (canvas.width !== width || canvas.height !== height) {
             canvas.width = width;
@@ -262,7 +306,6 @@ export class App implements AfterViewInit, OnInit, OnDestroy {
     }
 
     processBarButtonClicked(buttonName: string) {
-        // this.currentDisplayPart = buttonName;
         this.cdr.markForCheck();
     }
 }
