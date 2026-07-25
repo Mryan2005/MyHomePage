@@ -48,7 +48,7 @@ export const fileslist: File[] = [
     },
     {
         title: '广东话遣词造句日常',
-        url: 'https://365.kdocs.cn/l/cbPUgJY4btpJ',
+        url: 'https://365.kdocs.cn/l/caIbbIADqb5O',
         canOpen: false
     }
 ]
