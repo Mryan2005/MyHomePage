@@ -94,50 +94,6 @@
     }
   },
   {
-    "title": "财富之章：成塔",
-    "url": "https://github.com/Mryan2005/MyHomePage/discussions/44",
-    "createdAt": "2026-07-17T10:02:22Z",
-    "closed": false,
-    "body": "第三幕：成塔",
-    "category": {
-      "name": "Announcements"
-    },
-    "author": {
-      "login": "Mryan2005"
-    },
-    "labels": [
-      {
-        "name": "Pause"
-      }
-    ],
-    "progress": {
-      "total": 0,
-      "completed": 0
-    }
-  },
-  {
-    "title": "财富之章：筑基",
-    "url": "https://github.com/Mryan2005/MyHomePage/discussions/42",
-    "createdAt": "2026-07-17T10:00:43Z",
-    "closed": false,
-    "body": "财富之章：筑基",
-    "category": {
-      "name": "Announcements"
-    },
-    "author": {
-      "login": "Mryan2005"
-    },
-    "labels": [
-      {
-        "name": "Pause"
-      }
-    ],
-    "progress": {
-      "total": 0,
-      "completed": 0
-    }
-  },
-  {
     "title": "复习软件工程",
     "url": "https://github.com/Mryan2005/MyHomePage/discussions/37",
     "createdAt": "2026-06-02T12:15:07Z",
