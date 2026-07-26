@@ -6,8 +6,8 @@
     <div *ngIf="!loading && !error && allDiscussions.length" class="status-layout">
         <section class="list-panel">
             <div class="list-title">夜桜閑客最近过得怎么样了？</div>
-            <div class="list-subtitle">如果你是一位一年没见的朋友请你喝咖啡，我该和你说些什么好呢？</div>
             <div class="list-divider"></div>
+            <div class="list-subtitle">如果你是一位一年没见的朋友请你喝咖啡，我该和你说些什么好呢？</div>
             <div class="issue-list">
                 @for (discussion of discussions; track discussion.url) {
                     <button
