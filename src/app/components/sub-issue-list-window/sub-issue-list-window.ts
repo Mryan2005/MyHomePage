@@ -197,16 +197,16 @@ export class SubIssueListComponent implements OnInit, OnDestroy {
         const diffMinutes = Math.max(1, Math.floor((now - created) / 60000));
 
         if (diffMinutes < 60) {
-            return `${diffMinutes}m`;
+            return `最近${diffMinutes}分钟开始的事情`;
         }
 
         const diffHours = Math.floor(diffMinutes / 60);
         if (diffHours < 24) {
-            return `${diffHours}h`;
+            return `最近${diffHours}小时开始的事情`;
         }
 
         const diffDays = Math.floor(diffHours / 24);
-        return `${diffDays}d`;
+        return `最近${diffDays}天前开始的事情`;
     }
 
     private updateSelectedDiscussionBody(): void {
