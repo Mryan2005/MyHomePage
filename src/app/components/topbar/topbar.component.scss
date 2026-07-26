@@ -290,3 +290,20 @@
     color: #2563eb;
     font-weight: 500;
 }
+
+.topbar-filter {
+    cursor: pointer;
+    gap: 4px;
+    user-select: none;
+}
+
+.topbar-filter input {
+    cursor: pointer;
+    accent-color: #c9a85b;
+}
+
+.topbar-filter .bar_p {
+    font-size: 12px;
+    color: #8b7a5c;
+    white-space: nowrap;
+}
