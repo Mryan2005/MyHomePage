@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, OutputEmitterRef, ChangeDetectorRef} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, OutputEmitterRef, ChangeDetectorRef, NgZone} from '@angular/core';
 import {WebsitePramasService} from '../../services/Website-pramas';
 import {Router, NavigationEnd} from '@angular/router';
 import {filter} from 'rxjs/operators';
@@ -22,7 +22,8 @@ export class TopbarComponent implements OnInit {
     constructor(
         public websitePramas: WebsitePramasService,
         private router: Router,
-        private cdr: ChangeDetectorRef
+        private cdr: ChangeDetectorRef,
+        private zone: NgZone
     ) {
     }
 
@@ -52,20 +53,23 @@ export class TopbarComponent implements OnInit {
     }
 
     private updatePageFlags(url: string) {
-        this.isFilesPage = url.startsWith('/files');
-        this.isTaskPage = url.startsWith('/task');
-        this.cdr.detectChanges();
+        const isFiles = url.startsWith('/files');
+        const isTask = url.startsWith('/task');
+        if (this.isFilesPage !== isFiles || this.isTaskPage !== isTask) {
+            this.zone.run(() => {
+                this.isFilesPage = isFiles;
+                this.isTaskPage = isTask;
+            });
+        }
     }
 
     ngOnInit(): void {
-        // 监听路由变化（覆盖直接 URL 导航、前进后退等所有情况）
         this.router.events
             .pipe(filter(e => e instanceof NavigationEnd))
             .subscribe((e) => {
                 this.updatePageFlags((e as NavigationEnd).urlAfterRedirects);
             });
 
-        // 初始化时也检查一次
         this.updatePageFlags(this.router.url);
     }
 
