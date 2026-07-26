@@ -183,10 +183,10 @@ export class SubIssueListComponent implements OnInit, OnDestroy {
 
     getStatusLabel(discussion: GithubDiscussion): string {
         const map: Record<string, string> = {
-            'Cancelled': '废止',
-            'Pause': '暂缓',
-            'Ongoing': '正在执行',
-            'Done': '已完成',
+            'Cancelled': 'Cancelled',
+            'Pause': 'Pause',
+            'Ongoing': 'Ongoing',
+            'Done': 'Done',
         };
         return map[this.getStatus(discussion)] || '';
     }
