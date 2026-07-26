@@ -9,52 +9,53 @@
         <div *ngIf="error" class="error">{{ error }}</div>
 
         <div *ngIf="!loading && !error" class="panel-body">
-            <!-- 总进度环 -->
-            <div class="overall-section">
-                <div class="ring-wrap">
-                    <svg class="ring" viewBox="0 0 120 120">
-                        <circle
-                            class="ring-bg"
-                            cx="60" cy="60" r="52"
-                            fill="none"
-                            stroke="rgba(216,190,139,.18)"
-                            stroke-width="10"
-                        />
-                        <circle
-                            class="ring-fill"
-                            cx="60" cy="60" r="52"
-                            fill="none"
-                            stroke="url(#grad)"
-                            stroke-width="10"
-                            stroke-linecap="round"
-                            [style.strokeDasharray]="circumference"
-                            [style.strokeDashoffset]="dashOffset"
-                            transform="rotate(-90 60 60)"
-                        />
-                        <defs>
-                            <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" stop-color="#e9c46a" />
-                                <stop offset="100%" stop-color="#e9b13b" />
-                            </linearGradient>
-                        </defs>
-                    </svg>
-                    <div class="ring-center">
-                        <span class="ring-pct">{{ overallPercent }}%</span>
-                        <span class="ring-label">完成度</span>
-                    </div>
+            <!-- 子任务完成度 -->
+            <div class="section">
+                <div class="section-title">子任务完成度</div>
+                <div class="progress-bar-wrap">
+                    <div class="progress-bar-fill" [style.width.%]="overallPercent"></div>
                 </div>
-                <div class="overall-detail">
-                    <div class="stat-row">
-                        <span class="stat-label">子任务总数</span>
-                        <span class="stat-value">{{ overallTotal }}</span>
+                <div class="bar-legend">
+                    <span>{{ overallCompleted }} / {{ overallTotal }}</span>
+                    <span class="bar-pct">{{ overallPercent }}%</span>
+                </div>
+            </div>
+
+            <!-- 任务状态分布 -->
+            <div class="section">
+                <div class="section-title">任务状态</div>
+                <div class="status-bar">
+                    @if (ongoingPct > 0) {
+                        <div class="status-seg ongoing" [style.width.%]="ongoingPct">
+                            @if (ongoingPct >= 12) { Ongoing }
+                        </div>
+                    }
+                    @if (pausePct > 0) {
+                        <div class="status-seg pause" [style.width.%]="pausePct">
+                            @if (pausePct >= 12) { Pause }
+                        </div>
+                    }
+                    @if (donePct > 0) {
+                        <div class="status-seg done" [style.width.%]="donePct">
+                            @if (donePct >= 12) { Done }
+                        </div>
+                    }
+                </div>
+                <div class="status-legend">
+                    <div class="legend-item">
+                        <span class="legend-dot ongoing-dot"></span>
+                        <span class="legend-label">进行中</span>
+                        <span class="legend-num">{{ ongoingCount }}</span>
                     </div>
-                    <div class="stat-row">
-                        <span class="stat-label">已完成</span>
-                        <span class="stat-value done">{{ overallCompleted }}</span>
+                    <div class="legend-item">
+                        <span class="legend-dot pause-dot"></span>
+                        <span class="legend-label">暂停</span>
+                        <span class="legend-num">{{ pauseCount }}</span>
                     </div>
-                    <div class="stat-row">
-                        <span class="stat-label">剩余</span>
-                        <span class="stat-value remain">{{ overallTotal - overallCompleted }}</span>
+                    <div class="legend-item">
+                        <span class="legend-dot done-dot"></span>
+                        <span class="legend-label">已完成</span>
+                        <span class="legend-num">{{ doneCount }}</span>
                     </div>
                 </div>
             </div>

@@ -27,9 +27,11 @@
                 <div class="bar_p ping-label">Ping</div>
             </div>
         }
-        <div class="barItemBox progress-button" (click)="onProgressClick($event)">
-            <div class="bar_p progress-label">📊</div>
-        </div>
+        @if (isTaskPage) {
+            <div class="barItemBox progress-button" (click)="onProgressClick($event)">
+                <div class="bar_p progress-label">📊</div>
+            </div>
+        }
         <div class="appleItemDiv" style="padding: 0 1px; margin: 0 0.1rem"></div>
         <div class="barItemBox">
             <div class="appleItem">
