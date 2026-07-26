@@ -94,55 +94,11 @@
     }
   },
   {
-    "title": "财富之章：登顶",
-    "url": "https://github.com/Mryan2005/MyHomePage/discussions/45",
-    "createdAt": "2026-07-17T10:03:03Z",
-    "closed": false,
-    "body": "终章：登顶\r\n\r\n详细且看 [这里](https://github.com/Mryan2005/My-Life/issues/207)",
-    "category": {
-      "name": "Announcements"
-    },
-    "author": {
-      "login": "Mryan2005"
-    },
-    "labels": [
-      {
-        "name": "Pause"
-      }
-    ],
-    "progress": {
-      "total": 0,
-      "completed": 0
-    }
-  },
-  {
     "title": "财富之章：成塔",
     "url": "https://github.com/Mryan2005/MyHomePage/discussions/44",
     "createdAt": "2026-07-17T10:02:22Z",
     "closed": false,
     "body": "第三幕：成塔",
-    "category": {
-      "name": "Announcements"
-    },
-    "author": {
-      "login": "Mryan2005"
-    },
-    "labels": [
-      {
-        "name": "Pause"
-      }
-    ],
-    "progress": {
-      "total": 0,
-      "completed": 0
-    }
-  },
-  {
-    "title": "财富之章：聚沙",
-    "url": "https://github.com/Mryan2005/MyHomePage/discussions/43",
-    "createdAt": "2026-07-17T10:01:33Z",
-    "closed": false,
-    "body": "第二幕：聚沙\r\n\r\n详细且看 [这里](https://github.com/Mryan2005/My-Life/issues/206)",
     "category": {
       "name": "Announcements"
     },
