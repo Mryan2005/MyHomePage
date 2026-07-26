@@ -1,63 +1,43 @@
 <div class="overlay-bg" [class.active]="show" (click)="onOverlayClick($event)">
     <div class="progress-panel" [class.active]="show">
         <div class="panel-header">
-            <h2>📊 任务总进度</h2>
-            <button class="close-btn" (click)="close()">✕</button>
+            <h2>任务总进度</h2>
+            <button class="close-btn" (click)="close()">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                    <path d="M1 1l12 12M13 1L1 13"/>
+                </svg>
+            </button>
         </div>
 
         <div *ngIf="loading" class="loading">Loading...</div>
         <div *ngIf="error" class="error">{{ error }}</div>
 
         <div *ngIf="!loading && !error" class="panel-body">
-            <!-- 子任务完成度 -->
-            <div class="section">
-                <div class="section-title">子任务完成度</div>
-                <div class="progress-bar-wrap">
-                    <div class="progress-bar-fill" [style.width.%]="overallPercent"></div>
-                </div>
-                <div class="bar-legend">
-                    <span>{{ overallCompleted }} / {{ overallTotal }}</span>
-                    <span class="bar-pct">{{ overallPercent }}%</span>
+            <!-- 分段进度条 -->
+            <div class="bar-container">
+                <div class="bar-track">
+                    @for (seg of segments; track seg.key) {
+                        @if (seg.pct > 0) {
+                            <span
+                                class="bar-segment"
+                                [style.width.%]="seg.pct"
+                                [style.background-color]="seg.color"
+                                [attr.data-label]="seg.label"
+                            ></span>
+                        }
+                    }
                 </div>
             </div>
 
-            <!-- 任务状态分布 -->
-            <div class="section">
-                <div class="section-title">任务状态</div>
-                <div class="status-bar">
-                    @if (ongoingPct > 0) {
-                        <div class="status-seg ongoing" [style.width.%]="ongoingPct">
-                            @if (ongoingPct >= 12) { Ongoing }
-                        </div>
-                    }
-                    @if (pausePct > 0) {
-                        <div class="status-seg pause" [style.width.%]="pausePct">
-                            @if (pausePct >= 12) { Pause }
-                        </div>
-                    }
-                    @if (donePct > 0) {
-                        <div class="status-seg done" [style.width.%]="donePct">
-                            @if (donePct >= 12) { Done }
-                        </div>
-                    }
-                </div>
-                <div class="status-legend">
+            <!-- 图例 -->
+            <div class="legend">
+                @for (seg of segments; track seg.key) {
                     <div class="legend-item">
-                        <span class="legend-dot ongoing-dot"></span>
-                        <span class="legend-label">进行中</span>
-                        <span class="legend-num">{{ ongoingCount }}</span>
+                        <span class="legend-dot" [style.background-color]="seg.color"></span>
+                        <span class="legend-label">{{ seg.label }}</span>
+                        <span class="legend-pct">{{ seg.pctText }}</span>
                     </div>
-                    <div class="legend-item">
-                        <span class="legend-dot pause-dot"></span>
-                        <span class="legend-label">暂停</span>
-                        <span class="legend-num">{{ pauseCount }}</span>
-                    </div>
-                    <div class="legend-item">
-                        <span class="legend-dot done-dot"></span>
-                        <span class="legend-label">已完成</span>
-                        <span class="legend-num">{{ doneCount }}</span>
-                    </div>
-                </div>
+                }
             </div>
         </div>
     </div>

@@ -6,6 +6,15 @@ import { GithubDiscussion } from '../../interfaces/github-discussion';
 import { firstValueFrom } from 'rxjs';
 import { Subscription } from 'rxjs';
 
+interface StatusSegment {
+    key: string;
+    label: string;
+    count: number;
+    pct: number;       // 整数，用于 bar width
+    pctText: string;   // 一位小数文本，如 "33.4%"
+    color: string;
+}
+
 @Component({
     selector: 'app-sub-progress-overview',
     standalone: true,
@@ -18,21 +27,8 @@ export class SubProgressOverviewComponent implements OnInit, OnDestroy {
     loading = false;
     error = '';
 
-    /** 子任务进度 */
-    overallTotal = 0;
-    overallCompleted = 0;
-    overallPercent = 0;
-
-    /** 讨论状态统计 */
+    segments: StatusSegment[] = [];
     totalDiscussions = 0;
-    ongoingCount = 0;
-    pauseCount = 0;
-    doneCount = 0;
-
-    /** 状态条各段百分比 */
-    ongoingPct = 0;
-    pausePct = 0;
-    donePct = 0;
 
     show = false;
     private overlaySubscription?: Subscription;
@@ -75,46 +71,43 @@ export class SubProgressOverviewComponent implements OnInit, OnDestroy {
     }
 
     computeStats(discussions: GithubDiscussion[]) {
-        // 子任务进度
-        this.overallTotal = 0;
-        this.overallCompleted = 0;
-        for (const d of discussions) {
-            if (d.progress) {
-                this.overallTotal += d.progress.total;
-                this.overallCompleted += d.progress.completed;
-            }
-        }
-        this.overallPercent = this.overallTotal > 0
-            ? Math.round((this.overallCompleted / this.overallTotal) * 100)
-            : 0;
-
-        // 讨论状态统计
         this.totalDiscussions = discussions.length;
-        this.ongoingCount = 0;
-        this.pauseCount = 0;
-        this.doneCount = 0;
+        let ongoing = 0, pause = 0, done = 0;
 
         for (const d of discussions) {
             if (d.labels.length) {
-                this.pauseCount++;
+                pause++;
             } else if (d.closed) {
-                this.doneCount++;
+                done++;
             } else {
-                this.ongoingCount++;
+                ongoing++;
             }
         }
 
-        // 状态条百分比
-        if (this.totalDiscussions > 0) {
-            this.ongoingPct = Math.round((this.ongoingCount / this.totalDiscussions) * 100);
-            this.pausePct = Math.round((this.pauseCount / this.totalDiscussions) * 100);
-            // donePct 补足 100%，避免四舍五入误差
-            this.donePct = 100 - this.ongoingPct - this.pausePct;
-        } else {
-            this.ongoingPct = 0;
-            this.pausePct = 0;
-            this.donePct = 0;
-        }
+        const raw: { key: string; label: string; count: number; color: string }[] = [
+            { key: 'ongoing', label: '进行中', count: ongoing, color: '#58a6ff' },
+            { key: 'pause',   label: '暂停',   count: pause,  color: '#d29922' },
+            { key: 'done',    label: '已完成', count: done,   color: '#3fb950' },
+        ];
+
+        // 计算精确百分比（一位小数）
+        const intPcts = raw.map(item =>
+            this.totalDiscussions > 0
+                ? Math.round((item.count / this.totalDiscussions) * 100)
+                : 0
+        );
+
+        // 最后一段补足 100%，避免四舍五入误差
+        const sumExceptLast = intPcts.slice(0, -1).reduce((a, b) => a + b, 0);
+        intPcts[intPcts.length - 1] = Math.max(0, 100 - sumExceptLast);
+
+        this.segments = raw.map((item, i) => ({
+            ...item,
+            pct: intPcts[i],
+            pctText: (this.totalDiscussions > 0
+                ? ((item.count / this.totalDiscussions) * 100).toFixed(1)
+                : '0.0') + '%',
+        }));
     }
 
     close() {
