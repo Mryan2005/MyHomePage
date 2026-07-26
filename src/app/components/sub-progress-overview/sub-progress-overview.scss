@@ -1,0 +1,165 @@
+.overlay-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    transition: background 0.3s ease;
+}
+
+.overlay-bg.active {
+    background: rgba(0, 0, 0, 0.35);
+    pointer-events: auto;
+}
+
+.progress-panel {
+    width: 90%;
+    max-width: 440px;
+    border-radius: 18px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(245, 239, 226, 0.88));
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    box-shadow: 0 20px 48px rgba(56, 78, 109, 0.22);
+    backdrop-filter: blur(18px);
+    overflow: hidden;
+    transform: translateY(20px) scale(0.96);
+    opacity: 0;
+    transition: transform 0.28s ease, opacity 0.28s ease;
+}
+
+.progress-panel.active {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px 14px;
+    border-bottom: 1px solid rgba(216, 190, 139, 0.25);
+}
+
+.panel-header h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #2f3a4e;
+}
+
+.close-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    background: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+    cursor: pointer;
+    color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.close-btn:hover {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.panel-body {
+    padding: 28px 32px 32px;
+}
+
+/* Overall section */
+.overall-section {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    justify-content: center;
+}
+
+/* Ring chart */
+.ring-wrap {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    flex-shrink: 0;
+}
+
+.ring {
+    width: 100%;
+    height: 100%;
+}
+
+.ring-fill {
+    transition: stroke-dashoffset 0.6s ease;
+}
+
+.ring-center {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.ring-pct {
+    font-size: 30px;
+    font-weight: 700;
+    color: #b18833;
+    line-height: 1;
+}
+
+.ring-label {
+    font-size: 12px;
+    color: #999;
+    margin-top: 4px;
+}
+
+/* Detail stats */
+.overall-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.stat-row {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: #8b7a5c;
+    min-width: 70px;
+}
+
+.stat-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: #2f3a4e;
+}
+
+.stat-value.done {
+    color: #6aaa6a;
+}
+
+.stat-value.remain {
+    color: #d4a843;
+}
+
+.loading,
+.error {
+    padding: 32px 0;
+    text-align: center;
+    font-size: 14px;
+    color: rgba(47, 58, 78, 0.88);
+}
+
+.error {
+    color: rgb(252, 157, 157);
+}

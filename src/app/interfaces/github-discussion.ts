@@ -28,4 +28,12 @@ export interface GithubDiscussion {
 
     }[];
 
+    progress?: {
+
+        total: number;
+
+        completed: number;
+
+    };
+
 }
