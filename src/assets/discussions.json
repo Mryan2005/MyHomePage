@@ -1,19 +1,5 @@
 [
   {
-    "title": "建立汇丰银行账户体系",
-    "url": "https://github.com/Mryan2005/MyHomePage/discussions/46",
-    "createdAt": "2026-07-18T07:29:37Z",
-    "closed": false,
-    "body": "建立并完善汇丰银行账户体系，完成账户开立、数字银行服务配置、首次资金存入及账户功能验证，构建满足跨境资金流转、多币种管理与国际金融服务需求的个人银行账户基础设施。",
-    "category": {
-      "name": "Announcements"
-    },
-    "author": {
-      "login": "Mryan2005"
-    },
-    "labels": []
-  },
-  {
     "title": "学习概率与统计：数学（一）要完成 100%",
     "url": "https://github.com/Mryan2005/MyHomePage/discussions/39",
     "createdAt": "2026-07-07T08:44:56Z",
@@ -25,7 +11,11 @@
     "author": {
       "login": "Mryan2005"
     },
-    "labels": []
+    "labels": [],
+    "progress": {
+      "total": 0,
+      "completed": 0
+    }
   },
   {
     "title": "风雨兼程ing",
@@ -39,7 +29,11 @@
     "author": {
       "login": "Mryan2005"
     },
-    "labels": []
+    "labels": [],
+    "progress": {
+      "total": 0,
+      "completed": 0
+    }
   },
   {
     "title": "追求7.5~8小时睡眠ing",
@@ -53,7 +47,11 @@
     "author": {
       "login": "Mryan2005"
     },
-    "labels": []
+    "labels": [],
+    "progress": {
+      "total": 0,
+      "completed": 0
+    }
   },
   {
     "title": "Focusing on Postgraduate entrance examination",
@@ -67,7 +65,33 @@
     "author": {
       "login": "Mryan2005"
     },
-    "labels": []
+    "labels": [],
+    "progress": {
+      "total": 0,
+      "completed": 0
+    }
+  },
+  {
+    "title": "建立汇丰银行账户体系",
+    "url": "https://github.com/Mryan2005/MyHomePage/discussions/46",
+    "createdAt": "2026-07-18T07:29:37Z",
+    "closed": false,
+    "body": "建立并完善汇丰银行账户体系，完成账户开立、数字银行服务配置、首次资金存入及账户功能验证，构建满足跨境资金流转、多币种管理与国际金融服务需求的个人银行账户基础设施。",
+    "category": {
+      "name": "Announcements"
+    },
+    "author": {
+      "login": "Mryan2005"
+    },
+    "labels": [
+      {
+        "name": "Pause"
+      }
+    ],
+    "progress": {
+      "total": 0,
+      "completed": 0
+    }
   },
   {
     "title": "财富之章：登顶",
@@ -85,7 +109,11 @@
       {
         "name": "Pause"
       }
-    ]
+    ],
+    "progress": {
+      "total": 0,
+      "completed": 0
+    }
   },
   {
     "title": "财富之章：成塔",
@@ -103,7 +131,11 @@
       {
         "name": "Pause"
       }
-    ]
+    ],
+    "progress": {
+      "total": 0,
+      "completed": 0
+    }
   },
   {
     "title": "财富之章：聚沙",
@@ -121,7 +153,11 @@
       {
         "name": "Pause"
       }
-    ]
+    ],
+    "progress": {
+      "total": 0,
+      "completed": 0
+    }
   },
   {
     "title": "财富之章：筑基",
@@ -139,7 +175,11 @@
       {
         "name": "Pause"
       }
-    ]
+    ],
+    "progress": {
+      "total": 0,
+      "completed": 0
+    }
   },
   {
     "title": "复习软件工程",
@@ -153,6 +193,136 @@
     "author": {
       "login": "Mryan2005"
     },
-    "labels": []
+    "labels": [],
+    "progress": {
+      "total": 0,
+      "completed": 0
+    }
+  },
+  {
+    "title": "完成深度学习大作业ing",
+    "url": "https://github.com/Mryan2005/MyHomePage/discussions/36",
+    "createdAt": "2026-06-02T12:14:30Z",
+    "closed": true,
+    "body": "完成深度学习大作业ing\r\n\r\n",
+    "category": {
+      "name": "Announcements"
+    },
+    "author": {
+      "login": "Mryan2005"
+    },
+    "labels": [],
+    "progress": {
+      "total": 0,
+      "completed": 0
+    }
+  },
+  {
+    "title": "复习计算机组成原理",
+    "url": "https://github.com/Mryan2005/MyHomePage/discussions/29",
+    "createdAt": "2026-05-26T15:38:03Z",
+    "closed": true,
+    "body": "计算机组成原理",
+    "category": {
+      "name": "Announcements"
+    },
+    "author": {
+      "login": "Mryan2005"
+    },
+    "labels": [],
+    "progress": {
+      "total": 0,
+      "completed": 0
+    }
+  },
+  {
+    "title": "完成高等数学的学习",
+    "url": "https://github.com/Mryan2005/MyHomePage/discussions/28",
+    "createdAt": "2026-05-26T15:35:51Z",
+    "closed": true,
+    "body": "高等数学 ",
+    "category": {
+      "name": "Announcements"
+    },
+    "author": {
+      "login": "Mryan2005"
+    },
+    "labels": [],
+    "progress": {
+      "total": 0,
+      "completed": 0
+    }
+  },
+  {
+    "title": "学习线性代数：数学（一）要完成到 87%",
+    "url": "https://github.com/Mryan2005/MyHomePage/discussions/27",
+    "createdAt": "2026-05-26T14:59:36Z",
+    "closed": true,
+    "body": "完成《线性代数》的学习，掌握**行列式的概念、性质与计算方法**，理解**矩阵的基本运算、可逆性、初等变换及分块结构**，熟悉**向量组的线性表示、线性相关性、秩与正交规范化方法**，掌握**线性方程组的求解理论与解的结构分析**，深入理解**特征值、特征向量、相似矩阵以及实对称矩阵的性质**，进一步掌握**二次型及其标准化方法**，建立从矩阵运算到线性空间分析的完整知识体系，为后续人工智能、机器学习与数据建模中的数学应用提供坚实基础。\r\n",
+    "category": {
+      "name": "Announcements"
+    },
+    "author": {
+      "login": "Mryan2005"
+    },
+    "labels": [],
+    "progress": {
+      "total": 0,
+      "completed": 0
+    }
+  },
+  {
+    "title": "重新“估值”后，数学的内容完成率为56%，预估之前相比，减少15%",
+    "url": "https://github.com/Mryan2005/MyHomePage/discussions/26",
+    "createdAt": "2026-05-26T13:38:25Z",
+    "closed": true,
+    "body": "重新“估值”后，数学的内容完成率为56%，预估之前相比，减少15%",
+    "category": {
+      "name": "Announcements"
+    },
+    "author": {
+      "login": "Mryan2005"
+    },
+    "labels": [],
+    "progress": {
+      "total": 0,
+      "completed": 0
+    }
+  },
+  {
+    "title": "Focusing on CET-6",
+    "url": "https://github.com/Mryan2005/MyHomePage/discussions/24",
+    "createdAt": "2026-05-26T13:33:14Z",
+    "closed": true,
+    "body": "Focusing on CET-6\n\n",
+    "category": {
+      "name": "Announcements"
+    },
+    "author": {
+      "login": "Mryan2005"
+    },
+    "labels": [],
+    "progress": {
+      "total": 0,
+      "completed": 0
+    }
+  },
+  {
+    "title": "Ciallo～(∠・ω< )⌒☆",
+    "url": "https://github.com/Mryan2005/MyHomePage/discussions/20",
+    "createdAt": "2026-05-26T12:52:13Z",
+    "closed": true,
+    "body": "Hello World\r\n \r\nCiallo～(∠・ω< )⌒☆",
+    "category": {
+      "name": "Announcements"
+    },
+    "author": {
+      "login": "Mryan2005"
+    },
+    "labels": [],
+    "progress": {
+      "total": 0,
+      "completed": 0
+    }
   }
 ]
