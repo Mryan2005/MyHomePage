@@ -16,6 +16,7 @@ export class TopbarComponent implements OnInit {
     @Output() clickBarButton = new EventEmitter<string>();
 
     isFilesPage: boolean = false;
+    isTaskPage: boolean = false;
 
     constructor(
         public websitePramas: WebsitePramasService,
@@ -51,6 +52,7 @@ export class TopbarComponent implements OnInit {
     ngOnInit(): void {
         this.websitePramas.currentDisplayPart$.subscribe((part) => {
             this.isFilesPage = part === 'Files';
+            this.isTaskPage = part === 'Task';
         });
     }
 
