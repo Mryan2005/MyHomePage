@@ -34,7 +34,7 @@ export class TopbarComponent implements OnInit {
             Home: 'home',
             Works: 'works',
             Travel: 'travel',
-            Task: 'task',
+            Now: 'now',
             Files: 'files',
             Contact: 'contact',
             Help: 'help'
@@ -54,7 +54,7 @@ export class TopbarComponent implements OnInit {
 
     private updatePageFlags(url: string) {
         const isFiles = url.startsWith('/files');
-        const isTask = url.startsWith('/task');
+        const isTask = url.startsWith('/now');
         if (this.isFilesPage !== isFiles || this.isTaskPage !== isTask) {
             this.zone.run(() => {
                 this.isFilesPage = isFiles;
