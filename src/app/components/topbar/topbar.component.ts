@@ -1,6 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output, OutputEmitterRef} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, OutputEmitterRef, ChangeDetectorRef} from '@angular/core';
 import {WebsitePramasService} from '../../services/Website-pramas';
-import {Router} from '@angular/router';
+import {Router, NavigationEnd} from '@angular/router';
+import {filter} from 'rxjs/operators';
 
 @Component({
     selector: 'app-topbar',
@@ -20,7 +21,8 @@ export class TopbarComponent implements OnInit {
 
     constructor(
         public websitePramas: WebsitePramasService,
-        private router: Router
+        private router: Router,
+        private cdr: ChangeDetectorRef
     ) {
     }
 
@@ -49,11 +51,22 @@ export class TopbarComponent implements OnInit {
         this.websitePramas.toggleProgressOverlay();
     }
 
+    private updatePageFlags(url: string) {
+        this.isFilesPage = url.startsWith('/files');
+        this.isTaskPage = url.startsWith('/task');
+        this.cdr.detectChanges();
+    }
+
     ngOnInit(): void {
-        this.websitePramas.currentDisplayPart$.subscribe((part) => {
-            this.isFilesPage = part === 'Files';
-            this.isTaskPage = part === 'Task';
-        });
+        // 监听路由变化（覆盖直接 URL 导航、前进后退等所有情况）
+        this.router.events
+            .pipe(filter(e => e instanceof NavigationEnd))
+            .subscribe((e) => {
+                this.updatePageFlags((e as NavigationEnd).urlAfterRedirects);
+            });
+
+        // 初始化时也检查一次
+        this.updatePageFlags(this.router.url);
     }
 
 }

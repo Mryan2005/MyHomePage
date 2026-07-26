@@ -1,3 +1,4 @@
+/* ===== Overlay ===== */
 .overlay-bg {
     position: fixed;
     inset: 0;
@@ -7,7 +8,7 @@
     justify-content: center;
     align-items: center;
     pointer-events: none;
-    transition: background 0.3s ease;
+    transition: background 0.25s ease;
 }
 
 .overlay-bg.active {
@@ -15,18 +16,17 @@
     pointer-events: auto;
 }
 
+/* ===== Panel ===== */
 .progress-panel {
     width: 90%;
-    max-width: 480px;
-    border-radius: 18px;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(245, 239, 226, 0.88));
-    border: 1px solid rgba(255, 255, 255, 0.65);
-    box-shadow: 0 20px 48px rgba(56, 78, 109, 0.22);
-    backdrop-filter: blur(18px);
+    max-width: 500px;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.06);
     overflow: hidden;
-    transform: translateY(20px) scale(0.96);
+    transform: translateY(16px) scale(0.97);
     opacity: 0;
-    transition: transform 0.28s ease, opacity 0.28s ease;
+    transition: transform 0.22s ease, opacity 0.22s ease;
 }
 
 .progress-panel.active {
@@ -34,171 +34,125 @@
     opacity: 1;
 }
 
+/* ===== Header ===== */
 .panel-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 24px 14px;
-    border-bottom: 1px solid rgba(216, 190, 139, 0.25);
+    padding: 18px 24px 14px;
 }
 
 .panel-header h2 {
     margin: 0;
-    font-size: 18px;
-    font-weight: 700;
-    color: #2f3a4e;
+    font-size: 16px;
+    font-weight: 600;
+    color: #24292f;
 }
 
 .close-btn {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    background: rgba(255, 255, 255, 0.6);
-    font-size: 14px;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    border: none;
+    background: transparent;
     cursor: pointer;
-    color: #666;
+    color: #656d76;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background 0.2s;
+    transition: background 0.15s, color 0.15s;
 }
 
 .close-btn:hover {
-    background: rgba(0, 0, 0, 0.08);
+    background: #f3f4f6;
+    color: #24292f;
 }
 
+/* ===== Body ===== */
 .panel-body {
-    padding: 24px 28px 28px;
+    padding: 0 24px 24px;
     display: flex;
     flex-direction: column;
-    gap: 28px;
+    gap: 18px;
 }
 
-/* Sections */
-.section {
+/* ===== Segmented bar (GitHub 风格) ===== */
+.bar-container {
+    width: 100%;
+}
+
+.bar-track {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.section-title {
-    font-size: 14px;
-    font-weight: 600;
-    color: #8b7a5c;
-}
-
-/* Progress bar */
-.progress-bar-wrap {
-    height: 18px;
-    border-radius: 999px;
-    background: rgba(216, 190, 139, 0.16);
+    gap: 2px;
+    height: 10px;
+    border-radius: 6px;
     overflow: hidden;
+    background: #ffffff;
 }
 
-.progress-bar-fill {
+.bar-segment {
     height: 100%;
-    border-radius: 999px;
-    background: linear-gradient(90deg, #e9c46a, #e9b13b);
-    transition: width 0.5s ease;
     min-width: 0;
-}
-
-.bar-legend {
-    display: flex;
-    justify-content: space-between;
-    font-size: 13px;
-    color: #8b7a5c;
-}
-
-.bar-pct {
-    font-weight: 700;
-    color: #b18833;
-}
-
-/* Status stacked bar */
-.status-bar {
-    height: 28px;
-    border-radius: 999px;
-    overflow: hidden;
-    display: flex;
-}
-
-.status-seg {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    font-weight: 600;
-    color: #fff;
     transition: width 0.5s ease;
-    overflow: hidden;
-    white-space: nowrap;
 }
 
-.status-seg.ongoing {
-    background: linear-gradient(90deg, #8b9dc3, #6c7da8);
+.bar-segment:first-child {
+    border-radius: 6px 0 0 6px;
 }
 
-.status-seg.pause {
-    background: linear-gradient(90deg, #a08060, #7a5f44);
+.bar-segment:last-child {
+    border-radius: 0 6px 6px 0;
 }
 
-.status-seg.done {
-    background: linear-gradient(90deg, #8db88d, #5f9e5f);
+/* 只有一个段时两端都圆角 */
+.bar-segment:only-child {
+    border-radius: 6px;
 }
 
-/* Status legend */
-.status-legend {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
+/* ===== Legend（两列网格） ===== */
+.legend {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 24px;
 }
 
 .legend-item {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
+    padding: 6px 0;
 }
 
 .legend-dot {
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
     flex-shrink: 0;
 }
 
-.ongoing-dot {
-    background: #8b9dc3;
-}
-
-.pause-dot {
-    background: #a08060;
-}
-
-.done-dot {
-    background: #8db88d;
-}
-
 .legend-label {
     font-size: 13px;
-    color: #8b7a5c;
+    font-weight: 500;
+    color: #24292f;
+    white-space: nowrap;
 }
 
-.legend-num {
-    font-size: 14px;
-    font-weight: 700;
-    color: #2f3a4e;
+.legend-pct {
+    font-size: 13px;
+    color: #656d76;
+    margin-left: auto;
+    font-variant-numeric: tabular-nums;
 }
 
+/* ===== States ===== */
 .loading,
 .error {
-    padding: 32px 0;
+    padding: 28px 0;
     text-align: center;
     font-size: 14px;
-    color: rgba(47, 58, 78, 0.88);
+    color: #656d76;
 }
 
 .error {
-    color: rgb(252, 157, 157);
+    color: #cf222e;
 }

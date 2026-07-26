@@ -7,16 +7,6 @@
         <section class="list-panel">
             <!-- 筛选栏 -->
             <div class="filter-bar">
-                <select
-                    class="filter-select"
-                    [value]="selectedCategory"
-                    (change)="onCategoryChange($any($event.target).value)"
-                >
-                    <option value="">全部分类</option>
-                    @for (cat of categories; track cat) {
-                        <option [value]="cat">{{ cat }}</option>
-                    }
-                </select>
                 <label class="filter-toggle">
                     <input
                         type="checkbox"
