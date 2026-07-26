@@ -5,27 +5,9 @@
 
     <div *ngIf="!loading && !error && allDiscussions.length" class="status-layout">
         <section class="list-panel">
-            <!-- 筛选栏 -->
-            <div class="filter-bar">
-                <label class="filter-toggle">
-                    <input
-                        type="checkbox"
-                        [checked]="showPause"
-                        (change)="onShowPauseChange($any($event.target).checked)"
-                    />
-                    <span>显示暂缓</span>
-                </label>
-                <label class="filter-toggle">
-                    <input
-                        type="checkbox"
-                        [checked]="showDone"
-                        (change)="onShowDoneChange($any($event.target).checked)"
-                    />
-                    <span>显示已完成</span>
-                </label>
-            </div>
-
             <div class="list-title">夜桜閑客最近过得怎么样了？</div>
+            <div class="list-subtitle">如果你是一位一年没见的朋友请你喝咖啡，我该和你说些什么好呢？</div>
+            <div class="list-divider"></div>
             <div class="issue-list">
                 @for (discussion of discussions; track discussion.url) {
                     <button

@@ -1,8 +1,9 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {GithubDiscussionsService} from '../../services/github-discussions.service';
+import {WebsitePramasService} from '../../services/Website-pramas';
 import {GithubDiscussion} from '../../interfaces/github-discussion';
-import {firstValueFrom} from 'rxjs';
+import {firstValueFrom, Subscription} from 'rxjs';
 import {marked} from 'marked';
 
 /** 在 Task 页面默认展示的分类名称（与 GitHub Discussion Category 的 name 一致） */
@@ -15,7 +16,7 @@ const DEFAULT_TASK_CATEGORY = 'Task';
     templateUrl: './sub-issue-list-window.html',
     styleUrl: './sub-issue-list-window.scss'
 })
-export class SubIssueListComponent implements OnInit {
+export class SubIssueListComponent implements OnInit, OnDestroy {
 
     allDiscussions: GithubDiscussion[] = [];
     discussions: GithubDiscussion[] = [];
@@ -27,21 +28,46 @@ export class SubIssueListComponent implements OnInit {
 
     /** 当前选中的分类筛选（空字符串 = 全部） */
     selectedCategory = DEFAULT_TASK_CATEGORY;
-    /** 当前是否显示暂缓的任务 */
-    showPause = false;
-    /** 当前是否显示已完成（含废止）的任务 */
-    showDone = false;
 
     /** 从数据中提取的全部分类名称 */
     categories: string[] = [];
 
+    private showPause = false;
+    private showDone = false;
+    private subscriptions: Subscription[] = [];
+
     constructor(
         private githubDiscussionsService: GithubDiscussionsService,
+        private websitePramas: WebsitePramasService,
         public cdr: ChangeDetectorRef
     ) {
     }
 
     async ngOnInit() {
+
+        // 订阅筛选状态变化
+        this.subscriptions.push(
+            this.websitePramas.showPause$.subscribe(v => {
+                this.showPause = v;
+                if (this.allDiscussions.length) {
+                    this.applyFilter();
+                    this.selectedDiscussion = this.discussions[0];
+                    this.updateSelectedDiscussionBody();
+                    this.cdr.detectChanges();
+                }
+            })
+        );
+        this.subscriptions.push(
+            this.websitePramas.showDone$.subscribe(v => {
+                this.showDone = v;
+                if (this.allDiscussions.length) {
+                    this.applyFilter();
+                    this.selectedDiscussion = this.discussions[0];
+                    this.updateSelectedDiscussionBody();
+                    this.cdr.detectChanges();
+                }
+            })
+        );
 
         this.loading = true;
 
@@ -51,6 +77,10 @@ export class SubIssueListComponent implements OnInit {
                 await firstValueFrom(
                     this.githubDiscussionsService.getDiscussions()
                 );
+
+            // 同步初始值
+            this.showPause = this.websitePramas.showPause;
+            this.showDone = this.websitePramas.showDone;
 
             // 提取分类列表
             const catSet = new Set<string>();
@@ -80,6 +110,10 @@ export class SubIssueListComponent implements OnInit {
             this.cdr.detectChanges();
 
         }
+    }
+
+    ngOnDestroy() {
+        this.subscriptions.forEach(s => s.unsubscribe());
     }
 
     /** 应用分类和状态的筛选 */
@@ -121,20 +155,6 @@ export class SubIssueListComponent implements OnInit {
 
     onCategoryChange(name: string) {
         this.selectedCategory = name;
-        this.applyFilter();
-        this.selectedDiscussion = this.discussions[0];
-        this.updateSelectedDiscussionBody();
-    }
-
-    onShowPauseChange(checked: boolean) {
-        this.showPause = checked;
-        this.applyFilter();
-        this.selectedDiscussion = this.discussions[0];
-        this.updateSelectedDiscussionBody();
-    }
-
-    onShowDoneChange(checked: boolean) {
-        this.showDone = checked;
         this.applyFilter();
         this.selectedDiscussion = this.discussions[0];
         this.updateSelectedDiscussionBody();

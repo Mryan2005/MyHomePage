@@ -12,7 +12,7 @@
         <div class="barItemBox" id="barStatusBox" (click)="clickBarButton1('Now')">
             <div class="bar_p">Now</div>
         </div>
-        <div class="barItemBox" id="barContactBox" (click)="clickBarButton1('Files')">
+        <div class="barItemBox" id="barFilesBox" (click)="clickBarButton1('Files')">
             <div class="bar_p">Files</div>
         </div>
         <div class="barItemBox" id="barContactBox" (click)="clickBarButton1('Contact')">
@@ -28,6 +28,22 @@
             </div>
         }
         @if (isTaskPage) {
+            <label class="barItemBox topbar-filter">
+                <input
+                    type="checkbox"
+                    [checked]="websitePramas.showPause"
+                    (change)="onShowPauseChange($event)"
+                />
+                <span class="bar_p">暂缓</span>
+            </label>
+            <label class="barItemBox topbar-filter">
+                <input
+                    type="checkbox"
+                    [checked]="websitePramas.showDone"
+                    (change)="onShowDoneChange($event)"
+                />
+                <span class="bar_p">已完成</span>
+            </label>
             <div class="barItemBox progress-button" (click)="onProgressClick($event)">
                 <div class="bar_p progress-label">Progress</div>
             </div>

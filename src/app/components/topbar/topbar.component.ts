@@ -52,6 +52,18 @@ export class TopbarComponent implements OnInit {
         this.websitePramas.toggleProgressOverlay();
     }
 
+    onShowPauseChange(event: Event): void {
+        event.stopPropagation();
+        const checked = (event.target as HTMLInputElement).checked;
+        this.websitePramas.showPause = checked;
+    }
+
+    onShowDoneChange(event: Event): void {
+        event.stopPropagation();
+        const checked = (event.target as HTMLInputElement).checked;
+        this.websitePramas.showDone = checked;
+    }
+
     private updatePageFlags(url: string) {
         const isFiles = url.startsWith('/files');
         const isTask = url.startsWith('/now');
