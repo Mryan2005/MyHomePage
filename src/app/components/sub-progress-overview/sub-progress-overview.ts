@@ -90,10 +90,10 @@ export class SubProgressOverviewComponent implements OnInit, OnDestroy {
         }
 
         const raw: { key: string; label: string; count: number; color: string }[] = [
-            { key: 'ongoing',   label: '正在执行', count: ongoing,   color: '#58a6ff' },
-            { key: 'pause',     label: '暂缓',     count: pause,     color: '#d29922' },
-            { key: 'done',      label: '已完成',   count: done,      color: '#3fb950' },
-            { key: 'cancelled', label: '废止',     count: cancelled, color: '#8b949e' },
+            { key: 'ongoing',   label: 'Ongoing',   count: ongoing,   color: '#58a6ff' },
+            { key: 'pause',     label: 'Pause',     count: pause,     color: '#d29922' },
+            { key: 'done',      label: 'Done',      count: done,      color: '#3fb950' },
+            { key: 'cancelled', label: 'Cancelled', count: cancelled, color: '#8b949e' },
         ];
 
         // 计算精确百分比（一位小数）
