@@ -101,11 +101,16 @@ async function generate() {
 
             .sort((a, b) => {
 
-                // 排序优先级: Ongoing(0) → Pause(1) → Done(2)
-                const order = d =>
-                    d.labels?.length ? 1 :   // Pause
-                    d.closed          ? 2 :   // Done
-                                         0;    // Ongoing
+                // 排序优先级: Ongoing(0) → Pause(1) → Done(2) → Cancelled(3)
+                const order = d => {
+                    const hasCancelled = d.labels?.some(l => l.name === 'Cancelled Task');
+                    const hasPause = d.labels?.some(l => l.name === 'Pause');
+
+                    if (d.closed && hasCancelled) return 3;  // Cancelled
+                    if (d.closed) return 2;                   // Done
+                    if (hasPause) return 1;                   // Pause
+                    return 0;                                  // Ongoing
+                };
 
                 const diff = order(a) - order(b);
                 if (diff !== 0) return diff;

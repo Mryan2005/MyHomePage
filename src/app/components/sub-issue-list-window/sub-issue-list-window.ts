@@ -27,7 +27,9 @@ export class SubIssueListComponent implements OnInit {
 
     /** 当前选中的分类筛选（空字符串 = 全部） */
     selectedCategory = DEFAULT_TASK_CATEGORY;
-    /** 当前是否显示已完成的任务 */
+    /** 当前是否显示暂缓的任务 */
+    showPause = false;
+    /** 当前是否显示已完成（含废止）的任务 */
     showDone = false;
 
     /** 从数据中提取的全部分类名称 */
@@ -80,7 +82,7 @@ export class SubIssueListComponent implements OnInit {
         }
     }
 
-    /** 应用分类和完成状态的筛选 */
+    /** 应用分类和状态的筛选 */
     applyFilter() {
         let filtered = this.allDiscussions;
 
@@ -89,17 +91,43 @@ export class SubIssueListComponent implements OnInit {
             filtered = filtered.filter(d => d.category?.name === this.selectedCategory);
         }
 
-        // 默认隐藏已完成
-        if (!this.showDone) {
-            filtered = filtered.filter(d => !d.closed || d.labels.length > 0);
-            // 保留未关闭的 + 暂停的（有label但可能已关闭）
-        }
+        // 按状态分组
+        const withStatus = filtered.map(d => ({ d, status: this.getStatus(d) }));
 
-        this.discussions = filtered;
+        // 根据开关过滤
+        const afterToggles = withStatus.filter(({ status }) => {
+            if (status === 'Pause' && !this.showPause) return false;
+            if ((status === 'Done' || status === 'Cancelled') && !this.showDone) return false;
+            return true;
+        });
+
+        // 分离 Ongoing 与其他状态
+        const ongoing = afterToggles.filter(({ status }) => status === 'Ongoing');
+        const others = afterToggles.filter(({ status }) => status !== 'Ongoing');
+
+        // Ongoing 按创建时间升序（最早优先），取前 10 条
+        const topOngoing = ongoing
+            .sort((a, b) => new Date(a.d.createdAt).getTime() - new Date(b.d.createdAt).getTime())
+            .slice(0, 10);
+
+        // 合并：Ongoing → Pause → Done → Cancelled
+        const statusOrder = ['Ongoing', 'Pause', 'Done', 'Cancelled'];
+        const sortedOthers = others.sort(
+            (a, b) => statusOrder.indexOf(a.status) - statusOrder.indexOf(b.status)
+        );
+
+        this.discussions = [...topOngoing, ...sortedOthers].map(s => s.d);
     }
 
     onCategoryChange(name: string) {
         this.selectedCategory = name;
+        this.applyFilter();
+        this.selectedDiscussion = this.discussions[0];
+        this.updateSelectedDiscussionBody();
+    }
+
+    onShowPauseChange(checked: boolean) {
+        this.showPause = checked;
         this.applyFilter();
         this.selectedDiscussion = this.discussions[0];
         this.updateSelectedDiscussionBody();
@@ -117,11 +145,30 @@ export class SubIssueListComponent implements OnInit {
         this.updateSelectedDiscussionBody();
     }
 
-    getStatus(discussion: GithubDiscussion): 'Pause' | 'Ongoing' | 'Done' {
-        if (discussion.labels.length) {
+    getStatus(discussion: GithubDiscussion): 'Cancelled' | 'Pause' | 'Ongoing' | 'Done' {
+        const hasCancelled = discussion.labels.some(l => l.name === 'Cancelled Task');
+        const hasPause = discussion.labels.some(l => l.name === 'Pause');
+
+        if (discussion.closed && hasCancelled) {
+            return 'Cancelled';
+        }
+        if (discussion.closed) {
+            return 'Done';
+        }
+        if (hasPause) {
             return 'Pause';
         }
-        return discussion.closed ? 'Done' : 'Ongoing';
+        return 'Ongoing';
+    }
+
+    getStatusLabel(discussion: GithubDiscussion): string {
+        const map: Record<string, string> = {
+            'Cancelled': '废止',
+            'Pause': '暂缓',
+            'Ongoing': '正在执行',
+            'Done': '已完成',
+        };
+        return map[this.getStatus(discussion)] || '';
     }
 
     getTimeAgo(createdAt: string): string {

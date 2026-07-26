@@ -11,7 +11,7 @@ export const routes: Routes = [
     {path: 'home', component: SubIntroduceMyselfWindow},
     {path: 'works', component: SubWorksListWindow},
     {path: 'travel', component: SubTravellingWindow},
-    {path: 'task', component: SubIssueListComponent},
+    {path: 'now', component: SubIssueListComponent},
     {path: 'files', component: SubFilesListWindow},
     {path: 'contact', component: SubContactListWindow},
     {path: 'help', redirectTo: 'home'},

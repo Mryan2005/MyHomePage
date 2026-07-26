@@ -10,6 +10,14 @@
                 <label class="filter-toggle">
                     <input
                         type="checkbox"
+                        [checked]="showPause"
+                        (change)="onShowPauseChange($any($event.target).checked)"
+                    />
+                    <span>显示暂缓</span>
+                </label>
+                <label class="filter-toggle">
+                    <input
+                        type="checkbox"
                         [checked]="showDone"
                         (change)="onShowDoneChange($any($event.target).checked)"
                     />
@@ -17,7 +25,7 @@
                 </label>
             </div>
 
-            <div class="list-title">任务列表</div>
+            <div class="list-title">夜桜閑客最近过得怎么样了？</div>
             <div class="issue-list">
                 @for (discussion of discussions; track discussion.url) {
                     <button
@@ -32,11 +40,12 @@
                         </div>
                         <span
                             class="badge"
+                            [class.cancelled]="getStatus(discussion) === 'Cancelled'"
                             [class.pause]="getStatus(discussion) === 'Pause'"
                             [class.working]="getStatus(discussion) === 'Ongoing'"
                             [class.done]="getStatus(discussion) === 'Done'"
                         >
-                            {{ getStatus(discussion) }}
+                            {{ getStatusLabel(discussion) }}
                         </span>
                     </button>
                 }
@@ -51,11 +60,12 @@
                 <h2>{{ selectedDiscussion?.title }}</h2>
                 <span
                     class="badge"
+                    [class.cancelled]="selectedDiscussion && getStatus(selectedDiscussion) === 'Cancelled'"
                     [class.pause]="selectedDiscussion && getStatus(selectedDiscussion) === 'Pause'"
                     [class.working]="selectedDiscussion && getStatus(selectedDiscussion) === 'Ongoing'"
                     [class.done]="selectedDiscussion && getStatus(selectedDiscussion) === 'Done'"
                 >
-                    {{ selectedDiscussion ? getStatus(selectedDiscussion) : '' }}
+                    {{ selectedDiscussion ? getStatusLabel(selectedDiscussion) : '' }}
                 </span>
             </div>
             <div class="meta-line">

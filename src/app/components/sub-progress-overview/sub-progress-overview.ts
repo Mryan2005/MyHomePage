@@ -72,22 +72,28 @@ export class SubProgressOverviewComponent implements OnInit, OnDestroy {
 
     computeStats(discussions: GithubDiscussion[]) {
         this.totalDiscussions = discussions.length;
-        let ongoing = 0, pause = 0, done = 0;
+        let ongoing = 0, pause = 0, done = 0, cancelled = 0;
 
         for (const d of discussions) {
-            if (d.labels.length) {
-                pause++;
+            const hasCancelled = d.labels.some(l => l.name === 'Cancelled Task');
+            const hasPause = d.labels.some(l => l.name === 'Pause');
+
+            if (d.closed && hasCancelled) {
+                cancelled++;
             } else if (d.closed) {
                 done++;
+            } else if (hasPause) {
+                pause++;
             } else {
                 ongoing++;
             }
         }
 
         const raw: { key: string; label: string; count: number; color: string }[] = [
-            { key: 'ongoing', label: '进行中', count: ongoing, color: '#58a6ff' },
-            { key: 'pause',   label: '暂停',   count: pause,  color: '#d29922' },
-            { key: 'done',    label: '已完成', count: done,   color: '#3fb950' },
+            { key: 'ongoing',   label: '正在执行', count: ongoing,   color: '#58a6ff' },
+            { key: 'pause',     label: '暂缓',     count: pause,     color: '#d29922' },
+            { key: 'done',      label: '已完成',   count: done,      color: '#3fb950' },
+            { key: 'cancelled', label: '废止',     count: cancelled, color: '#8b949e' },
         ];
 
         // 计算精确百分比（一位小数）
