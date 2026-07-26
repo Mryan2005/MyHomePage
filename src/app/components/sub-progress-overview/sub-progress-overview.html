@@ -1,0 +1,63 @@
+<div class="overlay-bg" [class.active]="show" (click)="onOverlayClick($event)">
+    <div class="progress-panel" [class.active]="show">
+        <div class="panel-header">
+            <h2>📊 任务总进度</h2>
+            <button class="close-btn" (click)="close()">✕</button>
+        </div>
+
+        <div *ngIf="loading" class="loading">Loading...</div>
+        <div *ngIf="error" class="error">{{ error }}</div>
+
+        <div *ngIf="!loading && !error" class="panel-body">
+            <!-- 总进度环 -->
+            <div class="overall-section">
+                <div class="ring-wrap">
+                    <svg class="ring" viewBox="0 0 120 120">
+                        <circle
+                            class="ring-bg"
+                            cx="60" cy="60" r="52"
+                            fill="none"
+                            stroke="rgba(216,190,139,.18)"
+                            stroke-width="10"
+                        />
+                        <circle
+                            class="ring-fill"
+                            cx="60" cy="60" r="52"
+                            fill="none"
+                            stroke="url(#grad)"
+                            stroke-width="10"
+                            stroke-linecap="round"
+                            [style.strokeDasharray]="circumference"
+                            [style.strokeDashoffset]="dashOffset"
+                            transform="rotate(-90 60 60)"
+                        />
+                        <defs>
+                            <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#e9c46a" />
+                                <stop offset="100%" stop-color="#e9b13b" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <div class="ring-center">
+                        <span class="ring-pct">{{ overallPercent }}%</span>
+                        <span class="ring-label">完成度</span>
+                    </div>
+                </div>
+                <div class="overall-detail">
+                    <div class="stat-row">
+                        <span class="stat-label">子任务总数</span>
+                        <span class="stat-value">{{ overallTotal }}</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">已完成</span>
+                        <span class="stat-value done">{{ overallCompleted }}</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">剩余</span>
+                        <span class="stat-value remain">{{ overallTotal - overallCompleted }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

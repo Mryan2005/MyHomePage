@@ -2,11 +2,12 @@ import {AfterViewInit, ChangeDetectorRef, Component, Inject, PLATFORM_ID, Render
 import {BackgroundService} from './config/background';
 import {Footbar} from './components/footbar/footbar';
 import {TopbarComponent} from './components/topbar/topbar.component';
+import {SubProgressOverviewComponent} from './components/sub-progress-overview/sub-progress-overview';
 import {NgIf} from '@angular/common';
 import {RouterOutlet} from '@angular/router';
 
 @Component({
-    imports: [Footbar, TopbarComponent, NgIf, RouterOutlet],
+    imports: [Footbar, TopbarComponent, SubProgressOverviewComponent, NgIf, RouterOutlet],
     selector: 'app-root',
     standalone: true,
     templateUrl: './app.html',

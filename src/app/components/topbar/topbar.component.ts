@@ -15,6 +15,8 @@ export class TopbarComponent implements OnInit {
     @Input() barTitle: string = 'Desktop';
     @Output() clickBarButton = new EventEmitter<string>();
 
+    isFilesPage: boolean = false;
+
     constructor(
         public websitePramas: WebsitePramasService,
         private router: Router
@@ -28,7 +30,7 @@ export class TopbarComponent implements OnInit {
             Home: 'home',
             Works: 'works',
             Travel: 'travel',
-            Status: 'status',
+            Task: 'task',
             Files: 'files',
             Contact: 'contact',
             Help: 'help'
@@ -36,7 +38,20 @@ export class TopbarComponent implements OnInit {
         this.router.navigate([routeMap[buttonName] ?? 'home']);
     }
 
+    onPingClick(event: Event): void {
+        event.stopPropagation();
+        this.websitePramas.triggerPing();
+    }
+
+    onProgressClick(event: Event): void {
+        event.stopPropagation();
+        this.websitePramas.toggleProgressOverlay();
+    }
+
     ngOnInit(): void {
+        this.websitePramas.currentDisplayPart$.subscribe((part) => {
+            this.isFilesPage = part === 'Files';
+        });
     }
 
 }

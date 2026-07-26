@@ -1,11 +1,33 @@
 <div class="status-window">
     <div *ngIf="loading" class="loading">Loading...</div>
     <div *ngIf="error" class="error">{{ error }}</div>
-    <div *ngIf="!loading && !error && discussions.length === 0" class="empty">No Status found</div>
+    <div *ngIf="!loading && !error && allDiscussions.length === 0" class="empty">No Task found</div>
 
-    <div *ngIf="!loading && !error && discussions.length" class="status-layout">
+    <div *ngIf="!loading && !error && allDiscussions.length" class="status-layout">
         <section class="list-panel">
-            <div class="list-title">进行中任务（地球 Online 的任务）</div>
+            <!-- 筛选栏 -->
+            <div class="filter-bar">
+                <select
+                    class="filter-select"
+                    [value]="selectedCategory"
+                    (change)="onCategoryChange($any($event.target).value)"
+                >
+                    <option value="">全部分类</option>
+                    @for (cat of categories; track cat) {
+                        <option [value]="cat">{{ cat }}</option>
+                    }
+                </select>
+                <label class="filter-toggle">
+                    <input
+                        type="checkbox"
+                        [checked]="showDone"
+                        (change)="onShowDoneChange($any($event.target).checked)"
+                    />
+                    <span>显示已完成</span>
+                </label>
+            </div>
+
+            <div class="list-title">任务列表</div>
             <div class="issue-list">
                 @for (discussion of discussions; track discussion.url) {
                     <button
@@ -27,6 +49,9 @@
                             {{ getStatus(discussion) }}
                         </span>
                     </button>
+                }
+                @if (discussions.length === 0) {
+                    <div class="empty">没有匹配的任务</div>
                 }
             </div>
         </section>

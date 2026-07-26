@@ -9,8 +9,8 @@
         <div class="barItemBox" id="barTravelBox" (click)="clickBarButton1('Travel')">
             <div class="bar_p">Travel</div>
         </div>
-        <div class="barItemBox" id="barStatusBox" (click)="clickBarButton1('Status')">
-            <div class="bar_p">Tasks</div>
+        <div class="barItemBox" id="barStatusBox" (click)="clickBarButton1('Task')">
+            <div class="bar_p">Task</div>
         </div>
         <div class="barItemBox" id="barContactBox" (click)="clickBarButton1('Files')">
             <div class="bar_p">Files</div>
@@ -22,6 +22,14 @@
             <div class="bar_p">Help</div>
         </div>
         <div class="bar_right"></div>
+        @if (isFilesPage) {
+            <div class="barItemBox ping-button" (click)="onPingClick($event)">
+                <div class="bar_p ping-label">Ping</div>
+            </div>
+        }
+        <div class="barItemBox progress-button" (click)="onProgressClick($event)">
+            <div class="bar_p progress-label">📊</div>
+        </div>
         <div class="appleItemDiv" style="padding: 0 1px; margin: 0 0.1rem"></div>
         <div class="barItemBox">
             <div class="appleItem">
