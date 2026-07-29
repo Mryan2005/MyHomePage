@@ -1,10 +1,10 @@
 [
   {
-    "title": "学习概率与统计：数学（一）要完成 100%",
-    "url": "https://github.com/Mryan2005/MyHomePage/discussions/39",
-    "createdAt": "2026-07-07T08:44:56Z",
+    "title": "我要开始刷题了",
+    "url": "https://github.com/Mryan2005/MyHomePage/discussions/63",
+    "createdAt": "2026-07-29T16:42:13Z",
     "closed": false,
-    "body": "完成《概率论与数理统计》的学习，掌握**随机事件与概率的基本规律**，理解**随机变量及其概率分布、多维随机变量及其分布特征**，熟悉**数学期望、方差等随机变量数字特征的分析方法**，建立**数理统计的基本思想与数据分析方法**，掌握**参数估计对总体未知参数进行推断的理论与方法**，能够运用**假设检验对统计假设进行科学判断与分析**。",
+    "body": "要死了，再不开始刷题，我真的怕来不及",
     "category": {
       "name": "Announcements"
     },
@@ -88,6 +88,24 @@
         "name": "Pause"
       }
     ],
+    "progress": {
+      "total": 0,
+      "completed": 0
+    }
+  },
+  {
+    "title": "学习概率与统计：数学（一）要完成 100%",
+    "url": "https://github.com/Mryan2005/MyHomePage/discussions/39",
+    "createdAt": "2026-07-07T08:44:56Z",
+    "closed": true,
+    "body": "完成《概率论与数理统计》的学习，掌握**随机事件与概率的基本规律**，理解**随机变量及其概率分布、多维随机变量及其分布特征**，熟悉**数学期望、方差等随机变量数字特征的分析方法**，建立**数理统计的基本思想与数据分析方法**，掌握**参数估计对总体未知参数进行推断的理论与方法**，能够运用**假设检验对统计假设进行科学判断与分析**。",
+    "category": {
+      "name": "Announcements"
+    },
+    "author": {
+      "login": "Mryan2005"
+    },
+    "labels": [],
     "progress": {
       "total": 0,
       "completed": 0
