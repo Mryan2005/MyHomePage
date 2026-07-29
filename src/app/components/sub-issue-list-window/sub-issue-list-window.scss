@@ -19,11 +19,11 @@
     width: 100%;
     max-width: 1320px;
     height: 95%;
-    border-radius: 22px;
-    background: linear-gradient(180deg, rgba(255, 255, 255, .42), rgba(245, 239, 226, .32));
-    border: 1px solid rgba(255, 255, 255, .5);
-    box-shadow: 0 16px 38px rgba(56, 78, 109, .16);
-    backdrop-filter: blur(14px);
+    border-radius: 24px;
+    background: rgba(255,255,255,.16);
+    border: 1px solid rgba(255,255,255,.24);
+    box-shadow: 0 8px 32px rgba(0,0,0,.08);
+    backdrop-filter: blur(2px);
     overflow: hidden;
     padding: 18px;
 }
@@ -38,8 +38,8 @@
 .list-panel,
 .detail-panel {
     border-radius: 14px;
-    border: 1px solid rgba(255, 255, 255, .55);
-    background: rgba(255, 255, 255, .3);
+    border: 1px solid rgba(255,255,255,.24);
+    background: rgba(255,255,255,.16);
     overflow: hidden;
     min-height: 0;
 }
@@ -125,8 +125,8 @@
 
 .issue-row {
     width: 100%;
-    border: 1px solid rgba(255, 255, 255, .6);
-    background: rgba(255, 255, 255, .62);
+    border: 1px solid rgba(255,255,255,.24);
+    background: rgba(255,255,255,.16);
     border-radius: 10px;
     padding: 14px 16px;
     display: flex;
@@ -143,8 +143,8 @@
 }
 
 .issue-row.active {
-    background: rgba(237, 229, 213, .94);
-    border-color: rgba(255, 255, 255, .65);
+    background: rgba(255,255,255,.28);
+    border-color: rgba(255,255,255,.24);
 }
 
 .issue-row.active .issue-title,
@@ -179,7 +179,7 @@
     padding: 34px 34px 26px;
     display: flex;
     flex-direction: column;
-    background: rgba(255, 255, 255, .4);
+    background: rgba(255,255,255,.16);
 }
 
 .badge {
@@ -193,22 +193,26 @@
 
 .done {
     color: #4a3f2d;
-    background: rgba(229, 205, 147, .78);
+    background: rgba(229, 205, 147, .24);
+    border: 1px solid rgba(229, 205, 147, .24);
 }
 
 .pause {
     color: #f6d58a;
-    background: rgba(78, 55, 34, .72);
+    background: rgba(78, 55, 34, .24);
+    border: 1px solid rgba(78, 55, 34, .24);
 }
 
 .working {
     color: #e8ca95;
-    background: rgba(95, 78, 56, .72);
+    background: rgba(95, 78, 56, .24);
+    border: 1px solid rgba(95, 78, 56, .24);
 }
 
 .cancelled {
     color: #c9c9c9;
-    background: rgba(120, 120, 120, .48);
+    background: rgba(120, 120, 120, .24);
+    border: 1px solid rgba(120, 120, 120, .24);
 }
 
 .detail-header {
@@ -244,11 +248,15 @@
     overflow-y: auto;
     padding: 16px 18px;
     border-radius: 10px;
-    background: rgba(255, 255, 255, .52);
+    background: rgba(255,255,255,.16);
 }
 
 .body-text :where(p, ul, ol, blockquote, pre, h1, h2, h3, h4, h5, h6) {
     margin: 0 0 12px;
+}
+
+.body-text :where(p) {
+    margin: 6px 0;
 }
 
 .body-text :where(ul, ol) {
