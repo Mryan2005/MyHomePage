@@ -72,6 +72,28 @@
     }
   },
   {
+    "title": "整理 ROS 的笔记",
+    "url": "https://github.com/Mryan2005/MyHomePage/discussions/64",
+    "createdAt": "2026-07-29T16:46:40Z",
+    "closed": false,
+    "body": "我需要把一些ROS的代码和知识整理一下，要不然感觉自己没学懂",
+    "category": {
+      "name": "Announcements"
+    },
+    "author": {
+      "login": "Mryan2005"
+    },
+    "labels": [
+      {
+        "name": "Pause"
+      }
+    ],
+    "progress": {
+      "total": 0,
+      "completed": 0
+    }
+  },
+  {
     "title": "最近想办汇丰银行的银行卡了",
     "url": "https://github.com/Mryan2005/MyHomePage/discussions/46",
     "createdAt": "2026-07-18T07:29:37Z",
