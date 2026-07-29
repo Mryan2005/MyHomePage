@@ -34,7 +34,7 @@
                 @for (seg of segments; track seg.key) {
                     <div class="legend-item">
                         <span class="legend-dot" [style.background-color]="seg.color"></span>
-                        <span class="legend-label" [style.color]="seg.key === 'done' ? '' : '#87CEEB'">{{ seg.label }}</span>
+                        <span class="legend-label" [style.color]="seg.key === 'done' ? '' : '#FEDFE1'" [style.font-weight]="seg.key === 'done' ? '' : '500'">{{ seg.label }}</span>
                         <span class="legend-pct">{{ seg.pctText }}</span>
                     </div>
                 }
