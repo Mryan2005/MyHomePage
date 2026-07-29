@@ -3,16 +3,18 @@
     position: fixed;
     inset: 0;
     z-index: 1000;
-    background: rgba(0, 0, 0, 0);
+    background: transparent;
+    backdrop-filter: blur(0);
     display: flex;
     justify-content: center;
     align-items: center;
     pointer-events: none;
-    transition: background 0.25s ease;
+    transition: backdrop-filter 0.25s ease;
 }
 
 .overlay-bg.active {
-    background: rgba(0, 0, 0, 0.35);
+    background: transparent;
+    backdrop-filter: blur(6px);
     pointer-events: auto;
 }
 
