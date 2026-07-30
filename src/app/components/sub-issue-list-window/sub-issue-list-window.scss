@@ -263,18 +263,14 @@
         h3,
         h4,
         h5,
-        h6 {
-            margin: 0 0 12px;
-        }
-
-        p {
-            margin: 6px 0;
+        h6,
+        li {
+            margin: 1px 0;
         }
 
         ul,
         ol {
             padding-left: 20px;
-            margin: 6px 0;
         }
 
         ul {
@@ -283,10 +279,6 @@
 
         ol {
             list-style: decimal;
-        }
-
-        li {
-            margin: 2px 0;
         }
 
         pre,
