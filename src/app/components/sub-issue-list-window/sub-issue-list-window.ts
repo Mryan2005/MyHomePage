@@ -4,7 +4,7 @@ import {GithubDiscussionsService} from '../../services/github-discussions.servic
 import {WebsitePramasService} from '../../services/Website-pramas';
 import {GithubDiscussion} from '../../interfaces/github-discussion';
 import {firstValueFrom, Subscription} from 'rxjs';
-import {marked} from 'marked';
+import MarkdownIt from 'markdown-it';
 
 /** 在 Task 页面默认展示的分类名称（与 GitHub Discussion Category 的 name 一致） */
 const DEFAULT_TASK_CATEGORY = 'Task';
@@ -17,6 +17,8 @@ const DEFAULT_TASK_CATEGORY = 'Task';
     styleUrl: './sub-issue-list-window.scss'
 })
 export class SubIssueListComponent implements OnInit, OnDestroy {
+
+    private md = new MarkdownIt();
 
     allDiscussions: GithubDiscussion[] = [];
     discussions: GithubDiscussion[] = [];
@@ -211,6 +213,6 @@ export class SubIssueListComponent implements OnInit, OnDestroy {
 
     private updateSelectedDiscussionBody(): void {
         const content = this.selectedDiscussion?.body?.trim() || '暂无详情描述';
-        this.selectedDiscussionBodyHtml = marked.parse(content, {async: false}) as string;
+        this.selectedDiscussionBodyHtml = this.md.render(content);
     }
 }
