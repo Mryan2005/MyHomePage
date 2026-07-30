@@ -261,6 +261,11 @@
 
 .body-text :where(ul, ol) {
     padding-left: 20px;
+    margin: 6px 0;
+}
+
+.body-text :where(li) {
+    margin: 2px 0;
 }
 
 .body-text :where(pre, code) {
