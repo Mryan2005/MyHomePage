@@ -251,36 +251,48 @@
     background: rgba(255,255,255,.16);
 }
 
-.body-text :where(p, ul, ol, blockquote, pre, h1, h2, h3, h4, h5, h6) {
+.body-text p,
+.body-text ul,
+.body-text ol,
+.body-text blockquote,
+.body-text pre,
+.body-text h1,
+.body-text h2,
+.body-text h3,
+.body-text h4,
+.body-text h5,
+.body-text h6 {
     margin: 0 0 12px;
 }
 
-.body-text :where(p) {
+.body-text p {
     margin: 6px 0;
 }
 
-.body-text :where(ul, ol) {
+.body-text ul,
+.body-text ol {
     padding-left: 20px;
     margin: 6px 0;
     list-style: revert;
 }
 
-.body-text :where(li) {
+.body-text li {
     margin: 2px 0;
 }
 
-.body-text :where(pre, code) {
+.body-text pre,
+.body-text code {
     font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
 }
 
-.body-text :where(pre) {
+.body-text pre {
     padding: 10px 12px;
     border-radius: 8px;
     overflow-x: auto;
     background: rgba(47, 58, 78, .08);
 }
 
-.body-text :where(a) {
+.body-text a {
     color: #5f7cb0;
 }
 
