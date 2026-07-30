@@ -273,7 +273,14 @@
 .body-text ol {
     padding-left: 20px;
     margin: 6px 0;
-    list-style: revert;
+}
+
+.body-text ul {
+    list-style: disc !important;
+}
+
+.body-text ol {
+    list-style: decimal !important;
 }
 
 .body-text li {
