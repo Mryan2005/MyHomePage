@@ -262,6 +262,7 @@
 .body-text :where(ul, ol) {
     padding-left: 20px;
     margin: 6px 0;
+    list-style: revert;
 }
 
 .body-text :where(li) {
