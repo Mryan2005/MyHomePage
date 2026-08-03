@@ -297,6 +297,29 @@
             color: #5f7cb0;
         }
 
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 8px 0;
+            font-size: 14px;
+            border: 1px solid rgba(47, 58, 78, .2);
+        }
+
+        thead {
+            background: rgba(47, 58, 78, .06);
+        }
+
+        th,
+        td {
+            padding: 8px 12px;
+            border: 1px solid rgba(47, 58, 78, .16);
+        }
+
+        th {
+            text-align: left;
+            font-weight: 600;
+        }
+
         > :last-child {
             margin-bottom: 0;
         }
