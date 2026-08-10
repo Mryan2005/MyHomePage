@@ -93,7 +93,7 @@ export class SubProgressOverviewComponent implements OnInit, OnDestroy {
             { key: 'ongoing',   label: 'Ongoing',   count: ongoing,   color: '#58a6ff' },
             { key: 'pause',     label: 'Pause',     count: pause,     color: '#d29922' },
             { key: 'done',      label: 'Done',      count: done,      color: '#3fb950' },
-            { key: 'cancelled', label: 'Cancelled', count: cancelled, color: '#8b949e' },
+            { key: 'cancelled', label: 'Cancelled / Failed', count: cancelled, color: '#8b949e' },
         ];
 
         // 计算精确百分比（一位小数）
