@@ -18,8 +18,22 @@
         <div class="barItemBox" id="barContactBox" (click)="clickBarButton1('Contact')">
             <div class="bar_p">Contact</div>
         </div>
-        <div class="barItemBox" id="barHelpBox" (click)="clickBarButton1('Help')">
+        <div
+            class="barItemBox help-button"
+            id="barHelpBox"
+            [class.menu-open]="showHelpMenu"
+            (click)="toggleHelpMenu($event)"
+        >
             <div class="bar_p">Help</div>
+            @if (showHelpMenu) {
+                <div class="help-dropdown" (click)="$event.stopPropagation()">
+                    @for (item of helpMenuItems; track item.label) {
+                        <button type="button" class="help-menu-item" (click)="item.action()">
+                            {{ item.label }}
+                        </button>
+                    }
+                </div>
+            }
         </div>
         <div class="bar_right"></div>
         @if (isFilesPage) {
@@ -28,22 +42,20 @@
             </div>
         }
         @if (isTaskPage) {
-            <label class="barItemBox topbar-filter">
-                <input
-                    type="checkbox"
-                    [checked]="websitePramas.showPause"
-                    (change)="onShowPauseChange($event)"
-                />
-                <span class="bar_p">暂缓</span>
-            </label>
-            <label class="barItemBox topbar-filter">
-                <input
-                    type="checkbox"
-                    [checked]="websitePramas.showDone"
-                    (change)="onShowDoneChange($event)"
-                />
-                <span class="bar_p">已完成</span>
-            </label>
+            <div
+                class="barItemBox topbar-filter"
+                [class.active]="websitePramas.showPause"
+                (click)="toggleShowPause($event)"
+            >
+                <div class="bar_p">暂缓</div>
+            </div>
+            <div
+                class="barItemBox topbar-filter"
+                [class.active]="websitePramas.showDone"
+                (click)="toggleShowDone($event)"
+            >
+                <div class="bar_p">已完成</div>
+            </div>
             <div class="barItemBox progress-button" (click)="onProgressClick($event)">
                 <div class="bar_p progress-label">Statistics</div>
             </div>
@@ -56,3 +68,15 @@
         </div> -->
     </div>
 </header>
+
+@if (showAboutModal) {
+    <div class="about-modal-overlay" (click)="closeAboutModal()">
+        <div class="about-modal" (click)="$event.stopPropagation()">
+            <div class="about-modal-header">
+                <h3>{{ aboutModalTitle }}</h3>
+                <button type="button" class="about-modal-close" (click)="closeAboutModal()">✕</button>
+            </div>
+            <div class="about-modal-body" [innerHTML]="aboutModalContent"></div>
+        </div>
+    </div>
+}
