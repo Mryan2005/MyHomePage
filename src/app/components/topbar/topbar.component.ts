@@ -137,15 +137,12 @@ export class TopbarComponent implements OnInit {
         const menus: Record<string, HelpMenuItem[]> = {
             home: [
                 { label: '关于本站', action: () => this.openAboutModal() },
-                { label: 'Discussions', action: openDiscussions },
             ],
             works: [
                 { label: '关于', action: () => this.openAboutModal() },
-                { label: 'Discussions', action: openDiscussions },
             ],
             travel: [
                 { label: '关于', action: () => this.openAboutModal() },
-                { label: 'Discussions', action: openDiscussions },
             ],
             now: [
                 { label: '关于', action: () => this.openAboutModal() },
@@ -153,11 +150,9 @@ export class TopbarComponent implements OnInit {
             ],
             files: [
                 { label: '关于', action: () => this.openAboutModal() },
-                { label: 'Discussions', action: openDiscussions },
             ],
             contact: [
                 { label: '关于', action: () => this.openAboutModal() },
-                { label: 'Discussions', action: openDiscussions },
             ],
         };
 
