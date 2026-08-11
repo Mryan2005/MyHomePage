@@ -320,6 +320,11 @@
     cursor: pointer;
 }
 
+.help-button.menu-open {
+    border: 0.519481px solid rgba(128, 128, 128, 0.21);
+    background-color: rgba(128, 128, 128, 0.2);
+}
+
 .help-dropdown {
     position: absolute;
     top: 100%;
