@@ -109,7 +109,7 @@ export class TopbarComponent implements OnInit {
             },
             now: {
                 title: '关于 Now',
-                content: '<p>这里展示了我的任务看板，数据来源于 GitHub Discussions。</p><p>任务状态分为：<b>Ongoing</b>（进行中）、<b>Pause</b>（暂停）、<b>Done</b>（已完成）、<b>Cancelled</b>（已取消）。</p><p>可通过右上角的「暂缓」和「已完成」筛选器控制显示。</p>',
+                content: '<p>这是一个 Now 页面，灵感来自 <a href="https://nownownow.com" target="_blank">nownownow.com</a>，描述我最新的关注点和近况。</p>',
             },
             files: {
                 title: '关于 Files',
