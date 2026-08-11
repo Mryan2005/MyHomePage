@@ -132,32 +132,24 @@ export class TopbarComponent implements OnInit {
     }
 
     private updateHelpMenu(): void {
-        const closeMenu = () => this.closeHelpMenu();
-
         const menus: Record<string, HelpMenuItem[]> = {
             home: [
                 { label: '关于本站', action: () => this.openAboutModal() },
             ],
             works: [
                 { label: '关于', action: () => this.openAboutModal() },
-                { label: '作品分类说明', action: closeMenu },
             ],
             travel: [
                 { label: '关于', action: () => this.openAboutModal() },
-                { label: '照片说明', action: closeMenu },
             ],
             now: [
                 { label: '关于', action: () => this.openAboutModal() },
-                { label: '任务状态说明', action: closeMenu },
-                { label: 'Statistics', action: () => { this.websitePramas.toggleProgressOverlay(); this.closeHelpMenu(); } },
             ],
             files: [
                 { label: '关于', action: () => this.openAboutModal() },
-                { label: '文件说明', action: closeMenu },
             ],
             contact: [
                 { label: '关于', action: () => this.openAboutModal() },
-                { label: '联系方式说明', action: closeMenu },
             ],
         };
 
