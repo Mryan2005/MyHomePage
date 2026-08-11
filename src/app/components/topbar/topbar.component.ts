@@ -132,24 +132,32 @@ export class TopbarComponent implements OnInit {
     }
 
     private updateHelpMenu(): void {
+        const openDiscussions = () => window.open('https://github.com/Mryan2005/MyHomePage/discussions', '_blank');
+
         const menus: Record<string, HelpMenuItem[]> = {
             home: [
                 { label: '关于本站', action: () => this.openAboutModal() },
+                { label: 'Discussions', action: openDiscussions },
             ],
             works: [
                 { label: '关于', action: () => this.openAboutModal() },
+                { label: 'Discussions', action: openDiscussions },
             ],
             travel: [
                 { label: '关于', action: () => this.openAboutModal() },
+                { label: 'Discussions', action: openDiscussions },
             ],
             now: [
                 { label: '关于', action: () => this.openAboutModal() },
+                { label: 'Discussions', action: openDiscussions },
             ],
             files: [
                 { label: '关于', action: () => this.openAboutModal() },
+                { label: 'Discussions', action: openDiscussions },
             ],
             contact: [
                 { label: '关于', action: () => this.openAboutModal() },
+                { label: 'Discussions', action: openDiscussions },
             ],
         };
 
