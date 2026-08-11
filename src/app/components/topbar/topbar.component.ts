@@ -1,7 +1,12 @@
-import {Component, EventEmitter, Input, OnInit, Output, OutputEmitterRef, ChangeDetectorRef, NgZone} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, OutputEmitterRef, ChangeDetectorRef, NgZone, HostListener} from '@angular/core';
 import {WebsitePramasService} from '../../services/Website-pramas';
 import {Router, NavigationEnd} from '@angular/router';
 import {filter} from 'rxjs/operators';
+
+interface HelpMenuItem {
+    label: string;
+    action: () => void;
+}
 
 @Component({
     selector: 'app-topbar',
@@ -18,6 +23,12 @@ export class TopbarComponent implements OnInit {
 
     isFilesPage: boolean = false;
     isTaskPage: boolean = false;
+    showHelpMenu = false;
+    showAboutModal = false;
+    aboutModalTitle = '';
+    aboutModalContent = '';
+    currentPage = 'home';
+    helpMenuItems: HelpMenuItem[] = [];
 
     constructor(
         public websitePramas: WebsitePramasService,
@@ -29,6 +40,7 @@ export class TopbarComponent implements OnInit {
 
     clickBarButton1(buttonName: string) {
         console.debug(`TopbarComponent: clickBarButton1 called with buttonName=${buttonName}`);
+        this.showHelpMenu = false;
         this.websitePramas.currentDisplayPart = buttonName;
         const routeMap: Record<string, string> = {
             Home: 'home',
@@ -52,16 +64,104 @@ export class TopbarComponent implements OnInit {
         this.websitePramas.toggleProgressOverlay();
     }
 
-    onShowPauseChange(event: Event): void {
+    toggleShowPause(event: Event): void {
         event.stopPropagation();
-        const checked = (event.target as HTMLInputElement).checked;
-        this.websitePramas.showPause = checked;
+        this.websitePramas.showPause = !this.websitePramas.showPause;
     }
 
-    onShowDoneChange(event: Event): void {
+    toggleShowDone(event: Event): void {
         event.stopPropagation();
-        const checked = (event.target as HTMLInputElement).checked;
-        this.websitePramas.showDone = checked;
+        this.websitePramas.showDone = !this.websitePramas.showDone;
+    }
+
+    toggleHelpMenu(event: Event): void {
+        event.stopPropagation();
+        this.showHelpMenu = !this.showHelpMenu;
+    }
+
+    closeHelpMenu(): void {
+        this.showHelpMenu = false;
+    }
+
+    @HostListener('document:click')
+    onDocumentClick(): void {
+        if (this.showHelpMenu) {
+            this.showHelpMenu = false;
+            this.cdr.detectChanges();
+        }
+    }
+
+    openAboutModal(): void {
+        this.closeHelpMenu();
+
+        const aboutContent: Record<string, { title: string; content: string }> = {
+            home: {
+                title: '关于本站',
+                content: '<p>这是 <b>Mryan2005</b> 的个人主页，展示作品、旅行足迹、任务进展、文件分享和联系方式。</p><p>本站使用 Angular 构建，设计风格致敬 Apple 的简洁美学。</p>',
+            },
+            works: {
+                title: '关于 Works',
+                content: '<p>这里列出了我的开源项目和个人作品。</p><p>每项标注了 <b>Public Repo</b>（公开仓库）或 <b>Private Repo</b>（私有仓库），点击可跳转到对应链接。</p>',
+            },
+            travel: {
+                title: '关于 Travel',
+                content: '<p>这里嵌入了一张交互式地图，记录我去过的地方。</p><p>数据来自 <b>Where Have I Been</b> 项目，展示我的旅行足迹。</p>',
+            },
+            now: {
+                title: '关于 Now',
+                content: '<p>这里展示了我的任务看板，数据来源于 GitHub Discussions。</p><p>任务状态分为：<b>Ongoing</b>（进行中）、<b>Pause</b>（暂停）、<b>Done</b>（已完成）、<b>Cancelled</b>（已取消）。</p><p>可通过右上角的「暂缓」和「已完成」筛选器控制显示。</p>',
+            },
+            files: {
+                title: '关于 Files',
+                content: '<p>这里列出了我分享的文件和云端文档链接。</p><p>每项标注了 <b>Can Open</b>（可访问）或 <b>Cannot Open</b>（暂不可访问）的状态。</p>',
+            },
+            contact: {
+                title: '关于 Contact',
+                content: '<p>这里列出了联系我的各种方式。</p><p>每项标注了 <b>Valid</b>（有效）或 <b>Not Valid</b>（暂不可用），点击可跳转到对应链接。</p>',
+            },
+        };
+
+        const info = aboutContent[this.currentPage] || aboutContent['home'];
+        this.aboutModalTitle = info.title;
+        this.aboutModalContent = info.content;
+        this.showAboutModal = true;
+    }
+
+    closeAboutModal(): void {
+        this.showAboutModal = false;
+    }
+
+    private updateHelpMenu(): void {
+        const closeMenu = () => this.closeHelpMenu();
+
+        const menus: Record<string, HelpMenuItem[]> = {
+            home: [
+                { label: '关于本站', action: () => this.openAboutModal() },
+            ],
+            works: [
+                { label: '关于', action: () => this.openAboutModal() },
+                { label: '作品分类说明', action: closeMenu },
+            ],
+            travel: [
+                { label: '关于', action: () => this.openAboutModal() },
+                { label: '照片说明', action: closeMenu },
+            ],
+            now: [
+                { label: '关于', action: () => this.openAboutModal() },
+                { label: '任务状态说明', action: closeMenu },
+                { label: 'Statistics', action: () => { this.websitePramas.toggleProgressOverlay(); this.closeHelpMenu(); } },
+            ],
+            files: [
+                { label: '关于', action: () => this.openAboutModal() },
+                { label: '文件说明', action: closeMenu },
+            ],
+            contact: [
+                { label: '关于', action: () => this.openAboutModal() },
+                { label: '联系方式说明', action: closeMenu },
+            ],
+        };
+
+        this.helpMenuItems = menus[this.currentPage] || menus['home'];
     }
 
     private updatePageFlags(url: string) {
@@ -71,6 +171,15 @@ export class TopbarComponent implements OnInit {
             this.zone.run(() => {
                 this.isFilesPage = isFiles;
                 this.isTaskPage = isTask;
+            });
+        }
+
+        // 提取当前页面名
+        const page = url.split('/')[1] || 'home';
+        if (this.currentPage !== page) {
+            this.zone.run(() => {
+                this.currentPage = page;
+                this.updateHelpMenu();
             });
         }
     }
