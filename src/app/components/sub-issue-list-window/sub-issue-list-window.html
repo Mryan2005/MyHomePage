@@ -5,7 +5,10 @@
 
     <div *ngIf="!loading && !error && allDiscussions.length" class="status-layout">
         <section class="list-panel">
-            <div class="list-title">夜桜閑客最近过得怎么样了？</div>
+            <div class="list-title">
+                夜桜閑客最近过得怎么样了？
+                <span class="update-time" *ngIf="lastUpdated">（Updated: {{ lastUpdated }}）</span>
+            </div>
             <div class="list-divider"></div>
             <div class="list-subtitle">如果你是一位一年没见的朋友，我和你喝咖啡，该和你说些什么好呢？</div>
             <div class="issue-list">
