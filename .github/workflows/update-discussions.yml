@@ -43,3 +43,33 @@ jobs:
           git diff --cached --quiet || git commit -m "update discussions"
 
           git push
+
+  update-update-now-page-time:
+    runs-on: ubuntu-latest
+    needs: update-discussions
+
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Generate update-time.json
+        run: node scripts/update-now-page-time.js
+
+      - name: Commit update-time.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add src/assets/update-time.json
+
+          git diff --cached --quiet || git commit -m "update page time"
+
+          git push

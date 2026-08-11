@@ -1,5 +1,6 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {HttpClient} from '@angular/common/http';
 import {GithubDiscussionsService} from '../../services/github-discussions.service';
 import {WebsitePramasService} from '../../services/Website-pramas';
 import {GithubDiscussion} from '../../interfaces/github-discussion';
@@ -27,6 +28,9 @@ export class SubIssueListComponent implements OnInit, OnDestroy {
 
     loading = false;
     error = '';
+    lastUpdated = '';
+
+    private http = inject(HttpClient);
 
     /** 当前选中的分类筛选（空字符串 = 全部） */
     selectedCategory = DEFAULT_TASK_CATEGORY;
@@ -100,6 +104,22 @@ export class SubIssueListComponent implements OnInit, OnDestroy {
 
             this.selectedDiscussion = this.discussions[0];
             this.updateSelectedDiscussionBody();
+
+            // 获取页面更新时间
+            try {
+                const updateTime: any = await firstValueFrom(
+                    this.http.get('/assets/update-time.json')
+                );
+                if (updateTime?.lastUpdated) {
+                    const d = new Date(updateTime.lastUpdated);
+                    this.lastUpdated = d.getFullYear() + '-' +
+                        String(d.getMonth() + 1).padStart(2, '0') + '-' +
+                        String(d.getDate()).padStart(2, '0');
+                }
+            } catch {
+                // 文件不存在时静默忽略
+            }
+
             this.cdr.detectChanges();
         } catch (e) {
 
