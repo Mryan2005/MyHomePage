@@ -81,4 +81,15 @@ export const fileslist: FileTree = {
             },
         },
     },
+    'GitHub Gists': {
+        'Prompts': {
+            '计算机 408 考研全新知识建构大师 (V4.0 统考绝杀版)': {
+                url: 'https://gist.github.com/Mryan2005/1acb762ba7a1a0858636850a5da1fb23',
+                create_date: '2026-06-12',
+                type: 'pdf',
+                isPrivate: false,
+                canOpen: true
+            }
+        },
+    },
 }
