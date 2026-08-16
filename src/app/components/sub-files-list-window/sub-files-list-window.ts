@@ -195,8 +195,13 @@ export class SubFilesListWindow implements OnInit, OnDestroy {
   openContextMenu(event: MouseEvent, name: string, entry: FileEntry): void {
       event.preventDefault();
       this.selectedFile = name;
-      const x = Math.min(event.clientX, window.innerWidth - 220);
-      const y = Math.min(event.clientY, window.innerHeight - 200);
+      // backdrop-filter 会让 fixed 定位相对窗口而非视口，因此换算为窗口内相对坐标
+      const target = event.currentTarget as HTMLElement | null;
+      const win = target?.closest('.issue-window') as HTMLElement | null;
+      const rect = win?.getBoundingClientRect()
+          ?? { left: 0, top: 0, width: window.innerWidth, height: window.innerHeight };
+      const x = Math.min(event.clientX - rect.left, rect.width - 220);
+      const y = Math.min(event.clientY - rect.top, rect.height - 200);
       this.contextMenu = { x, y, name, entry };
   }
 
