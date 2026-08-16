@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, HostListener } from '@angular/core';
 import { fileslist } from 'src/app/data/files';
 import { File } from 'src/app/interfaces/File';
 import { WebsitePramasService } from 'src/app/services/Website-pramas';
@@ -13,6 +13,14 @@ import { Subscription } from 'rxjs';
 export class SubFilesListWindow implements OnInit, OnDestroy {
     files: File[] = [...fileslist];
     private pingSubscription?: Subscription;
+
+    // ===== Finder UI 状态 =====
+    selectedFile: File | null = null;
+    viewMode: 'grid' | 'list' = 'grid';
+    sortAsc = true;
+    searchText = '';
+    activeSidebar = '共享文件';
+    contextMenu: { x: number; y: number; file: File } | null = null;
 
     constructor(
         public cdr: ChangeDetectorRef,
@@ -29,7 +37,7 @@ export class SubFilesListWindow implements OnInit, OnDestroy {
     ngOnDestroy() {
         this.pingSubscription?.unsubscribe();
     }
-  
+
   async checkUrls() {
     let TrueFiles: File[] = this.files;
     console.log('开始通过智能弹窗探测连通性...');
@@ -40,11 +48,11 @@ export class SubFilesListWindow implements OnInit, OnDestroy {
         file.canOpen = false;
         continue;
       }
-      
+
       try {
         // 使用 window.open 的小窗口探测模式
         const isAlive = await this.probeUrlViaWindow(file.url);
-        
+
         if (isAlive) {
           console.log(`✅ 可访问: ${file.url}`);
           file.canOpen = true;
@@ -66,8 +74,8 @@ export class SubFilesListWindow implements OnInit, OnDestroy {
     return new Promise((resolve) => {
       // 弹出一个几乎不可见的超小窗口（部分浏览器会强制限制最小尺寸，但这不影响探测）
       const checkWin = window.open(
-        url, 
-        '_blank', 
+        url,
+        '_blank',
         'width=10,height=10,left=20000,top=20000,menubar=no,status=no,toolbar=no,scrollbars=no,resizable=no'
       );
 
@@ -100,5 +108,101 @@ export class SubFilesListWindow implements OnInit, OnDestroy {
         resolve(result);
       };
     });
+  }
+
+  // ===== Finder 交互 =====
+
+  /** 是否为文件夹（数据中以 folder: 前缀标识） */
+  isFolder(file: File): boolean {
+      return /^folder:/i.test(file.title);
+  }
+
+  /** 显示名称（去掉 folder: 前缀） */
+  displayName(file: File): string {
+      return file.title.replace(/^folder:\s*/i, '');
+  }
+
+  /** 按搜索词过滤、按名称排序（文件夹在前） */
+  get filteredFiles(): File[] {
+      const keyword = this.searchText.trim().toLowerCase();
+      const matched = keyword
+          ? this.files.filter(f => this.displayName(f).toLowerCase().includes(keyword))
+          : [...this.files];
+      const dir = this.sortAsc ? 1 : -1;
+      const folders = matched.filter(f => this.isFolder(f))
+          .sort((a, b) => a.title.localeCompare(b.title) * dir);
+      const docs = matched.filter(f => !this.isFolder(f))
+          .sort((a, b) => a.title.localeCompare(b.title) * dir);
+      return [...folders, ...docs];
+  }
+
+  onSearch(event: Event): void {
+      this.searchText = (event.target as HTMLInputElement).value;
+  }
+
+  selectFile(file: File): void {
+      this.selectedFile = file;
+  }
+
+  openFile(file: File): void {
+      if (file.url) {
+          window.location.href = file.url;
+      }
+  }
+
+  toggleView(): void {
+      this.viewMode = this.viewMode === 'grid' ? 'list' : 'grid';
+  }
+
+  toggleSort(): void {
+      this.sortAsc = !this.sortAsc;
+  }
+
+  share(): void {
+      const nav = navigator as any;
+      if (nav.share) {
+          nav.share({ title: 'Mryan2005 的共享文件', url: window.location.href }).catch(() => {});
+      }
+  }
+
+  setSidebar(name: string): void {
+      this.activeSidebar = name;
+  }
+
+  openContextMenu(event: MouseEvent, file: File): void {
+      event.preventDefault();
+      this.selectedFile = file;
+      const x = Math.min(event.clientX, window.innerWidth - 220);
+      const y = Math.min(event.clientY, window.innerHeight - 200);
+      this.contextMenu = { x, y, file };
+  }
+
+  @HostListener('document:click')
+  closeContextMenu(): void {
+      this.contextMenu = null;
+  }
+
+  menuOpen(): void {
+      const file = this.contextMenu?.file;
+      this.contextMenu = null;
+      if (file) {
+          this.openFile(file);
+      }
+  }
+
+  menuOpenNewTab(): void {
+      const file = this.contextMenu?.file;
+      this.contextMenu = null;
+      if (file?.url) {
+          window.open(file.url, '_blank');
+      }
+  }
+
+  menuCopyLink(): void {
+      const file = this.contextMenu?.file;
+      this.contextMenu = null;
+      if (file?.url) {
+          navigator.clipboard?.writeText(file.url);
+      }
   }
 }
