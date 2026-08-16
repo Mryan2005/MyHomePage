@@ -14,7 +14,7 @@
                 <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3 5 5-5 5"/></svg>
             </button>
         </div>
-        <div class="finder-title">共享文件</div>
+        <div class="finder-title">{{ selectedDir || '共享文件' }}</div>
         <div class="titlebar-tools">
             <button type="button" class="tool-btn" title="视图切换" (click)="toggleView()">
                 @if (viewMode === 'grid') {
@@ -42,68 +42,48 @@
     <!-- 主体 -->
     <div class="finder-body">
         <aside class="finder-sidebar">
-            <div class="sidebar-group">
-                <div class="sidebar-group-title">个人收藏</div>
-                <div class="sidebar-item" [class.active]="activeSidebar === '共享文件'" (click)="setSidebar('共享文件')">
-                    <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"><path d="M1.5 4.5A1.5 1.5 0 0 1 3 3h3.2l1.8 2h5.5A1.5 1.5 0 0 1 15 6.5v5A1.5 1.5 0 0 1 13.5 13H3a1.5 1.5 0 0 1-1.5-1.5z"/></svg>
-                    <span>共享文件</span>
+            @for (group of groups; track group) {
+                <div class="sidebar-group">
+                    <div class="sidebar-group-title">{{ group }}</div>
+                    @for (dir of groupDirsOf(group); track dir) {
+                        <div
+                            class="sidebar-item"
+                            [class.active]="selectedGroup === group && selectedDir === dir"
+                            (click)="selectDir(group, dir)"
+                        >
+                            <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"><path d="M1.5 4.5A1.5 1.5 0 0 1 3 3h3.2l1.8 2h5.5A1.5 1.5 0 0 1 15 6.5v5A1.5 1.5 0 0 1 13.5 13H3a1.5 1.5 0 0 1-1.5-1.5z"/></svg>
+                            <span>{{ dir }}</span>
+                        </div>
+                    }
                 </div>
-                <div class="sidebar-item" [class.active]="activeSidebar === '最近使用'" (click)="setSidebar('最近使用')">
-                    <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="8" cy="8" r="5.5"/><path d="M8 5.5V8l2 1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    <span>最近使用</span>
-                </div>
-                <div class="sidebar-item" [class.active]="activeSidebar === '应用程序'" (click)="setSidebar('应用程序')">
-                    <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="1.8" y="1.8" width="5.4" height="5.4" rx="1.2"/><rect x="8.8" y="1.8" width="5.4" height="5.4" rx="1.2"/><rect x="1.8" y="8.8" width="5.4" height="5.4" rx="1.2"/><rect x="8.8" y="8.8" width="5.4" height="5.4" rx="1.2"/></svg>
-                    <span>应用程序</span>
-                </div>
-                <div class="sidebar-item" [class.active]="activeSidebar === '桌面'" (click)="setSidebar('桌面')">
-                    <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="1.5" y="3" width="13" height="8.5" rx="1.5"/><path d="M5.5 14.5h5" stroke-linecap="round"/></svg>
-                    <span>桌面</span>
-                </div>
-                <div class="sidebar-item" [class.active]="activeSidebar === '文稿'" (click)="setSidebar('文稿')">
-                    <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"><path d="M4 1.5h5.5L13 5v9.5H4z"/><path d="M9.5 1.5V5H13"/></svg>
-                    <span>文稿</span>
-                </div>
-                <div class="sidebar-item" [class.active]="activeSidebar === '下载'" (click)="setSidebar('下载')">
-                    <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5v7.5"/><path d="m5 7 3 3 3-3"/><path d="M2.5 12.5h11"/></svg>
-                    <span>下载</span>
-                </div>
-            </div>
-            <div class="sidebar-group">
-                <div class="sidebar-group-title">iCloud</div>
-                <div class="sidebar-item" [class.active]="activeSidebar === 'iCloud 云盘'" (click)="setSidebar('iCloud 云盘')">
-                    <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M11.4 11.8H5.2a3.2 3.2 0 0 1 .9-6.3A4.3 4.3 0 0 1 14.4 6.6a2.7 2.7 0 0 1-1.7 4.6"/></svg>
-                    <span>iCloud 云盘</span>
-                </div>
-            </div>
-            <div class="sidebar-group">
-                <div class="sidebar-group-title">标签</div>
-                <div class="sidebar-item" [class.active]="activeSidebar === '红色'" (click)="setSidebar('红色')"><span class="tag-dot tag-red"></span><span>红色</span></div>
-                <div class="sidebar-item" [class.active]="activeSidebar === '橙色'" (click)="setSidebar('橙色')"><span class="tag-dot tag-orange"></span><span>橙色</span></div>
-                <div class="sidebar-item" [class.active]="activeSidebar === '黄色'" (click)="setSidebar('黄色')"><span class="tag-dot tag-yellow"></span><span>黄色</span></div>
-                <div class="sidebar-item" [class.active]="activeSidebar === '绿色'" (click)="setSidebar('绿色')"><span class="tag-dot tag-green"></span><span>绿色</span></div>
-                <div class="sidebar-item" [class.active]="activeSidebar === '蓝色'" (click)="setSidebar('蓝色')"><span class="tag-dot tag-blue"></span><span>蓝色</span></div>
-                <div class="sidebar-item" [class.active]="activeSidebar === '紫色'" (click)="setSidebar('紫色')"><span class="tag-dot tag-purple"></span><span>紫色</span></div>
-                <div class="sidebar-item" [class.active]="activeSidebar === '灰色'" (click)="setSidebar('灰色')"><span class="tag-dot tag-gray"></span><span>灰色</span></div>
-            </div>
+            }
         </aside>
 
         <main class="finder-content">
             @if (viewMode === 'grid') {
                 <div class="finder-grid">
-                    @for (file of filteredFiles; track file.url) {
+                    @for (file of currentFiles; track file.name) {
                         <div
                             class="file-item"
-                            [class.selected]="selectedFile === file"
-                            (click)="selectFile(file)"
-                            (dblclick)="openFile(file)"
-                            (contextmenu)="openContextMenu($event, file)"
+                            [class.selected]="selectedFile === file.name"
+                            [title]="'创建于 ' + file.entry.create_date"
+                            (click)="selectFile(file.name)"
+                            (dblclick)="openFile(file.entry)"
+                            (contextmenu)="openContextMenu($event, file.name, file.entry)"
                         >
                             <div class="file-icon">
-                                @if (isFolder(file)) {
+                                @if (file.entry.type === 'folder') {
                                     <svg viewBox="0 0 48 44" width="46" height="42">
                                         <path d="M5 10c0-1.7 1.3-3 3-3h11l4 4h17c1.7 0 3 1.3 3 3v22c0 1.7-1.3 3-3 3H8c-1.7 0-3-1.3-3-3z" fill="#5fa8e0"/>
                                         <path d="M5 12c0-1.7 1.3-3 3-3h11l4 4h17c1.7 0 3 1.3 3 3v1H5z" fill="#8cc8f2"/>
+                                    </svg>
+                                } @else if (file.entry.type === 'pdf') {
+                                    <svg viewBox="0 0 40 48" width="40" height="48">
+                                        <path d="M8 2h16l10 10v32c0 1.7-1.3 3-3 3H8c-1.7 0-3-1.3-3-3V5c0-1.7 1.3-3 3-3z" fill="#ffffff" stroke="rgba(0,0,0,.12)"/>
+                                        <path d="M24 2l10 10H25c-.6 0-1-.4-1-1z" fill="rgba(0,0,0,.07)"/>
+                                        <rect x="9" y="20" width="22" height="2" rx="1" fill="#f2413b"/>
+                                        <rect x="9" y="26" width="22" height="2" rx="1" fill="#f2413b"/>
+                                        <rect x="9" y="32" width="14" height="2" rx="1" fill="#f2413b"/>
                                     </svg>
                                 } @else {
                                     <svg viewBox="0 0 40 48" width="40" height="48">
@@ -114,47 +94,56 @@
                                         <rect x="9" y="32" width="14" height="2" rx="1" fill="rgba(0,0,0,.18)"/>
                                     </svg>
                                 }
+                                @if (file.entry.isPrivate) {
+                                    <span class="lock-badge" title="私有">
+                                        <svg viewBox="0 0 16 16" width="9" height="9" fill="currentColor"><path d="M5 6.5V5a3 3 0 0 1 6 0v1.5h.8a1.2 1.2 0 0 1 1.2 1.2v4.6a1.2 1.2 0 0 1-1.2 1.2H4.2a1.2 1.2 0 0 1-1.2-1.2V8.2A1.2 1.2 0 0 1 4.2 7z"/></svg>
+                                    </span>
+                                }
                                 <span
                                     class="status-dot"
-                                    [class.open]="file.canOpen"
-                                    [class.closed]="!file.canOpen"
-                                    [title]="file.canOpen ? '可以打开' : '当前不可打开'"
+                                    [class.open]="file.entry.canOpen"
+                                    [class.closed]="!file.entry.canOpen"
+                                    [title]="file.entry.canOpen ? '可以打开' : '当前不可打开'"
                                 ></span>
                             </div>
-                            <div class="file-name">{{ displayName(file) }}</div>
+                            <div class="file-name">{{ file.name }}</div>
                         </div>
                     }
                 </div>
-                @if (!filteredFiles.length) {
+                @if (!currentFiles.length) {
                     <div class="finder-empty">没有匹配的项目</div>
                 }
             } @else {
                 <div class="finder-list">
                     <div class="list-header">
                         <span>名称</span>
+                        <span>修改日期</span>
                         <span>状态</span>
                     </div>
-                    @for (file of filteredFiles; track file.url) {
+                    @for (file of currentFiles; track file.name) {
                         <div
                             class="list-row"
-                            [class.selected]="selectedFile === file"
-                            (click)="selectFile(file)"
-                            (dblclick)="openFile(file)"
-                            (contextmenu)="openContextMenu($event, file)"
+                            [class.selected]="selectedFile === file.name"
+                            (click)="selectFile(file.name)"
+                            (dblclick)="openFile(file.entry)"
+                            (contextmenu)="openContextMenu($event, file.name, file.entry)"
                         >
                             <div class="file-cell">
-                                @if (isFolder(file)) {
+                                @if (file.entry.type === 'folder') {
                                     <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="#5fa8e0" stroke-width="1.3" stroke-linejoin="round"><path d="M1.5 4.5A1.5 1.5 0 0 1 3 3h3.2l1.8 2h5.5A1.5 1.5 0 0 1 15 6.5v5A1.5 1.5 0 0 1 13.5 13H3a1.5 1.5 0 0 1-1.5-1.5z"/></svg>
+                                } @else if (file.entry.type === 'pdf') {
+                                    <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="#f2413b" stroke-width="1.3" stroke-linejoin="round"><path d="M4 1.5h5.5L13 5v9.5H4z"/><path d="M9.5 1.5V5H13"/></svg>
                                 } @else {
                                     <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="#86868b" stroke-width="1.3" stroke-linejoin="round"><path d="M4 1.5h5.5L13 5v9.5H4z"/><path d="M9.5 1.5V5H13"/></svg>
                                 }
-                                <span class="name-text">{{ displayName(file) }}</span>
+                                <span class="name-text">{{ file.name }}</span>
                             </div>
-                            <span class="state-text">{{ file.canOpen ? '可以打开' : '不可打开' }}</span>
+                            <span class="date-text">{{ file.entry.create_date }}</span>
+                            <span class="state-text">{{ file.entry.canOpen ? '可以打开' : '不可打开' }}{{ file.entry.isPrivate ? ' · 私有' : '' }}</span>
                         </div>
                     }
                 </div>
-                @if (!filteredFiles.length) {
+                @if (!currentFiles.length) {
                     <div class="finder-empty">没有匹配的项目</div>
                 }
             }
@@ -163,8 +152,8 @@
 
     <!-- 状态栏 -->
     <div class="finder-statusbar">
-        <span>{{ filteredFiles.length }} 个项目</span>
-        <span>{{ selectedFile ? '已选择「' + displayName(selectedFile) + '」' : '' }}</span>
+        <span>{{ currentFiles.length }} 个项目</span>
+        <span>{{ selectedFile ? '已选择「' + selectedFile + '」' : '' }}</span>
     </div>
 
     <!-- 右键菜单 -->
@@ -174,7 +163,7 @@
             <div class="context-menu-item" (click)="menuOpenNewTab()">在新标签页中打开</div>
             <div class="context-menu-item" (click)="menuCopyLink()">复制链接</div>
             <div class="context-menu-separator"></div>
-            <div class="context-menu-item disabled">{{ contextMenu.file.canOpen ? '可以打开' : '当前不可打开' }}</div>
+            <div class="context-menu-item disabled">{{ contextMenu.entry.canOpen ? '可以打开' : '当前不可打开' }}</div>
         </div>
     }
 </div>
