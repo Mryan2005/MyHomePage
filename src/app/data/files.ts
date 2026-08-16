@@ -1,7 +1,7 @@
 import { FileTree } from "../interfaces/File";
 
 export const fileslist: FileTree = {
-    '个人收藏': {
+    'WPS 365 Cloud': {
         '软件工程概论作业': {
             '资格和水平考试的考务处理系统（Claude Opus 4.7）': {
                 url: 'https://365.kdocs.cn/l/ctuGpX8FsmWe',
