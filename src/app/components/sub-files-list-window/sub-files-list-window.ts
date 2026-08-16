@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, HostListener } from '@angular/core';
 import { fileslist } from 'src/app/data/files';
-import { File } from 'src/app/interfaces/File';
+import { FileEntry, FileTree } from 'src/app/interfaces/File';
 import { WebsitePramasService } from 'src/app/services/Website-pramas';
 import { Subscription } from 'rxjs';
 
@@ -11,16 +11,17 @@ import { Subscription } from 'rxjs';
   styleUrl: './sub-files-list-window.scss',
 })
 export class SubFilesListWindow implements OnInit, OnDestroy {
-    files: File[] = [...fileslist];
+    files: FileTree = structuredClone(fileslist);
     private pingSubscription?: Subscription;
 
     // ===== Finder UI 状态 =====
-    selectedFile: File | null = null;
+    selectedFile: string | null = null;
+    selectedGroup = '';
+    selectedDir = '';
     viewMode: 'grid' | 'list' = 'grid';
     sortAsc = true;
     searchText = '';
-    activeSidebar = '共享文件';
-    contextMenu: { x: number; y: number; file: File } | null = null;
+    contextMenu: { x: number; y: number; name: string; entry: FileEntry } | null = null;
 
     constructor(
         public cdr: ChangeDetectorRef,
@@ -29,6 +30,16 @@ export class SubFilesListWindow implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        // 默认选中第一个分组的第一个目录
+        const groups = this.groups;
+        if (groups.length) {
+            this.selectedGroup = groups[0];
+            const dirs = this.groupDirs;
+            if (dirs.length) {
+                this.selectedDir = dirs[0];
+            }
+        }
+
         this.pingSubscription = this.websitePramas.pingTrigger$.subscribe(() => {
             this.checkUrls();
         });
@@ -39,34 +50,36 @@ export class SubFilesListWindow implements OnInit, OnDestroy {
     }
 
   async checkUrls() {
-    let TrueFiles: File[] = this.files;
     console.log('开始通过智能弹窗探测连通性...');
 
-    for (const file of TrueFiles) {
-      if (!file.url) {
-        console.warn(`文件 ${file.title || '未知'} 没有 URL 属性`);
-        file.canOpen = false;
-        continue;
-      }
+    for (const group of Object.values(this.files)) {
+      for (const dir of Object.values(group)) {
+        for (const entry of Object.values(dir)) {
+          if (!entry.url) {
+            console.warn('文件没有 URL 属性');
+            entry.canOpen = false;
+            continue;
+          }
 
-      try {
-        // 使用 window.open 的小窗口探测模式
-        const isAlive = await this.probeUrlViaWindow(file.url);
+          try {
+            // 使用 window.open 的小窗口探测模式
+            const isAlive = await this.probeUrlViaWindow(entry.url);
 
-        if (isAlive) {
-          console.log(`✅ 可访问: ${file.url}`);
-          file.canOpen = true;
-        } else {
-          console.error(`❌ 无法访问: ${file.url}`);
-          file.canOpen = false;
+            if (isAlive) {
+              console.log(`✅ 可访问: ${entry.url}`);
+              entry.canOpen = true;
+            } else {
+              console.error(`❌ 无法访问: ${entry.url}`);
+              entry.canOpen = false;
+            }
+          } catch (error) {
+            entry.canOpen = false;
+          }
+
+          // 动态更新界面
+          this.cdr.markForCheck();
         }
-      } catch (error) {
-        file.canOpen = false;
       }
-
-      // 动态更新界面
-      this.files = [...TrueFiles];
-        this.cdr.markForCheck();
     }
   }
 
@@ -112,41 +125,55 @@ export class SubFilesListWindow implements OnInit, OnDestroy {
 
   // ===== Finder 交互 =====
 
-  /** 是否为文件夹（数据中以 folder: 前缀标识） */
-  isFolder(file: File): boolean {
-      return /^folder:/i.test(file.title);
+  /** 顶层分组名（Sidebar 分组） */
+  get groups(): string[] {
+      return Object.keys(this.files);
   }
 
-  /** 显示名称（去掉 folder: 前缀） */
-  displayName(file: File): string {
-      return file.title.replace(/^folder:\s*/i, '');
+  /** 当前分组下的目录名（Sidebar 项目） */
+  get groupDirs(): string[] {
+      return Object.keys(this.files[this.selectedGroup] || {});
   }
 
-  /** 按搜索词过滤、按名称排序（文件夹在前） */
-  get filteredFiles(): File[] {
+  /** 指定分组下的目录名 */
+  groupDirsOf(group: string): string[] {
+      return Object.keys(this.files[group] || {});
+  }
+
+  /** 当前目录下的文件（按搜索词过滤、文件夹在前、按名称排序） */
+  get currentFiles(): { name: string; entry: FileEntry }[] {
+      const dir = this.files[this.selectedGroup]?.[this.selectedDir] || {};
       const keyword = this.searchText.trim().toLowerCase();
-      const matched = keyword
-          ? this.files.filter(f => this.displayName(f).toLowerCase().includes(keyword))
-          : [...this.files];
-      const dir = this.sortAsc ? 1 : -1;
-      const folders = matched.filter(f => this.isFolder(f))
-          .sort((a, b) => a.title.localeCompare(b.title) * dir);
-      const docs = matched.filter(f => !this.isFolder(f))
-          .sort((a, b) => a.title.localeCompare(b.title) * dir);
+      let list = Object.entries(dir).map(([name, entry]) => ({ name, entry }));
+      if (keyword) {
+          list = list.filter(f => f.name.toLowerCase().includes(keyword));
+      }
+      const dirMul = this.sortAsc ? 1 : -1;
+      const folders = list.filter(f => f.entry.type === 'folder')
+          .sort((a, b) => a.name.localeCompare(b.name) * dirMul);
+      const docs = list.filter(f => f.entry.type !== 'folder')
+          .sort((a, b) => a.name.localeCompare(b.name) * dirMul);
       return [...folders, ...docs];
+  }
+
+  selectDir(group: string, dir: string): void {
+      this.selectedGroup = group;
+      this.selectedDir = dir;
+      this.selectedFile = null;
+      this.searchText = '';
   }
 
   onSearch(event: Event): void {
       this.searchText = (event.target as HTMLInputElement).value;
   }
 
-  selectFile(file: File): void {
-      this.selectedFile = file;
+  selectFile(name: string): void {
+      this.selectedFile = name;
   }
 
-  openFile(file: File): void {
-      if (file.url) {
-          window.location.href = file.url;
+  openFile(entry: FileEntry): void {
+      if (entry.url) {
+          window.location.href = entry.url;
       }
   }
 
@@ -165,16 +192,12 @@ export class SubFilesListWindow implements OnInit, OnDestroy {
       }
   }
 
-  setSidebar(name: string): void {
-      this.activeSidebar = name;
-  }
-
-  openContextMenu(event: MouseEvent, file: File): void {
+  openContextMenu(event: MouseEvent, name: string, entry: FileEntry): void {
       event.preventDefault();
-      this.selectedFile = file;
+      this.selectedFile = name;
       const x = Math.min(event.clientX, window.innerWidth - 220);
       const y = Math.min(event.clientY, window.innerHeight - 200);
-      this.contextMenu = { x, y, file };
+      this.contextMenu = { x, y, name, entry };
   }
 
   @HostListener('document:click')
@@ -183,26 +206,26 @@ export class SubFilesListWindow implements OnInit, OnDestroy {
   }
 
   menuOpen(): void {
-      const file = this.contextMenu?.file;
+      const entry = this.contextMenu?.entry;
       this.contextMenu = null;
-      if (file) {
-          this.openFile(file);
+      if (entry) {
+          this.openFile(entry);
       }
   }
 
   menuOpenNewTab(): void {
-      const file = this.contextMenu?.file;
+      const entry = this.contextMenu?.entry;
       this.contextMenu = null;
-      if (file?.url) {
-          window.open(file.url, '_blank');
+      if (entry?.url) {
+          window.open(entry.url, '_blank');
       }
   }
 
   menuCopyLink(): void {
-      const file = this.contextMenu?.file;
+      const entry = this.contextMenu?.entry;
       this.contextMenu = null;
-      if (file?.url) {
-          navigator.clipboard?.writeText(file.url);
+      if (entry?.url) {
+          navigator.clipboard?.writeText(entry.url);
       }
   }
 }
