@@ -15,6 +15,7 @@
 
 /* ===== macOS Finder 窗口 ===== */
 .issue-window {
+    position: relative;
     width: 1040px;
     max-width: 92vw;
     height: 95%;
@@ -441,7 +442,7 @@
 
 /* ===== 右键菜单 ===== */
 .context-menu {
-    position: fixed;
+    position: absolute;
     z-index: 999;
     min-width: 200px;
     padding: 5px;
