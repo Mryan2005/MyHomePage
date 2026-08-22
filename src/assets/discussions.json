@@ -18,11 +18,11 @@
     }
   },
   {
-    "title": "8月14日前要刷完数据结构刷题册的选择题",
-    "url": "https://github.com/Mryan2005/MyHomePage/discussions/66",
-    "createdAt": "2026-08-02T13:45:36Z",
+    "title": "我要开始刷题了",
+    "url": "https://github.com/Mryan2005/MyHomePage/discussions/63",
+    "createdAt": "2026-07-29T16:42:13Z",
     "closed": false,
-    "body": "我要在8月14日前要刷完数据结构刷题册的选择题，并将不会的东西整理出来，然后，进行背诵和复习。\r\n\r\n共32小节，一天5小节",
+    "body": "要死了，再不开始刷题，我真的怕来不及\r\n\r\n现在的我会先这样做的：\r\n\r\n| 顺序 | A | B | C | D | 备注 |\r\n| -- | -- | -- | -- | -- | -- |\r\n| 1（2026.8.1~2026.8.21） | 数据结构选择题 | 数据结构简答题 | 英语 | 政治 | 因为生病，被迫延长一星期 |\r\n| 2（2026.8.22~2026.9.5） | 操作系统 | 高等数学 | 英语 | 政治 | | \r\n| 3（2026.8.6~2026.9.20） | 计算机网络 | 线性代数 | 英语 | 政治 | | \r\n| 4（2026.9.21~2026.10.5） | 计组 | 概率论 | 英语 | 政治 | |\r\n\r\n我会按照只剩3个月（假设12月上旬考试）的情况来看待的",
     "category": {
       "name": "Announcements"
     },
@@ -36,11 +36,11 @@
     }
   },
   {
-    "title": "我要开始刷题了",
-    "url": "https://github.com/Mryan2005/MyHomePage/discussions/63",
-    "createdAt": "2026-07-29T16:42:13Z",
+    "title": "最近想办汇丰银行的银行卡了",
+    "url": "https://github.com/Mryan2005/MyHomePage/discussions/46",
+    "createdAt": "2026-07-18T07:29:37Z",
     "closed": false,
-    "body": "要死了，再不开始刷题，我真的怕来不及\r\n\r\n现在的我会先这样做的：\r\n\r\n| 顺序 | A | B | C | D | 备注 |\r\n| -- | -- | -- | -- | -- | -- |\r\n| 1（2026.8.1~2026.8.21） | 数据结构选择题 | 数据结构简答题 | 英语 | 政治 | 因为生病，被迫延长一星期 |\r\n| 2（2026.8.22~2026.9.5） | 操作系统 | 高等数学 | 英语 | 政治 | | \r\n| 3（2026.8.6~2026.9.20） | 计算机网络 | 线性代数 | 英语 | 政治 | | \r\n| 4（2026.9.21~2026.10.5） | 计组 | 概率论 | 英语 | 政治 | |\r\n\r\n我会按照只剩3个月（假设12月上旬考试）的情况来看待的",
+    "body": "我已经受不了中银的手动换汇和招行的万事达无法绑定GitHub的问题了",
     "category": {
       "name": "Announcements"
     },
@@ -130,22 +130,18 @@
     }
   },
   {
-    "title": "最近想办汇丰银行的银行卡了",
-    "url": "https://github.com/Mryan2005/MyHomePage/discussions/46",
-    "createdAt": "2026-07-18T07:29:37Z",
-    "closed": false,
-    "body": "我已经受不了中银的手动换汇和招行的万事达无法绑定GitHub的问题了",
+    "title": "8月14日前要刷完数据结构刷题册的选择题",
+    "url": "https://github.com/Mryan2005/MyHomePage/discussions/66",
+    "createdAt": "2026-08-02T13:45:36Z",
+    "closed": true,
+    "body": "我要在8月14日前要刷完数据结构刷题册的选择题，并将不会的东西整理出来，然后，进行背诵和复习。\r\n\r\n共32小节，一天5小节",
     "category": {
       "name": "Announcements"
     },
     "author": {
       "login": "Mryan2005"
     },
-    "labels": [
-      {
-        "name": "Pause"
-      }
-    ],
+    "labels": [],
     "progress": {
       "total": 0,
       "completed": 0
