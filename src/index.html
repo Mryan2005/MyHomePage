@@ -24,7 +24,15 @@
             const img = new Image();
             img.src = randomImage;
             img.onload = () => {
-                document.body.style.backgroundImage = `url('${randomImage}')`;
+                const body = document.body;
+                
+                body.style.backgroundImage = `url('${randomImage}')`;
+                body.style.backgroundPosition = 'center center';   // 水平垂直居中
+                body.style.backgroundRepeat = 'no-repeat';          // 不重复
+                body.style.backgroundSize = 'cover';                // 铺满整个视口
+                body.style.backgroundAttachment = 'fixed';         // 可选：固定背景（视差效果）
+                body.style.minHeight = '100vh';                     // 确保至少占满一屏
+                body.style.margin = '0';                            // 去掉默认边距
             };
         });
     </script>
