@@ -133,7 +133,8 @@ export class TopbarComponent implements OnInit {
 
     private updateHelpMenu(): void {
         const openDiscussions = () => window.open('https://github.com/Mryan2005/MyHomePage/discussions', '_blank');
-
+        const openNowNowNowPersonalPage = () => window.open('https://nownownow.com/p/OPSc', '_blank');
+        
         const menus: Record<string, HelpMenuItem[]> = {
             home: [
                 { label: '关于本站', action: () => this.openAboutModal() },
@@ -146,6 +147,7 @@ export class TopbarComponent implements OnInit {
             ],
             now: [
                 { label: '关于', action: () => this.openAboutModal() },
+                { label: 'My NowNowNow profile', action: openNowNowNowPersonalPage },
                 { label: 'Discussions', action: openDiscussions },
             ],
             files: [
