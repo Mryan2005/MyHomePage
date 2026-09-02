@@ -98,5 +98,14 @@ export const fileslist: FileTree = {
                 canOpen: true
             }
         },
+        'Codes': {
+            '【学习赛】2026外卖情感分析-智能的最终代码': {
+                url: 'https://gist.github.com/Mryan2005/ae2da09498a5994d4f33c4fdd7db56ea',
+                create_date: '2026-09-03',
+                type: 'pdf',
+                isPrivate: false,
+                canOpen: true
+            }
+        },
     },
 }
