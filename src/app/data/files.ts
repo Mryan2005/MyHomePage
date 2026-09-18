@@ -108,4 +108,15 @@ export const fileslist: FileTree = {
             }
         },
     },
+    'Hugging Face': {
+        'Dataset': {
+            '爱理·阿卡迪亚在原著里面的对话': {
+                url: 'https://huggingface.co/datasets/Mryan2005/Airi',
+                create_date: '2026-09-18',
+                type: 'pdf',
+                isPrivate: false,
+                canOpen: true
+            }
+        },
+    },
 }
