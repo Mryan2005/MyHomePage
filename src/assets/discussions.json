@@ -1,68 +1,10 @@
 [
   {
-    "title": "本科期间pass六级",
-    "url": "https://github.com/Mryan2005/MyHomePage/discussions/80",
-    "createdAt": "2026-09-18T14:41:41Z",
-    "closed": false,
-    "body": "本科期间pass六级",
-    "category": {
-      "name": "Announcements"
-    },
-    "author": {
-      "login": "Mryan2005"
-    },
-    "labels": [
-      {
-        "name": "Cancelled Task"
-      }
-    ],
-    "progress": {
-      "total": 0,
-      "completed": 0
-    }
-  },
-  {
-    "title": "爱理·阿卡迪亚在原著里面的对话已经整理完了",
-    "url": "https://github.com/Mryan2005/MyHomePage/discussions/79",
-    "createdAt": "2026-09-12T02:52:42Z",
-    "closed": false,
-    "body": "爱理·阿卡迪亚在原著里面的对话已经整理完了，数据在 [huggingface](https://huggingface.co/datasets/Mryan2005/Airi) 里面",
-    "category": {
-      "name": "Announcements"
-    },
-    "author": {
-      "login": "Mryan2005"
-    },
-    "labels": [],
-    "progress": {
-      "total": 0,
-      "completed": 0
-    }
-  },
-  {
     "title": "我想好了，我不能落下政治",
     "url": "https://github.com/Mryan2005/MyHomePage/discussions/78",
     "createdAt": "2026-09-12T02:45:01Z",
     "closed": false,
     "body": "| 时间 | 内容 | 目标 | 状态 |\r\n|---|---|---| ---|\r\n| 第1天 | 思法 第1～3章 | 人生观、理想、中国精神 | √ |\r\n| 第2天 | 思法 第4～6章 | 价值观、道德、法治 | √ |\r\n| 第3天 | 近代史 第1～3章 | 晚清—辛亥革命 |  |\r\n| 第4天 | 近代史 第4～6章 | 建党—抗日战争 |  |\r\n| 第5天 | 近代史 第7～10章 | 解放战争—新时代 |  |\r\n| 第6天 | 毛中特 第1～4章 | 毛泽东思想、革命、改造、建设 |  |\r\n| 第7天 | 毛中特 第5～8章 | 邓小平—科学发展观 |  |\r\n| 第8天 | 新思想 第1～5章 | 新时代、中国式现代化、党的领导、人民 |  |\r\n| 第9天 | 新思想 第6～10章 | 改革、民主、法治、文化 |  |\r\n| 第10天 | 新思想 第11～17章 | 社会、生态、安全、外交、党建 |  |\r\n| 第11天 | 马原 第1～2章 | 唯物论、辩证法、认识论 |  |\r\n| 第12天 | 马原 第3章 | 唯物史观 |  |\r\n| 第13天 | 马原 第4～5章 | 资本主义 |  |\r\n| 第14天 | 马原 第6～7章 + 总复习 | 社会主义、共产主义 |  |",
-    "category": {
-      "name": "Announcements"
-    },
-    "author": {
-      "login": "Mryan2005"
-    },
-    "labels": [],
-    "progress": {
-      "total": 0,
-      "completed": 0
-    }
-  },
-  {
-    "title": "诶，我有一计",
-    "url": "https://github.com/Mryan2005/MyHomePage/discussions/77",
-    "createdAt": "2026-08-31T08:25:24Z",
-    "closed": false,
-    "body": "![](https://s41.ax1x.com/2026/08/31/pniMMQI.jpg)\r\n\r\n大作业吗？\r\n\r\n诶，我有一计\r\n\r\n我从 [YohooSoft](https://github.com/YohooSoft) 里面拿不就好了嘛，反正 [YohooSoft/Yozakura-Tsukiha](https://github.com/YohooSoft/Yozakura-Tsukiha) 已经用了两个了，只要改成 WEB 项目就好了。\r\n\r\n---\r\n\r\n2026 年 09 月 12 日更新：\r\n\r\n三个机器学习模型，还是算了吧。\r\n\r\n---\r\n\r\n2026 年 09 月 13 日更新：\r\n\r\n三个机器学习模型嘛，也不是不行，embedding算一个，其他的就用于强化记忆命中就好",
     "category": {
       "name": "Announcements"
     },
@@ -105,7 +47,11 @@
     "author": {
       "login": "Mryan2005"
     },
-    "labels": [],
+    "labels": [
+      {
+        "name": "size/XXL"
+      }
+    ],
     "progress": {
       "total": 0,
       "completed": 0
@@ -186,6 +132,42 @@
         "name": "Pause"
       }
     ],
+    "progress": {
+      "total": 0,
+      "completed": 0
+    }
+  },
+  {
+    "title": "爱理·阿卡迪亚在原著里面的对话已经整理完了",
+    "url": "https://github.com/Mryan2005/MyHomePage/discussions/79",
+    "createdAt": "2026-09-12T02:52:42Z",
+    "closed": true,
+    "body": "爱理·阿卡迪亚在原著里面的对话已经整理完了，数据在 [huggingface](https://huggingface.co/datasets/Mryan2005/Airi) 里面",
+    "category": {
+      "name": "Announcements"
+    },
+    "author": {
+      "login": "Mryan2005"
+    },
+    "labels": [],
+    "progress": {
+      "total": 0,
+      "completed": 0
+    }
+  },
+  {
+    "title": "诶，我有一计",
+    "url": "https://github.com/Mryan2005/MyHomePage/discussions/77",
+    "createdAt": "2026-08-31T08:25:24Z",
+    "closed": true,
+    "body": "![](https://s41.ax1x.com/2026/08/31/pniMMQI.jpg)\r\n\r\n大作业吗？\r\n\r\n诶，我有一计\r\n\r\n我从 [YohooSoft](https://github.com/YohooSoft) 里面拿不就好了嘛，反正 [YohooSoft/Yozakura-Tsukiha](https://github.com/YohooSoft/Yozakura-Tsukiha) 已经用了两个了，只要改成 WEB 项目就好了。\r\n\r\n---\r\n\r\n2026 年 09 月 12 日更新：\r\n\r\n三个机器学习模型，还是算了吧。\r\n\r\n---\r\n\r\n2026 年 09 月 13 日更新：\r\n\r\n三个机器学习模型嘛，也不是不行，embedding算一个，其他的就用于强化记忆命中就好",
+    "category": {
+      "name": "Announcements"
+    },
+    "author": {
+      "login": "Mryan2005"
+    },
+    "labels": [],
     "progress": {
       "total": 0,
       "completed": 0
@@ -438,6 +420,28 @@
       "login": "Mryan2005"
     },
     "labels": [],
+    "progress": {
+      "total": 0,
+      "completed": 0
+    }
+  },
+  {
+    "title": "本科期间pass六级",
+    "url": "https://github.com/Mryan2005/MyHomePage/discussions/80",
+    "createdAt": "2026-09-18T14:41:41Z",
+    "closed": true,
+    "body": "本科期间pass六级",
+    "category": {
+      "name": "Announcements"
+    },
+    "author": {
+      "login": "Mryan2005"
+    },
+    "labels": [
+      {
+        "name": "Cancelled Task"
+      }
+    ],
     "progress": {
       "total": 0,
       "completed": 0
