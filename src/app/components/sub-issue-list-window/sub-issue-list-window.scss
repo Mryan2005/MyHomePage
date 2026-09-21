@@ -398,3 +398,74 @@
         font-size: 15px;
     }
 }
+
+/* Liquid Glass task workspace */
+.status-window {
+    border-color: var(--liquid-stroke);
+    background:
+        radial-gradient(circle at 86% -5%, rgba(255, 255, 255, .28), transparent 28%),
+        linear-gradient(145deg, rgba(255, 255, 255, .20), rgba(205, 235, 255, .06));
+    box-shadow: var(--liquid-shadow), inset 0 1px 0 rgba(255, 255, 255, .92);
+    backdrop-filter: var(--liquid-blur);
+    -webkit-backdrop-filter: var(--liquid-blur);
+}
+
+.list-panel,
+.detail-panel {
+    border-color: rgba(255, 255, 255, .55);
+    background: linear-gradient(145deg, rgba(255, 255, 255, .42), rgba(255, 255, 255, .14));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .75), 0 10px 26px rgba(18, 44, 79, .08);
+}
+
+.list-title,
+.list-subtitle,
+.detail-header h2,
+.issue-title,
+.body-text { color: var(--liquid-ink); }
+
+.list-divider,
+.detail-header { border-color: rgba(255, 255, 255, .46); }
+
+.issue-row,
+.body-text {
+    border-color: rgba(255, 255, 255, .50);
+    background: linear-gradient(135deg, rgba(255, 255, 255, .42), rgba(255, 255, 255, .15));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .68);
+}
+
+.issue-row:hover {
+    border-color: rgba(255, 255, 255, .84);
+    background: linear-gradient(135deg, rgba(255, 255, 255, .72), rgba(232, 247, 255, .30));
+    box-shadow: 0 12px 28px rgba(21, 52, 90, .12), inset 0 1px 0 white;
+}
+
+.issue-row.active {
+    border-color: rgba(10, 132, 255, .38);
+    background: linear-gradient(135deg, rgba(196, 229, 255, .65), rgba(255, 255, 255, .30));
+    box-shadow: 0 10px 24px rgba(10, 132, 255, .15), inset 0 1px 0 rgba(255, 255, 255, .88);
+}
+
+.filter-select {
+    border-color: rgba(255, 255, 255, .62);
+    background: rgba(255, 255, 255, .38);
+    color: var(--liquid-ink);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .72);
+}
+
+.filter-select:focus { border-color: rgba(10, 132, 255, .60); box-shadow: 0 0 0 3px rgba(10, 132, 255, .13); }
+.filter-toggle { color: var(--liquid-muted); }
+.filter-toggle input { accent-color: var(--liquid-blue); }
+.issue-time, .meta-line { color: var(--liquid-muted); }
+.target-btn {
+    color: white;
+    border-color: rgba(255, 255, 255, .58);
+    background: linear-gradient(180deg, #46a8ff, #087cf0);
+    box-shadow: 0 8px 18px rgba(10, 132, 255, .26), inset 0 1px 0 rgba(255, 255, 255, .48);
+}
+
+@media (max-width: 760px) {
+    :host { padding: 0 10px; }
+    .status-window { padding: 10px; border-radius: 22px; }
+    .status-layout { gap: 10px; }
+    .detail-panel { padding: 22px 18px; }
+}

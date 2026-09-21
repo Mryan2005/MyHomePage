@@ -160,3 +160,29 @@
 .error {
     color: #cf222e;
 }
+
+/* Liquid Glass progress sheet */
+.overlay-bg.active {
+    background: rgba(20, 43, 74, .10);
+    backdrop-filter: blur(18px) saturate(135%);
+    -webkit-backdrop-filter: blur(18px) saturate(135%);
+}
+
+.progress-panel {
+    border-color: var(--liquid-stroke);
+    background:
+        radial-gradient(circle at 90% 0, rgba(255, 255, 255, .68), transparent 34%),
+        linear-gradient(145deg, rgba(255, 255, 255, .58), rgba(222, 243, 255, .26));
+    box-shadow: var(--liquid-shadow), inset 0 1px 0 rgba(255, 255, 255, .94);
+    backdrop-filter: var(--liquid-blur);
+    -webkit-backdrop-filter: var(--liquid-blur);
+}
+
+.panel-header { border-bottom: 1px solid rgba(255, 255, 255, .40); }
+.panel-header h2, .legend-label { color: var(--liquid-ink); }
+.legend-pct { color: var(--liquid-muted); }
+.close-btn { border: 1px solid transparent; }
+.close-btn:hover { border-color: rgba(255, 255, 255, .62); background: rgba(255, 255, 255, .44); }
+.bar-track { padding: 2px; height: 14px; background: rgba(255, 255, 255, .40); box-shadow: inset 0 1px 4px rgba(22, 51, 87, .10); }
+.bar-segment { border-radius: 5px !important; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .42); }
+.legend-item { padding: 7px 9px; border-radius: 11px; background: rgba(255, 255, 255, .20); border: 1px solid rgba(255, 255, 255, .28); }

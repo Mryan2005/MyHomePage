@@ -519,3 +519,96 @@
             scale(1);
     }
 }
+
+/* Liquid Glass Finder */
+.issue-window {
+    border-radius: var(--liquid-radius);
+    border-color: var(--liquid-stroke);
+    background:
+        radial-gradient(circle at 86% -8%, rgba(255, 255, 255, .28), transparent 30%),
+        linear-gradient(145deg, rgba(255, 255, 255, .20), rgba(202, 234, 255, .06));
+    box-shadow: var(--liquid-shadow), inset 0 1px 0 rgba(255, 255, 255, .94);
+    backdrop-filter: var(--liquid-blur);
+    -webkit-backdrop-filter: var(--liquid-blur);
+}
+
+.finder-titlebar,
+.finder-statusbar {
+    background: rgba(255, 255, 255, .13);
+    border-color: rgba(255, 255, 255, .38);
+}
+
+.nav-btn,
+.tool-btn {
+    border: 1px solid transparent;
+    color: var(--liquid-ink);
+}
+
+.nav-btn:hover:not(:disabled),
+.tool-btn:hover {
+    border-color: rgba(255, 255, 255, .62);
+    background: rgba(255, 255, 255, .42);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .82), 0 5px 12px rgba(20, 48, 84, .09);
+}
+
+.finder-search {
+    border-color: rgba(255, 255, 255, .48);
+    background: rgba(255, 255, 255, .28);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .65);
+}
+
+.finder-search:focus-within {
+    border-color: rgba(10, 132, 255, .58);
+    background: rgba(255, 255, 255, .56);
+}
+
+.finder-sidebar {
+    border-color: rgba(255, 255, 255, .34);
+    background: linear-gradient(160deg, rgba(214, 239, 255, .26), rgba(255, 255, 255, .10));
+}
+
+.finder-content { background: rgba(255, 255, 255, .12); }
+.finder-title, .sidebar-item, .file-name, .list-row { color: var(--liquid-ink); }
+
+.sidebar-item:hover,
+.file-item:hover,
+.list-row:hover {
+    background: rgba(255, 255, 255, .34);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .52);
+}
+
+.sidebar-item.active,
+.file-item.selected,
+.list-row.selected {
+    color: white;
+    background: linear-gradient(135deg, #3da2ff, #087df0);
+    box-shadow: 0 6px 16px rgba(10, 132, 255, .24), inset 0 1px 0 rgba(255, 255, 255, .42);
+}
+
+.file-item.selected .file-name { background: transparent; }
+
+.list-header {
+    background: rgba(239, 249, 255, .60);
+    border-color: rgba(255, 255, 255, .50);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+}
+
+.context-menu {
+    border-color: var(--liquid-stroke);
+    border-radius: 15px;
+    background: linear-gradient(145deg, rgba(255, 255, 255, .72), rgba(229, 246, 255, .40));
+    box-shadow: var(--liquid-shadow);
+    backdrop-filter: var(--liquid-blur);
+    -webkit-backdrop-filter: var(--liquid-blur);
+}
+
+.context-menu-item:hover { background: linear-gradient(135deg, #3da2ff, #087df0); }
+
+@media (max-width: 760px) {
+    :host { width: 96%; }
+    .issue-window { max-width: 96vw; }
+    .finder-sidebar { width: 132px; }
+    .finder-search { display: none; }
+    .finder-title { display: none; }
+}

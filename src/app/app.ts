@@ -1,4 +1,5 @@
 import {AfterViewInit, ChangeDetectorRef, Component, Inject, PLATFORM_ID, Renderer2, OnInit} from '@angular/core';
+import {isPlatformBrowser} from '@angular/common';
 import {BackgroundService} from './config/background';
 import {Footbar} from './components/footbar/footbar';
 import {TopbarComponent} from './components/topbar/topbar.component';
@@ -38,10 +39,12 @@ export class App implements AfterViewInit, OnInit {
     }
 
     ngOnInit() {
-        const currentDomain = window.location.hostname;
-        this.isTargetDomain = (currentDomain === 'index.mryan2005.top');
-        console.info("currentDomain:",  currentDomain)
-        this.cdr.markForCheck();
+        if (isPlatformBrowser(this.platformId)) {
+            const currentDomain = window.location.hostname;
+            this.isTargetDomain = (currentDomain === 'index.mryan2005.top');
+            console.info("currentDomain:", currentDomain);
+            this.cdr.markForCheck();
+        }
     }
 
     processBarButtonClicked(buttonName: string) {

@@ -57,21 +57,24 @@
     top: -45px;
     backdrop-filter: blur(2px);
     box-sizing: border-box;
+    overflow-x: hidden;
     overflow-y: auto; /* 允许右栏内容滚动 */
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px; /* 右栏圆角 */
 
     &::-webkit-scrollbar {
-        width: 10px; /* 滚动条宽度 */
+        width: 8px; /* 滚动条宽度 */
     }
 
     &::-webkit-scrollbar-thumb {
-        background-color: skyblue; /* 滚动条颜色 */
+        background-color: rgba(10, 132, 255, .42); /* 滚动条颜色 */
+        border: 2px solid transparent;
+        background-clip: padding-box;
         border-radius: 10px;
     }
 
     &::-webkit-scrollbar-track {
-        background-color: rgba(255, 255, 255, 0.18); /* 半透明背景色 */
+        background-color: transparent;
         backdrop-filter: blur(24px); /* 毛玻璃模糊效果 */
         border-radius: 5px; /* 防止轨道部分溢出 */
         margin: 15px; /* 添加内边距，避免轨道占满整个滚动条区域 */
@@ -178,4 +181,90 @@
 
   padding: 24px;
   box-sizing: border-box;
+}
+
+/* Liquid Glass profile card */
+:host {
+    top: 52px;
+    height: calc(100dvh - 52px);
+    padding: 5vh 5vw 12vh;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    z-index: 10;
+}
+
+.left-column,
+.right-column {
+    top: auto;
+    height: min(74vh, 760px);
+}
+
+.left-column {
+    width: min(31%, 390px);
+    padding: 12px 0 12px 12px;
+    border: 1px solid var(--liquid-stroke);
+    border-right: 0;
+    border-radius: var(--liquid-radius) 0 0 var(--liquid-radius);
+    background: linear-gradient(145deg, rgba(255, 255, 255, .58), rgba(255, 255, 255, .16));
+    box-shadow: -18px 25px 60px rgba(18, 35, 64, .17), inset 0 1px 0 rgba(255, 255, 255, .88);
+    backdrop-filter: var(--liquid-blur);
+    -webkit-backdrop-filter: var(--liquid-blur);
+}
+
+.profile-image {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    object-fit: cover;
+    border: 1px solid rgba(255, 255, 255, .62);
+    border-radius: 20px 0 0 20px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .65), 0 12px 32px rgba(18, 35, 64, .14);
+}
+
+.right-column {
+    width: min(55%, 760px);
+    border: 1px solid var(--liquid-stroke);
+    border-left-color: rgba(255, 255, 255, .24);
+    border-radius: 0 var(--liquid-radius) var(--liquid-radius) 0;
+    background:
+        radial-gradient(circle at 90% 5%, rgba(255, 255, 255, .28), transparent 30%),
+        linear-gradient(145deg, rgba(255, 255, 255, .24), rgba(207, 235, 255, .10) 62%, rgba(255, 255, 255, .16));
+    box-shadow: 22px 25px 60px rgba(18, 35, 64, .17), inset 0 1px 0 rgba(255, 255, 255, .88);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.glass {
+    display: none;
+}
+
+.content {
+    padding: 30px 34px;
+    color: #10213a;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, .32);
+}
+.content h1 { letter-spacing: -.035em; }
+
+.intro-text {
+    border: 1px solid transparent;
+    transition: transform .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+
+.intro-text:hover {
+    transform: translateX(2px);
+    border-color: rgba(255, 255, 255, .58);
+    background: linear-gradient(135deg, rgba(255, 255, 255, .64), rgba(255, 255, 255, .26));
+    box-shadow: 0 8px 22px rgba(22, 52, 88, .10), inset 0 1px 0 rgba(255, 255, 255, .88);
+}
+
+.right-column::-webkit-scrollbar-thumb { background: rgba(10, 132, 255, .42); }
+.right-column::-webkit-scrollbar-track { background: transparent; }
+
+@media (max-width: 768px) {
+    :host { align-items: flex-start; padding: 24px 14px 100px; overflow-y: auto; }
+    .left-column, .right-column { top: auto; width: 100%; height: auto; }
+    .left-column { display: none; }
+    .right-column { min-height: 74vh; border: 1px solid var(--liquid-stroke); border-radius: 24px; }
+    .content { padding: 24px 20px; }
 }
