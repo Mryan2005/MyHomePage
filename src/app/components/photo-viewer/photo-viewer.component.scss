@@ -38,3 +38,28 @@ img {
   color: white;
   cursor: pointer;
 }
+
+.viewer {
+  background: rgba(10, 24, 45, .46);
+  backdrop-filter: blur(30px) saturate(150%);
+  -webkit-backdrop-filter: blur(30px) saturate(150%);
+}
+
+img {
+  padding: 8px;
+  border: 1px solid rgba(255, 255, 255, .58);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, .18);
+  box-shadow: 0 30px 90px rgba(4, 18, 38, .42), inset 0 1px 0 rgba(255, 255, 255, .72);
+}
+
+.close-btn {
+  border: 1px solid rgba(255, 255, 255, .42);
+  background: linear-gradient(145deg, rgba(255, 255, 255, .38), rgba(255, 255, 255, .14));
+  box-shadow: 0 10px 26px rgba(4, 18, 38, .22), inset 0 1px 0 rgba(255, 255, 255, .68);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  transition: transform .2s ease, background .2s ease;
+}
+
+.close-btn:hover { transform: scale(1.06); background: rgba(255, 255, 255, .34); }

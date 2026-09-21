@@ -14,3 +14,29 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 阴影效果 */
     z-index: 1000; /* 确保在最上层 */
 }
+
+:host {
+    bottom: 18px;
+    min-height: 44px;
+    height: auto;
+    padding: 9px 16px;
+    gap: 2px;
+    color: var(--liquid-ink);
+    font-size: 12px;
+    border: 1px solid var(--liquid-stroke);
+    border-radius: 18px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, .30), rgba(206, 237, 255, .12));
+    box-shadow: var(--liquid-shadow-soft), inset 0 1px 0 rgba(255, 255, 255, .9);
+    backdrop-filter: var(--liquid-blur);
+    -webkit-backdrop-filter: var(--liquid-blur);
+}
+
+a {
+    text-decoration: none;
+    opacity: .78;
+    transition: opacity .2s ease, color .2s ease;
+}
+
+a:hover { color: var(--liquid-blue); opacity: 1; }
+
+img { filter: drop-shadow(0 2px 5px rgba(15, 42, 76, .16)); }
