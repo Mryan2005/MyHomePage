@@ -7,26 +7,24 @@ export interface AncestorRank {
 }
 
 // 当前状态和当前风评可在这里独立配置。
-export const ANCESTOR_CURRENT_STATE = '还在干这行，不好不坏';
-export const ANCESTOR_CURRENT_VIBE = 2;
+export const ANCESTOR_CURRENT_STATE = '被考研试题折磨得死去活来';
+export const ANCESTOR_CURRENT_VIBE = 0;
 
 // 是否允许拉到低于“当前风评”档位的位置。设为 false 时，滑片最低只能回到当前风评档位。
 export const ANCESTOR_ALLOW_PULL_BACK = false;
 
 // 禁止回拉时会随机显示其中一条提示。
 export const ANCESTOR_BLOCKED_BACKWARD_MESSAGES = [
-    '祖气不可逆，不能往回拉。',
-    '已登上的台阶，不能假装没走过。',
-    '历史的车轮不允许倒转。'
+    '欸！别往回拉了，再往回走，就真的是裤衩都不剩了',
 ];
 
 // 成功往前拉时显示的提示，键为目标档位（0-5）。
 export const ANCESTOR_FORWARD_HINT: Record<number, string> = {
-    1: '摆脱小难，先从牢閑客开始。',
-    2: '还在干这行，不好不坏。',
-    3: '有所作为，离圣又近一步。',
+    1: '勉强上岸',
+    2: '阿海，未来还请多多指教了',
+    3: '该弃code炒股了',
     4: '立足港沪，神性初显。',
-    5: '弃笔炒股，恭迎閑客祖。'
+    5: '一代股神，尽显龙象'
 };
 
 export const ANCESTOR_RANKS: AncestorRank[] = [
