@@ -74,7 +74,6 @@
 }
 
 .profile-media {
-    padding: 12px;
     border-right: 1px solid rgba(255, 255, 255, .40);
 }
 
@@ -228,7 +227,6 @@
 
     .profile-media {
         height: clamp(220px, 44vh, 340px);
-        padding: 9px;
         border-right: 0;
         border-bottom: 1px solid rgba(255, 255, 255, .40);
     }
