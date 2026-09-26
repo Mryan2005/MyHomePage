@@ -20,6 +20,7 @@ export const ANCESTOR_BLOCKED_BACKWARD_MESSAGES = [
 
 // 成功往前拉时显示的提示，键为目标档位（0-5）。
 export const ANCESTOR_FORWARD_HINT: Record<number, string> = {
+    0: '被考研试题折磨得死去活来',
     1: '勉强上岸',
     2: '阿海，未来还请多多指教了',
     3: '该弃code炒股了',
