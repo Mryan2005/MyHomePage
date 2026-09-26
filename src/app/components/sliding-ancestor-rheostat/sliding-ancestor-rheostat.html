@@ -1,0 +1,93 @@
+<input id="rheostat-toggle" class="rheostat-toggle" type="checkbox" aria-hidden="true">
+<div class="rheostat-overlay">
+    <section
+        class="rheostat-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="rheostat-title"
+        [style.--rank-accent]="selectedRank.accent"
+    >
+        <label
+            class="rheostat-close"
+            aria-label="关闭滑动变祖器"
+            for="rheostat-toggle"
+            role="button"
+            tabindex="0"
+        >✕</label>
+
+        <header class="rheostat-header">
+            <div>
+                <p class="rheostat-kicker">变阻器 → 变祖器</p>
+                <h2 id="rheostat-title">滑动变<span>祖</span>器</h2>
+                <p class="rheostat-en">Sliding Ancestor Rheostat</p>
+            </div>
+            <div class="rheostat-meter">
+                <span>祖气强度</span>
+                <strong>{{ intensity }} <em>Ω</em></strong>
+            </div>
+        </header>
+
+        <div class="rheostat-stage">
+            <figure class="rank-portrait">
+                <img [src]="selectedRank.image" [alt]="selectedRank.name + '级形象'">
+                <figcaption>LEVEL {{ selectedIndex }} · {{ selectedIndex + 1 }} / {{ ranks.length }}</figcaption>
+            </figure>
+        </div>
+
+        <section class="rank-reading" aria-live="polite">
+            <div class="rank-summary rank-summary-left">
+                <span>当前状态</span>
+                <strong>{{ currentStatus }}</strong>
+            </div>
+            <div class="rank-title-line">
+                <h3>{{ selectedRank.name }}</h3>
+                <p>当前风评是 {{ currentVibe.name }}</p>
+            </div>
+            <div class="rank-summary rank-summary-right">
+                <span>档 {{ selectedIndex + 1 }} / {{ ranks.length }}</span>
+                <strong>祖气 {{ intensity }} Ω</strong>
+            </div>
+        </section>
+
+        <section class="rheostat-instrument" aria-label="祖级选择器">
+            <div class="range-wrap">
+                <div class="range-rail" aria-hidden="true">
+                    <span class="range-fill" [style.width.%]="progress"></span>
+                    @for (rank of ranks; track rank.level) {
+                        <i
+                            [class.active]="rank.level === selectedIndex"
+                            [style.left.%]="rank.level * 20"
+                        ></i>
+                    }
+                </div>
+                <input
+                    class="rank-range"
+                    type="range"
+                    min="0"
+                    max="5"
+                    step="1"
+                    [value]="selectedIndex"
+                    aria-label="选择祖级"
+                    (input)="onRangeInput($event)"
+                >
+                <span class="image-thumb" [style.left]="thumbPosition" aria-hidden="true">
+                    <img [src]="selectedRank.image" alt="">
+                </span>
+            </div>
+
+            <div class="rank-scale">
+                @for (rank of ranks; track rank.level) {
+                    <button
+                        type="button"
+                        [class.active]="rank.level === selectedIndex"
+                        (click)="selectRank(rank.level)"
+                    >
+                        <strong>{{ rank.level }} {{ rank.name }}</strong>
+                        <span>{{ rank.description }}</span>
+                    </button>
+                }
+            </div>
+            <p class="rheostat-hint">← 滑动变祖 · 越往右祖气越浓 →</p>
+        </section>
+    </section>
+</div>

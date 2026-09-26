@@ -1,7 +1,21 @@
+:host {
+    position: relative;
+    z-index: 100;
+}
+
 #topbar {
     position: relative;
     z-index: 100;
     padding: 8px 10px 0;
+}
+
+.bar-content {
+    position: absolute;
+    inset: 8px 10px auto;
+    z-index: 4;
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
 }
 
 .bar {
@@ -117,6 +131,7 @@
 
 @media (max-width: 720px) {
     #topbar { padding: 6px 6px 0; }
+    .bar-content { inset: 6px 6px auto; }
     .bar { overflow-x: auto; overflow-y: visible; }
     .barItemBox { padding-inline: 9px; flex: 0 0 auto; }
     .bar_right { min-width: 2px; padding: 0; }
@@ -551,9 +566,9 @@
 
 /* Keep navigation readable over every randomly selected wallpaper while the
    WebGL layer supplies the actual, unblurred background refraction. */
-#liquid-topbar .bar_p,
-#liquid-topbar .ping-label,
-#liquid-topbar .progress-label {
+.bar-content .bar_p,
+.bar-content .ping-label,
+.bar-content .progress-label {
     color: rgba(255, 255, 255, .96);
     text-shadow: 0 1px 3px rgba(6, 18, 38, .78), 0 0 10px rgba(6, 18, 38, .28);
 }
@@ -595,4 +610,13 @@
 #liquid-topbar::after {
     opacity: .58;
     mix-blend-mode: screen;
+}
+
+.rheostat-button {
+    appearance: none;
+    gap: 7px;
+    white-space: nowrap;
+    color: inherit;
+    font: inherit;
+    text-decoration: none;
 }
