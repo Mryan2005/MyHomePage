@@ -20,8 +20,14 @@ export const ANCESTOR_BLOCKED_BACKWARD_MESSAGES = [
     '历史的车轮不允许倒转。'
 ];
 
-// 每次成功往前拉时显示的提示。
-export const ANCESTOR_FORWARD_HINT = '祖气上升中，继续往前。';
+// 成功往前拉时显示的提示，键为目标档位（0-5）。
+export const ANCESTOR_FORWARD_HINT: Record<number, string> = {
+    1: '摆脱小难，先从牢閑客开始。',
+    2: '还在干这行，不好不坏。',
+    3: '有所作为，离圣又近一步。',
+    4: '立足港沪，神性初显。',
+    5: '弃笔炒股，恭迎閑客祖。'
+};
 
 export const ANCESTOR_RANKS: AncestorRank[] = [
     {level: 0, name: '小难閑客', description: '一无是处', image: '/assets/images/ancestor-ranks/rank-0.png', accent: '#7aa0c8'},
