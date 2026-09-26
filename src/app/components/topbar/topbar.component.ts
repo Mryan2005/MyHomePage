@@ -32,6 +32,7 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
     currentPage = 'home';
     helpMenuItems: HelpMenuItem[] = [];
     private backgroundReadyHandler = () => this.refreshLiquidSnapshot();
+    private liquidBoundsHandler = () => this.syncCssLensBounds();
 
     constructor(
         public websitePramas: WebsitePramasService,
@@ -200,6 +201,9 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
 
         (window as any).html2canvas = html2canvas;
         window.addEventListener('site-background-ready', this.backgroundReadyHandler);
+        window.addEventListener('resize', this.liquidBoundsHandler, {passive: true});
+        window.visualViewport?.addEventListener('resize', this.liquidBoundsHandler, {passive: true});
+        this.syncCssLensBounds();
 
         requestAnimationFrame(() => {
             const liquidGL = (window as any).liquidGL;
@@ -212,15 +216,15 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
                 target: '#liquid-topbar',
                 snapshot: '#site-background',
                 resolution: Math.min(window.devicePixelRatio || 1, 1.5),
-                refraction: 0.022,
-                bevelDepth: 0.09,
-                bevelWidth: 0.18,
+                refraction: 0.04,
+                bevelDepth: 0.14,
+                bevelWidth: 0.28,
                 frost: 0,
                 shadow: false,
                 specular: true,
                 reveal: 'none',
                 tilt: false,
-                magnify: 1.018
+                magnify: 1.035
             });
 
             window.setTimeout(() => this.refreshLiquidSnapshot(), 180);
@@ -230,7 +234,22 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
     ngOnDestroy(): void {
         if (isPlatformBrowser(this.platformId)) {
             window.removeEventListener('site-background-ready', this.backgroundReadyHandler);
+            window.removeEventListener('resize', this.liquidBoundsHandler);
+            window.visualViewport?.removeEventListener('resize', this.liquidBoundsHandler);
         }
+    }
+
+    private syncCssLensBounds(): void {
+        if (!isPlatformBrowser(this.platformId)) return;
+        const topbar = document.querySelector<HTMLElement>('#liquid-topbar');
+        if (!topbar) return;
+
+        const rect = topbar.getBoundingClientRect();
+        const root = document.documentElement.style;
+        root.setProperty('--liquid-topbar-top', `${Math.max(0, rect.top)}px`);
+        root.setProperty('--liquid-topbar-right', `${Math.max(0, window.innerWidth - rect.right)}px`);
+        root.setProperty('--liquid-topbar-bottom', `${Math.max(0, window.innerHeight - rect.bottom)}px`);
+        root.setProperty('--liquid-topbar-left', `${Math.max(0, rect.left)}px`);
     }
 
     private refreshLiquidSnapshot(): void {
