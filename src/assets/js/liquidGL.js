@@ -452,7 +452,7 @@
               return true;
             }
             const style = window.getComputedStyle(element);
-            if (style.position === "fixed") {
+            if (element !== this.snapshotTarget && style.position === "fixed") {
               return true;
             }
             return (
@@ -1374,8 +1374,10 @@
       this.originalShadow = this.el.style.boxShadow;
       this.originalOpacity = this.el.style.opacity;
       this.originalTransition = this.el.style.transition;
+      this.originalPointerEvents = this.el.style.pointerEvents;
       this.el.style.transition = "none";
-      this.el.style.opacity = 0;
+      this.el.style.opacity =
+        this.revealTypeIndex === 0 ? this.originalOpacity || "1" : "0";
 
       this.el.style.position =
         this.el.style.position === "static"
@@ -1397,7 +1399,8 @@
       this.el.style.backgroundImage = "none";
       this.el.style.background = "transparent";
 
-      this.el.style.pointerEvents = "none";
+      // The WebGL canvas is already pointer-transparent. Keeping the target
+      // interactive is essential for nav bars and other controls.
 
       this.updateMetrics();
       this.setShadow(this.options.shadow);

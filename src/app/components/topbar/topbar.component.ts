@@ -1,4 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output, OutputEmitterRef, ChangeDetectorRef, NgZone, HostListener} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ChangeDetectorRef, NgZone, HostListener, Inject, PLATFORM_ID} from '@angular/core';
+import {isPlatformBrowser} from '@angular/common';
+import html2canvas from 'html2canvas';
 import {WebsitePramasService} from '../../services/Website-pramas';
 import {Router, NavigationEnd} from '@angular/router';
 import {filter} from 'rxjs/operators';
@@ -16,7 +18,7 @@ interface HelpMenuItem {
     styleUrl: './topbar.component.scss'
 })
 
-export class TopbarComponent implements OnInit {
+export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
     @Input() currentTime: string = '';
     @Input() barTitle: string = 'Desktop';
     @Output() clickBarButton = new EventEmitter<string>();
@@ -29,12 +31,14 @@ export class TopbarComponent implements OnInit {
     aboutModalContent = '';
     currentPage = 'home';
     helpMenuItems: HelpMenuItem[] = [];
+    private backgroundReadyHandler = () => this.refreshLiquidSnapshot();
 
     constructor(
         public websitePramas: WebsitePramasService,
         private router: Router,
         private cdr: ChangeDetectorRef,
-        private zone: NgZone
+        private zone: NgZone,
+        @Inject(PLATFORM_ID) private platformId: Object
     ) {
     }
 
@@ -189,6 +193,51 @@ export class TopbarComponent implements OnInit {
             });
 
         this.updatePageFlags(this.router.url);
+    }
+
+    ngAfterViewInit(): void {
+        if (!isPlatformBrowser(this.platformId)) return;
+
+        (window as any).html2canvas = html2canvas;
+        window.addEventListener('site-background-ready', this.backgroundReadyHandler);
+
+        requestAnimationFrame(() => {
+            const liquidGL = (window as any).liquidGL;
+            if (typeof liquidGL !== 'function') {
+                console.warn('liquidGL is unavailable; topbar uses the CSS fallback.');
+                return;
+            }
+
+            liquidGL({
+                target: '#liquid-topbar',
+                snapshot: '#site-background',
+                resolution: Math.min(window.devicePixelRatio || 1, 1.5),
+                refraction: 0.022,
+                bevelDepth: 0.09,
+                bevelWidth: 0.18,
+                frost: 0,
+                shadow: false,
+                specular: true,
+                reveal: 'none',
+                tilt: false,
+                magnify: 1.018
+            });
+
+            window.setTimeout(() => this.refreshLiquidSnapshot(), 180);
+        });
+    }
+
+    ngOnDestroy(): void {
+        if (isPlatformBrowser(this.platformId)) {
+            window.removeEventListener('site-background-ready', this.backgroundReadyHandler);
+        }
+    }
+
+    private refreshLiquidSnapshot(): void {
+        if (!isPlatformBrowser(this.platformId)) return;
+        window.setTimeout(() => {
+            (window as any).__liquidGLRenderer__?.captureSnapshot?.();
+        }, 60);
     }
 
 }
