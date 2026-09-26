@@ -57,7 +57,10 @@ export class SlidingAncestorRheostatComponent {
         }
 
         if (nextIndex > this.selectedIndex) {
-            this.showFeedback(ANCESTOR_FORWARD_HINT, 'forward');
+            this.showFeedback(
+                ANCESTOR_FORWARD_HINT[nextIndex] ?? '祖气上升中，继续往前。',
+                'forward'
+            );
         }
 
         const changed = nextIndex !== this.selectedIndex;
