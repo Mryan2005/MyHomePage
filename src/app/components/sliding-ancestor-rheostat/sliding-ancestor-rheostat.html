@@ -38,6 +38,16 @@
             <div class="rank-summary rank-summary-left">
                 <span>当前状态</span>
                 <strong>{{ currentStatus }}</strong>
+                <div
+                    class="status-progress"
+                    role="progressbar"
+                    aria-label="祖气进度"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    [attr.aria-valuenow]="progress"
+                >
+                    <span [style.width.%]="progress"></span>
+                </div>
             </div>
             <div class="rank-title-line">
                 <h3>{{ selectedRank.name }}</h3>
