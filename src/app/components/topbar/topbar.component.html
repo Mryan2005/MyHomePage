@@ -1,5 +1,6 @@
 <header id="topbar">
-    <div id="liquid-topbar" class="bar items-center liquid-refraction">
+    <div id="liquid-topbar" class="bar liquid-refraction" aria-hidden="true"></div>
+    <div class="bar bar-content items-center">
         <div class="barItemBox" id="barTitleBox" (click)="clickBarButton1('Home')">
             <div class="bar_title bar_p">Home</div>
         </div>
@@ -42,6 +43,14 @@
             </div>
         }
         @if (isTaskPage) {
+            <label
+                class="barItemBox rheostat-button"
+                for="rheostat-toggle"
+                role="button"
+                tabindex="0"
+            >
+                <span class="bar_p">滑动变祖器</span>
+            </label>
             <div
                 class="barItemBox topbar-filter"
                 [class.active]="websitePramas.showPause"
