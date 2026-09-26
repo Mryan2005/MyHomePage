@@ -10,7 +10,7 @@ export interface AncestorRank {
 export const ANCESTOR_CURRENT_STATE = '还在干这行，不好不坏';
 export const ANCESTOR_CURRENT_VIBE = 2;
 
-// 是否允许把滑片往回拉。设为 false 时，向左移动会保持在原档位。
+// 是否允许拉到低于“当前风评”档位的位置。设为 false 时，滑片最低只能回到当前风评档位。
 export const ANCESTOR_ALLOW_PULL_BACK = false;
 
 // 禁止回拉时会随机显示其中一条提示。
