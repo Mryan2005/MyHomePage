@@ -557,3 +557,42 @@
     color: rgba(255, 255, 255, .96);
     text-shadow: 0 1px 3px rgba(6, 18, 38, .78), 0 0 10px rgba(6, 18, 38, .28);
 }
+
+/* Chromium/Edge-safe optical layer. It uses the exact same fixed wallpaper as
+   the page and physically displaces its pixels, so refraction remains visible
+   even when WebGL is unavailable or hardware acceleration is disabled. */
+#liquid-topbar {
+    overflow: visible;
+}
+
+#liquid-topbar::before {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background-color: transparent;
+    background-image: var(--site-background-image);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    -webkit-mask: none;
+    mask: none;
+    filter: url('#liquid-glass-refraction') saturate(1.12) contrast(1.035);
+    clip-path: inset(
+        var(--liquid-topbar-top, 8px)
+        var(--liquid-topbar-right, 10px)
+        var(--liquid-topbar-bottom, calc(100vh - 52px))
+        var(--liquid-topbar-left, 10px)
+        round 18px
+    );
+    opacity: .96;
+}
+
+#liquid-topbar::after {
+    opacity: .58;
+    mix-blend-mode: screen;
+}
