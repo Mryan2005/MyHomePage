@@ -20,7 +20,7 @@ export class SlidingAncestorRheostatComponent {
     @Output() closed = new EventEmitter<void>();
 
     readonly ranks: AncestorRank[] = ANCESTOR_RANKS;
-    readonly currentStatus = ANCESTOR_CURRENT_STATE;
+    currentStatus = ANCESTOR_CURRENT_STATE;
     readonly currentVibeIndex = Math.max(0, Math.min(ANCESTOR_RANKS.length - 1, ANCESTOR_CURRENT_VIBE));
     readonly currentVibe = ANCESTOR_RANKS[this.currentVibeIndex];
 
@@ -56,15 +56,19 @@ export class SlidingAncestorRheostatComponent {
             return false;
         }
 
-        if (nextIndex > this.selectedIndex) {
-            this.showFeedback(
-                ANCESTOR_FORWARD_HINT[nextIndex] ?? '祖气上升中，继续往前。',
-                'forward'
-            );
+        const changed = nextIndex !== this.selectedIndex;
+        const wasForward = nextIndex > this.selectedIndex;
+        this.selectedIndex = nextIndex;
+
+        const status = nextIndex === this.currentVibeIndex
+            ? ANCESTOR_CURRENT_STATE
+            : ANCESTOR_FORWARD_HINT[nextIndex] ?? ANCESTOR_CURRENT_STATE;
+        this.currentStatus = status;
+
+        if (wasForward) {
+            this.showFeedback(status, 'forward');
         }
 
-        const changed = nextIndex !== this.selectedIndex;
-        this.selectedIndex = nextIndex;
         return changed;
     }
 
