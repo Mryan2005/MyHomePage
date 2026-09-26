@@ -1,11 +1,14 @@
-<div class="left-column">
-    <img src="{{ avatarService.avatarUrl }}" alt="个人图片" class="profile-image">
-</div>
+<section id="profile-liquid-glass" class="profile-layout liquid-refraction" aria-labelledby="profile-title">
+    <aside class="profile-media">
+        <img src="{{ avatarService.avatarUrl }}" alt="个人图片" class="profile-image">
+    </aside>
 
-<div class="right-column liquid-refraction">
-    <div class="glass"></div>
-    <div class="content" data-liquid-ignore>
-        <h1 class="text-xl mb-2">曾经有一个人</h1>
+    <section class="profile-content-panel">
+        <article class="content" data-liquid-ignore>
+        <header class="profile-heading">
+            <p class="profile-kicker">ABOUT ME</p>
+            <h1 id="profile-title" class="text-xl">曾经有一个人</h1>
+        </header>
 
         <p class="intro-text text-base">
         这个人自幼便对各种新奇事物抱有浓厚兴趣，尤其喜欢拆解事物背后的运行逻辑。后来互联网迅速发展，他恰好成长于这一时代，于是很早便接触计算机与编程，并逐渐将其发展为长期的兴趣。
@@ -437,5 +440,6 @@
             </span>
             的生平介绍
         </p>
-    </div>
-</div>
+        </article>
+    </section>
+</section>
