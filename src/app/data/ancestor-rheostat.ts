@@ -10,6 +10,19 @@ export interface AncestorRank {
 export const ANCESTOR_CURRENT_STATE = '还在干这行，不好不坏';
 export const ANCESTOR_CURRENT_VIBE = 2;
 
+// 是否允许把滑片往回拉。设为 false 时，向左移动会保持在原档位。
+export const ANCESTOR_ALLOW_PULL_BACK = false;
+
+// 禁止回拉时会随机显示其中一条提示。
+export const ANCESTOR_BLOCKED_BACKWARD_MESSAGES = [
+    '祖气不可逆，不能往回拉。',
+    '已登上的台阶，不能假装没走过。',
+    '历史的车轮不允许倒转。'
+];
+
+// 每次成功往前拉时显示的提示。
+export const ANCESTOR_FORWARD_HINT = '祖气上升中，继续往前。';
+
 export const ANCESTOR_RANKS: AncestorRank[] = [
     {level: 0, name: '小难閑客', description: '一无是处', image: '/assets/images/ancestor-ranks/rank-0.png', accent: '#7aa0c8'},
     {level: 1, name: '牢閑客', description: '毫无成就', image: '/assets/images/ancestor-ranks/rank-1.png', accent: '#c45a4a'},
