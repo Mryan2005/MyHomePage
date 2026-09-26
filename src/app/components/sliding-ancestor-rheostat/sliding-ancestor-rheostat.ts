@@ -1,7 +1,10 @@
 import {Component, EventEmitter, HostListener, Output} from '@angular/core';
 import {
+    ANCESTOR_ALLOW_PULL_BACK,
+    ANCESTOR_BLOCKED_BACKWARD_MESSAGES,
     ANCESTOR_CURRENT_STATE,
     ANCESTOR_CURRENT_VIBE,
+    ANCESTOR_FORWARD_HINT,
     ANCESTOR_RANKS,
     AncestorRank
 } from '../../data/ancestor-rheostat';
@@ -22,6 +25,9 @@ export class SlidingAncestorRheostatComponent {
     readonly currentVibe = ANCESTOR_RANKS[this.currentVibeIndex];
 
     selectedIndex = this.currentVibeIndex;
+    feedback = '';
+    feedbackKind: 'blocked' | 'forward' = 'forward';
+    private feedbackTimer?: ReturnType<typeof setTimeout>;
 
     get selectedRank(): AncestorRank {
         return this.ranks[this.selectedIndex];
@@ -40,12 +46,39 @@ export class SlidingAncestorRheostatComponent {
         return `calc(${this.progress}% + ${edgeOffset}px)`;
     }
 
-    selectRank(index: number): void {
-        this.selectedIndex = Math.max(0, Math.min(this.ranks.length - 1, Math.round(index)));
+    selectRank(index: number): boolean {
+        const nextIndex = Math.max(0, Math.min(this.ranks.length - 1, Math.round(index)));
+
+        if (nextIndex < this.selectedIndex && !ANCESTOR_ALLOW_PULL_BACK) {
+            const messages = ANCESTOR_BLOCKED_BACKWARD_MESSAGES;
+            const message = messages[Math.floor(Math.random() * messages.length)] ?? '不能往回拉。';
+            this.showFeedback(message, 'blocked');
+            return false;
+        }
+
+        if (nextIndex > this.selectedIndex) {
+            this.showFeedback(ANCESTOR_FORWARD_HINT, 'forward');
+        }
+
+        const changed = nextIndex !== this.selectedIndex;
+        this.selectedIndex = nextIndex;
+        return changed;
     }
 
     onRangeInput(event: Event): void {
-        this.selectRank(Number((event.target as HTMLInputElement).value));
+        const input = event.target as HTMLInputElement;
+        const previousIndex = this.selectedIndex;
+        this.selectRank(Number(input.value));
+        if (this.selectedIndex === previousIndex) {
+            input.value = String(previousIndex);
+        }
+    }
+
+    private showFeedback(message: string, kind: 'blocked' | 'forward'): void {
+        this.feedback = message;
+        this.feedbackKind = kind;
+        if (this.feedbackTimer) clearTimeout(this.feedbackTimer);
+        this.feedbackTimer = setTimeout(() => this.feedback = '', 2400);
     }
 
     close(): void {

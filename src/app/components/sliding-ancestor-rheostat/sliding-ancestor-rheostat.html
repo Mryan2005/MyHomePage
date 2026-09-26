@@ -89,5 +89,11 @@
             </div>
             <p class="rheostat-hint">← 滑动变祖 · 越往右祖气越浓 →</p>
         </section>
+
+        @if (feedback) {
+            <p class="rheostat-feedback" [class.is-blocked]="feedbackKind === 'blocked'" role="status">
+                {{ feedback }}
+            </p>
+        }
     </section>
 </div>
