@@ -1,4 +1,4 @@
-import {Component, Input, AfterViewInit} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy} from '@angular/core';
 import {AvatarService} from '../../config/avatar';
 import {WebsitePramasService} from '../../services/Website-pramas';
 import {OnInit} from '@angular/core';
@@ -12,10 +12,12 @@ import {Router} from '@angular/router';
     templateUrl: './sub-introduce-myself-window.html',
     styleUrl: './sub-introduce-myself-window.scss',
 })
-export class SubIntroduceMyselfWindow implements OnInit, AfterViewInit {
+export class SubIntroduceMyselfWindow implements OnInit, AfterViewInit, OnDestroy {
     public currentDisplayPart: string = 'Home';
     public adam_smith_avatar: string = '/assets/images/7646049331687920481(20260531-213655).png'
     public ciallo_image = ['/assets/images/ciallo/Murasame_ciallo.png', '/assets/images/ciallo/Yoshino_Ciallo.png'];
+    private profileLensInitialized = false;
+    private readonly syncLayoutBoundsHandler = () => this.syncLayoutBounds();
 
     openPortal() {
         this.websitePramas.currentDisplayPart = 'Works';
@@ -57,43 +59,51 @@ export class SubIntroduceMyselfWindow implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
+        window.addEventListener('resize', this.syncLayoutBoundsHandler, {passive: true});
+        window.visualViewport?.addEventListener('resize', this.syncLayoutBoundsHandler, {passive: true});
+
         requestAnimationFrame(() => {
-            window.addEventListener('load', () => {
-                const liquid = (window as any).liquidGL;
-
-                if (!liquid) {
-                    console.error("liquidGL 未加载");
-                    return;
-                }
-
-                liquid({
-
-                    target: ".glass",
-
-                    snapshot: "body",
-
-                    resolution: 2,
-
-                    refraction: 0.05,
-
-                    bevelDepth: 0.08,
-
-                    bevelWidth: 0.15,
-
-                    frost: 2,
-
-                    shadow: true,
-
-                    specular: true,
-
-                    reveal: "fade",
-
-                    tilt: false,
-
-                    magnify: 1
-
-                });
-            });
+            this.syncLayoutBounds();
+            this.initializeProfileLens();
         });
+    }
+
+    ngOnDestroy(): void {
+        window.removeEventListener('resize', this.syncLayoutBoundsHandler);
+        window.visualViewport?.removeEventListener('resize', this.syncLayoutBoundsHandler);
+    }
+
+    private initializeProfileLens(): void {
+        if (this.profileLensInitialized) return;
+        const liquid = (window as any).liquidGL;
+        const target = document.querySelector('#profile-liquid-glass');
+        if (typeof liquid !== 'function' || !target) return;
+
+        this.profileLensInitialized = true;
+        liquid({
+            target: '#profile-liquid-glass',
+            snapshot: '#site-background',
+            resolution: Math.min(window.devicePixelRatio || 1, 1.5),
+            refraction: 0.035,
+            bevelDepth: 0.12,
+            bevelWidth: 0.22,
+            frost: 0,
+            shadow: false,
+            specular: true,
+            reveal: 'none',
+            tilt: false,
+            magnify: 1.025
+        });
+    }
+
+    private syncLayoutBounds(): void {
+        const layout = document.querySelector<HTMLElement>('#profile-liquid-glass');
+        if (!layout) return;
+        const rect = layout.getBoundingClientRect();
+
+        layout.style.setProperty('--profile-top', `${Math.max(0, rect.top)}px`);
+        layout.style.setProperty('--profile-right', `${Math.max(0, window.innerWidth - rect.right)}px`);
+        layout.style.setProperty('--profile-bottom', `${Math.max(0, window.innerHeight - rect.bottom)}px`);
+        layout.style.setProperty('--profile-left', `${Math.max(0, rect.left)}px`);
     }
 }

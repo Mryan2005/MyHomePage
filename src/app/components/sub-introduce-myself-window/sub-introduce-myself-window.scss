@@ -1,275 +1,269 @@
 :host {
-    // 内部显示（水平+垂直居中）
-    position: fixed;
-    top: 40px;               /* 相当于 top:0; right:0; bottom:0; left:0; */
-    display: flex;
-    justify-content: center; /* 水平居中 */
-    align-items: center;     /* 垂直居中 */
+    position: absolute;
+    inset: 52px 0 122px;
+    width: auto !important;
+    height: auto !important;
+    box-sizing: border-box;
+    z-index: 10;
+    display: grid;
+    place-items: center;
+    min-width: 0;
+    min-height: 0;
+    padding: clamp(16px, 3vh, 32px) clamp(18px, 5vw, 72px) 10px;
+    overflow: hidden;
+    animation: windowSlideIn .55s ease-out;
+}
 
+.profile-layout {
+    display: grid;
+    grid-template-columns: minmax(250px, .78fr) minmax(0, 1.55fr);
+    width: min(1180px, 100%);
+    height: min(760px, 100%);
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+    border: 1px solid var(--liquid-stroke);
+    border-radius: 30px;
+    background: rgba(255, 255, 255, .035);
+    box-shadow: var(--liquid-shadow), inset 0 1px 0 rgba(255, 255, 255, .82);
+    isolation: isolate;
+}
+
+/* Edge-compatible refraction fallback. The full viewport wallpaper is clipped
+   to this component, so its pixels remain aligned exactly with the page. */
+.profile-layout::before {
+    position: fixed;
+    inset: 0;
     width: 100vw;
     height: 100vh;
-
-    // 窗口样式
-    border-radius: 12px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 阴影效果 */
-
-    // 边框效果
-    border: 1px solid rgba(255, 255, 255, 0.2);
-
-    // 确保内容不会溢出
-    overflow-x: hidden;
-    overflow-y: hidden; /* 允许滚动 */
-
-    // 动画效果
-    animation: windowSlideIn 0.6s ease-out;
-
-    // 确保 z-index 足够高，避免被其他元素覆盖
-    z-index: 1000;
-}
-
-.left-column {
-    width: 30%; /* 左栏宽度 */
-    height: 75%; /* 高度自适应 */
-    position: relative;
-    top: -45px;
-    background-color: #f0f0f0; /* 左栏背景色 */
-    box-sizing: border-box;
-    display: flex; /* 用于居中图片 */
-    flex-direction: column; /* 使内容垂直排列 */
-    align-items: center; /* 水平居中 */
-    justify-content: flex-start; /* 从顶部开始对齐 */
-    border-bottom-left-radius: 10px;
-    border-top-left-radius: 10px; /* 左栏圆角 */
-}
-
-.profile-image {
-    width: 100%; /* 图片宽度相对于左栏 */
-    height: 100%; /* 图片宽度相对于左栏 */
-    border-bottom-left-radius: 10px;
-    border-top-left-radius: 10px; /* 左栏圆角 */
-    margin-bottom: 20px; /* 图片下方间距 */
-}
-
-.right-column {
-    width: 50%; /* 右栏宽度 */
-    height: 75%; /* 高度自适应 */
-    position: relative;
-    top: -45px;
-    backdrop-filter: blur(2px);
-    box-sizing: border-box;
-    overflow-x: hidden;
-    overflow-y: auto; /* 允许右栏内容滚动 */
-    border-bottom-right-radius: 10px;
-    border-top-right-radius: 10px; /* 右栏圆角 */
-
-    &::-webkit-scrollbar {
-        width: 8px; /* 滚动条宽度 */
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background-color: rgba(10, 132, 255, .42); /* 滚动条颜色 */
-        border: 2px solid transparent;
-        background-clip: padding-box;
-        border-radius: 10px;
-    }
-
-    &::-webkit-scrollbar-track {
-        background-color: transparent;
-        backdrop-filter: blur(24px); /* 毛玻璃模糊效果 */
-        border-radius: 5px; /* 防止轨道部分溢出 */
-        margin: 15px; /* 添加内边距，避免轨道占满整个滚动条区域 */
-    }
-}
-
-.intro-text {
-
-    padding: 6px;
-
-    border-radius: 12px;
-
-    transition:
-        background .2s ease,
-        box-shadow .2s ease;
-}
-
-.intro-text:hover {
-
-    background:
-        rgba(255,255,255,.82);
-
-    box-shadow:
-        0 4px 14px rgba(0,0,0,.08);
-}
-
-.portal-link {
-  position: relative;
-
-  background: linear-gradient(90deg, #ff7e5f, #feb47b);
-  background-clip: text;
-  -webkit-background-clip: text;
-
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-
-  font-weight: 700;
-}
-
-.portal-link::after {
-  content: '';
-
-  position: absolute;
-
-  left: 0;
-  bottom: -2px;
-
-  width: 0;
-  height: 2px;
-
-  background: linear-gradient(
-    90deg,
-    #ff7e5f,
-    #feb47b
-  );
-
-  transition: width .25s ease;
-}
-
-.portal-link:hover::after {
-  width: 100%;
-}
-
-/* 响应式设计：在小屏幕上堆叠显示 */
-@media (max-width: 768px) {
-    .left-column, .right-column {
-        width: 100%;
-        height: auto; /* 高度自适应 */
-    }
-    .left-column {
-        justify-content: center; /* 在小屏幕上垂直居中图片 */
-    }
-    .profile-image {
-        margin-bottom: 10px; /* 调整小屏幕下的间距 */
-    }
-}
-
-.glass {
-  position: absolute;
-  inset: 0;
-
-  height: max-content;
-
-  background: linear-gradient(
-      160deg,
-      rgba(255, 255, 255, .34),
-      rgba(255, 255, 255, .16)
-  );
-  border: 1px solid rgba(255, 255, 255, .4);
-  box-shadow: 0 12px 30px rgba(72, 104, 141, .14);
-
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-
-  z-index: 1;
-}
-
-.content {
-  position: relative;
-  z-index: 2;
-
-  width: 100%;
-  height: 100%;
-
-  padding: 24px;
-  box-sizing: border-box;
-}
-
-/* Liquid Glass profile card */
-:host {
-    top: 52px;
-    height: calc(100dvh - 52px);
-    padding: 5vh 5vw 12vh;
+    padding: 0;
     border: 0;
     border-radius: 0;
-    box-shadow: none;
-    z-index: 10;
+    background-color: transparent;
+    background-image: var(--site-background-image);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    -webkit-mask: none;
+    mask: none;
+    filter: url('#liquid-glass-refraction') saturate(1.1) contrast(1.025);
+    clip-path: inset(
+        var(--profile-top, 80px)
+        var(--profile-right, 5vw)
+        var(--profile-bottom, 100px)
+        var(--profile-left, 5vw)
+        round 30px
+    );
+    opacity: .94;
 }
 
-.left-column,
-.right-column {
-    top: auto;
-    height: min(74vh, 760px);
+.profile-layout::after {
+    z-index: 1;
+    opacity: .48;
+    mix-blend-mode: screen;
 }
 
-.left-column {
-    width: min(31%, 390px);
-    padding: 12px 0 12px 12px;
-    border: 1px solid var(--liquid-stroke);
-    border-right: 0;
-    border-radius: var(--liquid-radius) 0 0 var(--liquid-radius);
-    background: linear-gradient(145deg, rgba(255, 255, 255, .58), rgba(255, 255, 255, .16));
-    box-shadow: -18px 25px 60px rgba(18, 35, 64, .17), inset 0 1px 0 rgba(255, 255, 255, .88);
-    backdrop-filter: var(--liquid-blur);
-    -webkit-backdrop-filter: var(--liquid-blur);
+.profile-media,
+.profile-content-panel {
+    position: relative;
+    z-index: 2;
+    min-width: 0;
+    min-height: 0;
+    background: rgba(255, 255, 255, .055);
+}
+
+.profile-media {
+    padding: 12px;
+    border-right: 1px solid rgba(255, 255, 255, .40);
 }
 
 .profile-image {
+    display: block;
     width: 100%;
     height: 100%;
     margin: 0;
     object-fit: cover;
-    border: 1px solid rgba(255, 255, 255, .62);
-    border-radius: 20px 0 0 20px;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .65), 0 12px 32px rgba(18, 35, 64, .14);
+    object-position: center;
+    border: 0;
+    border-radius: 20px 8px 8px 20px;
+    box-shadow: 0 18px 42px rgba(18, 35, 64, .18);
 }
 
-.right-column {
-    width: min(55%, 760px);
-    border: 1px solid var(--liquid-stroke);
-    border-left-color: rgba(255, 255, 255, .24);
-    border-radius: 0 var(--liquid-radius) var(--liquid-radius) 0;
+.profile-content-panel {
+    overflow: hidden;
     background:
-        radial-gradient(circle at 90% 5%, rgba(255, 255, 255, .28), transparent 30%),
-        linear-gradient(145deg, rgba(255, 255, 255, .24), rgba(207, 235, 255, .10) 62%, rgba(255, 255, 255, .16));
-    box-shadow: 22px 25px 60px rgba(18, 35, 64, .17), inset 0 1px 0 rgba(255, 255, 255, .88);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-}
-
-.glass {
-    display: none;
+        radial-gradient(circle at 92% 4%, rgba(255, 255, 255, .26), transparent 30%),
+        linear-gradient(145deg, rgba(255, 255, 255, .18), rgba(207, 235, 255, .10));
 }
 
 .content {
-    padding: 30px 34px;
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    padding: clamp(24px, 3.2vw, 42px);
+    overflow-x: hidden;
+    overflow-y: auto;
+    box-sizing: border-box;
     border: 0;
     border-radius: 0;
     outline: 0;
-    box-shadow: none;
     background: transparent;
+    box-shadow: none;
     color: #10213a;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, .32);
+    text-shadow: 0 1px 1px rgba(255, 255, 255, .76), 0 0 10px rgba(255, 255, 255, .28);
+    scrollbar-gutter: stable;
 }
-.content h1 { letter-spacing: -.035em; }
+
+.profile-heading {
+    margin: 0 0 12px;
+    padding: 0 10px;
+}
+
+.profile-kicker {
+    margin: 0 0 4px;
+    color: rgba(16, 33, 58, .60);
+    font-size: 11px;
+    font-weight: 760;
+    letter-spacing: .16em;
+}
+
+.profile-heading h1 {
+    margin: 0;
+    color: #10213a;
+    font-size: clamp(25px, 2.4vw, 36px);
+    line-height: 1.15;
+    letter-spacing: -.04em;
+}
 
 .intro-text {
-    border: 1px solid transparent;
-    transition: transform .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
+    margin: 0;
+    padding: 9px 10px;
+    border: 0;
+    border-radius: 12px;
+    line-height: 1.75;
+    transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
 }
 
 .intro-text:hover {
     transform: translateX(2px);
-    border-color: rgba(255, 255, 255, .58);
-    background: linear-gradient(135deg, rgba(255, 255, 255, .64), rgba(255, 255, 255, .26));
-    box-shadow: 0 8px 22px rgba(22, 52, 88, .10), inset 0 1px 0 rgba(255, 255, 255, .88);
+    background: linear-gradient(135deg, rgba(255, 255, 255, .52), rgba(255, 255, 255, .16));
+    box-shadow: 0 8px 22px rgba(22, 52, 88, .08), inset 0 1px 0 rgba(255, 255, 255, .70);
 }
 
-.right-column::-webkit-scrollbar-thumb { background: rgba(10, 132, 255, .42); }
-.right-column::-webkit-scrollbar-track { background: transparent; }
+.portal-link {
+    position: relative;
+    font-weight: 750;
+    cursor: pointer;
+    background: linear-gradient(90deg, #ff765c, #ffad67);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
 
-@media (max-width: 768px) {
-    :host { align-items: flex-start; padding: 24px 14px 100px; overflow-y: auto; }
-    .left-column, .right-column { top: auto; width: 100%; height: auto; }
-    .left-column { display: none; }
-    .right-column { min-height: 74vh; border: 1px solid var(--liquid-stroke); border-radius: 24px; }
-    .content { padding: 24px 20px; }
+.portal-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 100%;
+    bottom: -2px;
+    height: 2px;
+    background: linear-gradient(90deg, #ff765c, #ffad67);
+    transition: right .25s ease;
+}
+
+.portal-link:hover::after {
+    right: 0;
+}
+
+.content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.content::-webkit-scrollbar-thumb {
+    border: 2px solid transparent;
+    border-radius: 999px;
+    background: rgba(10, 132, 255, .42);
+    background-clip: padding-box;
+}
+
+.content::-webkit-scrollbar-track {
+    margin: 18px 0;
+    background: transparent;
+}
+
+@media (max-width: 900px) {
+    :host {
+        padding-inline: 18px;
+    }
+
+    .profile-layout {
+        grid-template-columns: minmax(220px, .72fr) minmax(0, 1.28fr);
+    }
+}
+
+@media (max-width: 700px) {
+    :host {
+        inset: 52px 0 52px;
+        display: block;
+        padding: 16px 12px 104px;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .profile-layout {
+        grid-template-columns: 1fr;
+        width: 100%;
+        height: auto;
+        overflow: visible;
+        border-radius: 24px;
+    }
+
+    .profile-media {
+        height: clamp(220px, 44vh, 340px);
+        padding: 9px;
+        border-right: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, .40);
+    }
+
+    .profile-image {
+        border-radius: 17px 17px 8px 8px;
+    }
+
+    .profile-content-panel {
+        overflow: visible;
+    }
+
+    .content {
+        height: auto;
+        padding: 24px 18px 30px;
+        overflow: visible;
+        scrollbar-gutter: auto;
+    }
+
+    .profile-heading,
+    .intro-text {
+        padding-inline: 4px;
+    }
+}
+
+@media (max-height: 680px) and (min-width: 701px) {
+    :host {
+        bottom: 116px;
+        padding-top: 10px;
+        padding-bottom: 8px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    :host {
+        animation: none;
+    }
 }
