@@ -22,30 +22,39 @@
                 'assets/images/bg8.jpg',
             ];
             const randomImage = images[Math.floor(Math.random() * images.length)];
+            const background = document.getElementById('site-background');
+            if (background) {
+                background.style.backgroundImage = `url('${randomImage}')`;
+            }
             const img = new Image();
             img.src = randomImage;
             img.onload = () => {
                 const body = document.body;
-                
-                body.style.backgroundImage = `url('${randomImage}')`;
-                body.style.backgroundPosition = 'center center';   // 水平垂直居中
-                body.style.backgroundRepeat = 'no-repeat';          // 不重复
-                body.style.backgroundSize = 'cover';                // 铺满整个视口
-                body.style.backgroundAttachment = 'fixed';         // 可选：固定背景（视差效果）
                 body.style.minHeight = '100vh';                     // 确保至少占满一屏
                 body.style.margin = '0';                            // 去掉默认边距
+                window.dispatchEvent(new Event('site-background-ready'));
             };
         });
     </script>
     <style>
         body {
-            background-size: cover;
+            background: #b9dfff;
+        }
+
+        #site-background {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background-position: center center;
             background-repeat: no-repeat;
+            background-size: cover;
             transition: background-image 0.5s ease-in-out;
         }
     </style>
 </head>
 <body>
+    <div id="site-background" aria-hidden="true"></div>
     <app-root></app-root>
 </body>
 </html>

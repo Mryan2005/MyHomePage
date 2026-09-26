@@ -5,6 +5,8 @@
     height: 100% !important;
     min-height: 100dvh;
     display: block;
+    position: relative;
+    z-index: 1;
     isolation: isolate;
 }
 
