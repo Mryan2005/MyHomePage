@@ -241,6 +241,11 @@
 
 .content {
     padding: 30px 34px;
+    border: 0;
+    border-radius: 0;
+    outline: 0;
+    box-shadow: none;
+    background: transparent;
     color: #10213a;
     text-shadow: 0 1px 0 rgba(255, 255, 255, .32);
 }
