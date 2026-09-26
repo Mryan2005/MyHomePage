@@ -236,6 +236,23 @@
     font-size: clamp(13px, 1.6vw, 18px);
 }
 
+.status-progress {
+    width: min(100%, 230px);
+    height: 5px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: rgba(239, 230, 214, .18);
+}
+
+.status-progress span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #7897ff, var(--rank-accent));
+    box-shadow: 0 0 10px color-mix(in srgb, var(--rank-accent) 70%, transparent);
+    transition: width .28s ease, background .28s ease;
+}
+
 .rank-summary-right { justify-items: end; }
 
 .rheostat-instrument { flex: 0 0 auto; user-select: none; }

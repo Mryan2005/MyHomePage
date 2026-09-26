@@ -49,10 +49,10 @@ export class SlidingAncestorRheostatComponent {
     selectRank(index: number): boolean {
         const nextIndex = Math.max(0, Math.min(this.ranks.length - 1, Math.round(index)));
 
-        if (nextIndex < this.selectedIndex && !ANCESTOR_ALLOW_PULL_BACK) {
+        if (nextIndex < this.currentVibeIndex && !ANCESTOR_ALLOW_PULL_BACK) {
             const messages = ANCESTOR_BLOCKED_BACKWARD_MESSAGES;
             const message = messages[Math.floor(Math.random() * messages.length)] ?? '不能往回拉。';
-            this.showFeedback(message, 'blocked');
+            window.alert(message);
             return false;
         }
 
