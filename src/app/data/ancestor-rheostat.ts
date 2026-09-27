@@ -21,7 +21,7 @@ export const ANCESTOR_BLOCKED_BACKWARD_MESSAGES = [
 export const ANCESTOR_FORWARD_HINT: Record<number, string> = {
     0: '被考研试题折磨得死去活来',
     1: '勉强上岸',
-    2: '阿海，未来还请多多指教了',
+    2: '阿海，今后也请多多指教啦',
     3: '该弃code炒股了',
     4: '立足港沪，神性初显。',
     5: '一代股神，尽显龙象'
