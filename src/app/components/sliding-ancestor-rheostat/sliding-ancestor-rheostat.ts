@@ -54,22 +54,26 @@ export class SlidingAncestorRheostatComponent {
     selectRank(index: number): boolean {
         const nextIndex = Math.max(0, Math.min(this.ranks.length - 1, Math.round(index)));
 
-        if (nextIndex < this.selectedIndex && !ANCESTOR_ALLOW_PULL_BACK) {
+        if (nextIndex < this.currentVibeIndex && !ANCESTOR_ALLOW_PULL_BACK) {
             const messages = ANCESTOR_BLOCKED_BACKWARD_MESSAGES;
             const message = messages[Math.floor(Math.random() * messages.length)] ?? '不能往回拉。';
-            this.showFeedback(message, 'blocked');
+            window.alert(message);
             return false;
         }
 
-        if (nextIndex > this.selectedIndex) {
-            this.showFeedback(
-                ANCESTOR_FORWARD_HINT[nextIndex] ?? '祖气上升中，继续往前。',
-                'forward'
-            );
+        const changed = nextIndex !== this.selectedIndex;
+        const wasForward = nextIndex > this.selectedIndex;
+        this.selectedIndex = nextIndex;
+
+        const status = nextIndex === this.currentVibeIndex
+            ? ANCESTOR_CURRENT_STATE
+            : ANCESTOR_FORWARD_HINT[nextIndex] ?? ANCESTOR_CURRENT_STATE;
+        this.currentStatus = status;
+
+        if (wasForward) {
+            this.showFeedback(status, 'forward');
         }
 
-        const changed = nextIndex !== this.selectedIndex;
-        this.selectedIndex = nextIndex;
         return changed;
     }
 
