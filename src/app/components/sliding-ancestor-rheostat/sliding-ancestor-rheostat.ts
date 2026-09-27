@@ -3,7 +3,6 @@ import {
     ANCESTOR_ALLOW_PULL_BACK,
     ANCESTOR_BLOCKED_BACKWARD_MESSAGES,
     ANCESTOR_CURRENT_STATE,
-    ANCESTOR_CURRENT_VIBE,
     ANCESTOR_FORWARD_HINT,
     ANCESTOR_RANKS,
     AncestorRank
@@ -21,7 +20,13 @@ export class SlidingAncestorRheostatComponent {
 
     readonly ranks: AncestorRank[] = ANCESTOR_RANKS;
     readonly currentStatus = ANCESTOR_CURRENT_STATE;
-    readonly currentVibeIndex = Math.max(0, Math.min(ANCESTOR_RANKS.length - 1, ANCESTOR_CURRENT_VIBE));
+    readonly currentVibeIndex = Math.max(
+        0,
+        Math.min(
+            ANCESTOR_RANKS.length - 1,
+            Number(Object.entries(ANCESTOR_FORWARD_HINT).find(([, hint]) => hint === this.currentStatus)?.[0] ?? 0)
+        )
+    );
     readonly currentVibe = ANCESTOR_RANKS[this.currentVibeIndex];
 
     selectedIndex = this.currentVibeIndex;

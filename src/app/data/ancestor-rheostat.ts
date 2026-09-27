@@ -6,9 +6,8 @@ export interface AncestorRank {
     accent: string;
 }
 
-// 当前状态和当前风评可在这里独立配置。
+// 当前状态会匹配 ANCESTOR_FORWARD_HINT 中的提示，以确定初始风评档位。
 export const ANCESTOR_CURRENT_STATE = '还在干这行，不好不坏';
-export const ANCESTOR_CURRENT_VIBE = 2;
 
 // 是否允许把滑片往回拉。设为 false 时，向左移动会保持在原档位。
 export const ANCESTOR_ALLOW_PULL_BACK = false;
