@@ -2,7 +2,7 @@ import {Component, EventEmitter, HostListener, Output} from '@angular/core';
 import {
     ANCESTOR_ALLOW_PULL_BACK,
     ANCESTOR_BLOCKED_BACKWARD_MESSAGES,
-    ANCESTOR_CURRENT_STATE,
+    ANCESTOR_CURRENT_VIBE,
     ANCESTOR_FORWARD_HINT,
     ANCESTOR_RANKS,
     AncestorRank
@@ -19,14 +19,8 @@ export class SlidingAncestorRheostatComponent {
     @Output() closed = new EventEmitter<void>();
 
     readonly ranks: AncestorRank[] = ANCESTOR_RANKS;
-    readonly currentStatus = ANCESTOR_CURRENT_STATE;
-    readonly currentVibeIndex = Math.max(
-        0,
-        Math.min(
-            ANCESTOR_RANKS.length - 1,
-            Number(Object.entries(ANCESTOR_FORWARD_HINT).find(([, hint]) => hint === this.currentStatus)?.[0] ?? 0)
-        )
-    );
+    readonly currentVibeIndex = Math.max(0, Math.min(ANCESTOR_RANKS.length - 1, ANCESTOR_CURRENT_VIBE));
+    currentStatus = ANCESTOR_FORWARD_HINT[this.currentVibeIndex] ?? '';
     readonly currentVibe = ANCESTOR_RANKS[this.currentVibeIndex];
 
     selectedIndex = this.currentVibeIndex;
@@ -66,8 +60,8 @@ export class SlidingAncestorRheostatComponent {
         this.selectedIndex = nextIndex;
 
         const status = nextIndex === this.currentVibeIndex
-            ? ANCESTOR_CURRENT_STATE
-            : ANCESTOR_FORWARD_HINT[nextIndex] ?? ANCESTOR_CURRENT_STATE;
+            ? ANCESTOR_FORWARD_HINT[this.currentVibeIndex] ?? ''
+            : ANCESTOR_FORWARD_HINT[nextIndex] ?? this.currentStatus;
         this.currentStatus = status;
 
         if (wasForward) {
