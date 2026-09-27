@@ -1,4 +1,4 @@
-import {Component, EventEmitter, HostListener, Output} from '@angular/core';
+import {afterNextRender, Component, EventEmitter, HostListener, Output} from '@angular/core';
 import {
     ANCESTOR_ALLOW_PULL_BACK,
     ANCESTOR_BLOCKED_BACKWARD_MESSAGES,
@@ -26,6 +26,19 @@ export class SlidingAncestorRheostatComponent {
     feedback = '';
     feedbackKind: 'blocked' | 'forward' = 'forward';
     private feedbackTimer?: ReturnType<typeof setTimeout>;
+    private readonly preloadedImages: HTMLImageElement[] = [];
+
+    constructor() {
+        afterNextRender(() => {
+            for (const rank of this.ranks) {
+                const image = new Image();
+                image.decoding = 'async';
+                image.src = rank.image;
+                void image.decode().catch(() => undefined);
+                this.preloadedImages.push(image);
+            }
+        });
+    }
 
     get selectedRank(): AncestorRank {
         return this.ranks[this.selectedIndex];
@@ -79,7 +92,11 @@ export class SlidingAncestorRheostatComponent {
     onRangeInput(event: Event): void {
         const input = event.target as HTMLInputElement;
         const position = Math.max(0, Math.min(this.ranks.length - 1, Number(input.value)));
-        const nextIndex = Math.round(position);
+        const nextIndex = position > this.dragPosition
+            ? Math.ceil(position)
+            : position < this.dragPosition
+                ? Math.floor(position)
+                : this.selectedIndex;
 
         if (nextIndex < this.currentVibeIndex && !ANCESTOR_ALLOW_PULL_BACK) {
             this.selectRank(nextIndex);
