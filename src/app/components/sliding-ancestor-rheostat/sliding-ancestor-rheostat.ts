@@ -48,10 +48,6 @@ export class SlidingAncestorRheostatComponent {
         return this.ranks[this.currentVibeIndex];
     }
 
-    get currentStatus(): string {
-        return ANCESTOR_FORWARD_HINT[this.currentVibeIndex] ?? '';
-    }
-
     get statusLabel(): string {
         if (this.selectedIndex === this.currentVibeIndex) return '当前状态';
         return this.selectedIndex < this.currentVibeIndex ? '糟糕的状态' : '理想状态';
