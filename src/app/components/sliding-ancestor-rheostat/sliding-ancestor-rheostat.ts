@@ -1,8 +1,7 @@
-import {Component, EventEmitter, HostListener, Output} from '@angular/core';
+import {afterNextRender, Component, EventEmitter, HostListener, Output} from '@angular/core';
 import {
     ANCESTOR_ALLOW_PULL_BACK,
     ANCESTOR_BLOCKED_BACKWARD_MESSAGES,
-    ANCESTOR_CURRENT_STATE,
     ANCESTOR_CURRENT_VIBE,
     ANCESTOR_FORWARD_HINT,
     ANCESTOR_RANKS,
@@ -20,21 +19,41 @@ export class SlidingAncestorRheostatComponent {
     @Output() closed = new EventEmitter<void>();
 
     readonly ranks: AncestorRank[] = ANCESTOR_RANKS;
-    currentStatus = ANCESTOR_CURRENT_STATE;
     readonly currentVibeIndex = Math.max(0, Math.min(ANCESTOR_RANKS.length - 1, ANCESTOR_CURRENT_VIBE));
-    readonly currentVibe = ANCESTOR_RANKS[this.currentVibeIndex];
 
     selectedIndex = this.currentVibeIndex;
+    dragPosition = this.currentVibeIndex;
     feedback = '';
     feedbackKind: 'blocked' | 'forward' = 'forward';
     private feedbackTimer?: ReturnType<typeof setTimeout>;
+    private readonly preloadedImages: HTMLImageElement[] = [];
+
+    constructor() {
+        afterNextRender(() => {
+            for (const rank of this.ranks) {
+                const image = new Image();
+                image.decoding = 'async';
+                image.src = rank.image;
+                void image.decode().catch(() => undefined);
+                this.preloadedImages.push(image);
+            }
+        });
+    }
 
     get selectedRank(): AncestorRank {
         return this.ranks[this.selectedIndex];
     }
 
+    get currentVibe(): AncestorRank {
+        return this.selectedRank;
+    }
+
+    get currentStatus(): string {
+        return ANCESTOR_FORWARD_HINT[this.selectedIndex] ?? '';
+    }
+
     get progress(): number {
-        return this.selectedIndex / (this.ranks.length - 1) * 100;
+        return this.dragPosition / (this.ranks.length - 1) * 100;
     }
 
     get intensity(): string {
@@ -59,11 +78,9 @@ export class SlidingAncestorRheostatComponent {
         const changed = nextIndex !== this.selectedIndex;
         const wasForward = nextIndex > this.selectedIndex;
         this.selectedIndex = nextIndex;
+        this.dragPosition = nextIndex;
 
-        const status = nextIndex === this.currentVibeIndex
-            ? ANCESTOR_CURRENT_STATE
-            : ANCESTOR_FORWARD_HINT[nextIndex] ?? ANCESTOR_CURRENT_STATE;
-        this.currentStatus = status;
+        const status = this.currentStatus;
 
         if (wasForward) {
             this.showFeedback(status, 'forward');
@@ -74,11 +91,21 @@ export class SlidingAncestorRheostatComponent {
 
     onRangeInput(event: Event): void {
         const input = event.target as HTMLInputElement;
-        const previousIndex = this.selectedIndex;
-        this.selectRank(Number(input.value));
-        if (this.selectedIndex === previousIndex) {
-            input.value = String(previousIndex);
+        const position = Math.max(0, Math.min(this.ranks.length - 1, Number(input.value)));
+        const nextIndex = position > this.dragPosition
+            ? Math.ceil(position)
+            : position < this.dragPosition
+                ? Math.floor(position)
+                : this.selectedIndex;
+
+        if (nextIndex < this.currentVibeIndex && !ANCESTOR_ALLOW_PULL_BACK) {
+            this.selectRank(nextIndex);
+            input.value = String(this.dragPosition);
+            return;
         }
+
+        this.selectRank(nextIndex);
+        this.dragPosition = position;
     }
 
     private showFeedback(message: string, kind: 'blocked' | 'forward'): void {

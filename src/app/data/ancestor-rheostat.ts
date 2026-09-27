@@ -6,8 +6,7 @@ export interface AncestorRank {
     accent: string;
 }
 
-// 当前状态和当前风评可在这里独立配置。
-export const ANCESTOR_CURRENT_STATE = '被考研试题折磨得死去活来';
+// 初始风评档位；当前状态由该档位对应的 ANCESTOR_FORWARD_HINT 获取。
 export const ANCESTOR_CURRENT_VIBE = 0;
 
 // 是否允许拉到低于“当前风评”档位的位置。设为 false 时，滑片最低只能回到当前风评档位。
@@ -22,7 +21,7 @@ export const ANCESTOR_BLOCKED_BACKWARD_MESSAGES = [
 export const ANCESTOR_FORWARD_HINT: Record<number, string> = {
     0: '被考研试题折磨得死去活来',
     1: '勉强上岸',
-    2: '阿海，未来还请多多指教了',
+    2: '阿海，今后也请多多指教啦',
     3: '该弃code炒股了',
     4: '立足港沪，神性初显。',
     5: '一代股神，尽显龙象'

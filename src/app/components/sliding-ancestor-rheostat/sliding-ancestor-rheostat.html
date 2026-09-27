@@ -53,20 +53,14 @@
             <div class="range-wrap">
                 <div class="range-rail" aria-hidden="true">
                     <span class="range-fill" [style.width.%]="progress"></span>
-                    @for (rank of ranks; track rank.level) {
-                        <i
-                            [class.active]="rank.level === selectedIndex"
-                            [style.left.%]="rank.level * 20"
-                        ></i>
-                    }
                 </div>
                 <input
                     class="rank-range"
                     type="range"
                     min="0"
                     max="5"
-                    step="1"
-                    [value]="selectedIndex"
+                    step="any"
+                    [value]="dragPosition"
                     aria-label="选择祖级"
                     (input)="onRangeInput($event)"
                 >
@@ -83,7 +77,6 @@
                         (click)="selectRank(rank.level)"
                     >
                         <strong>{{ rank.level }} {{ rank.name }}</strong>
-                        <span>{{ rank.description }}</span>
                     </button>
                 }
             </div>
