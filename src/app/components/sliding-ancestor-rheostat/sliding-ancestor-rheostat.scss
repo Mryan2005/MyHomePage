@@ -259,19 +259,6 @@
     transform: translateY(-50%);
 }
 
-.range-rail i {
-    position: absolute;
-    top: 50%;
-    z-index: 2;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: rgba(239, 230, 214, .38);
-    transform: translate(-50%, -50%);
-}
-
-.range-rail i.active { background: #fff; }
-
 .range-fill {
     position: absolute;
     inset: 0 auto 0 0;
@@ -321,6 +308,7 @@
     box-shadow: 0 0 0 3px #809cff, 0 8px 18px rgba(0, 0, 0, .5);
     pointer-events: none;
     transform: translate(-50%, -50%);
+    transition: left .08s linear;
 }
 
 .image-thumb img {
@@ -353,22 +341,11 @@
     background: color-mix(in srgb, var(--rank-accent) 9%, #130b22);
 }
 
-.rank-scale strong,
-.rank-scale span { display: block; }
-
 .rank-scale strong {
+    display: block;
     overflow: hidden;
     font-family: "Songti SC", serif;
     font-size: clamp(11px, 1.3vw, 15px);
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.rank-scale span {
-    margin-top: 3px;
-    overflow: hidden;
-    color: rgba(239, 230, 214, .48);
-    font-size: 8px;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
@@ -414,7 +391,6 @@
     .rank-title-line h3 { font-size: 27px; }
     .rank-title-line p { padding-inline: 10px; font-size: 9px; }
     .range-wrap { margin-inline: 22px; }
-    .rank-scale span { display: none; }
     .rank-scale strong { font-size: 10px; }
 }
 
