@@ -24,7 +24,7 @@ export const ANCESTOR_FORWARD_HINT: Record<number, string> = {
     2: '阿海，今后也请多多指教啦',
     3: '该弃code炒股了',
     4: '立足港沪，神性初显。',
-    5: '一代股神，尽显龙象'
+    5: '登上龙虎榜，尽显龙象'
 };
 
 export const ANCESTOR_RANKS: AncestorRank[] = [
