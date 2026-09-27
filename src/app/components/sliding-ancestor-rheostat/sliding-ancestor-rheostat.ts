@@ -45,10 +45,19 @@ export class SlidingAncestorRheostatComponent {
     }
 
     get currentVibe(): AncestorRank {
-        return this.selectedRank;
+        return this.ranks[this.currentVibeIndex];
     }
 
     get currentStatus(): string {
+        return ANCESTOR_FORWARD_HINT[this.currentVibeIndex] ?? '';
+    }
+
+    get statusLabel(): string {
+        if (this.selectedIndex === this.currentVibeIndex) return '当前状态';
+        return this.selectedIndex < this.currentVibeIndex ? '糟糕的状态' : '理想状态';
+    }
+
+    get selectedStatus(): string {
         return ANCESTOR_FORWARD_HINT[this.selectedIndex] ?? '';
     }
 
@@ -80,7 +89,7 @@ export class SlidingAncestorRheostatComponent {
         this.selectedIndex = nextIndex;
         this.dragPosition = nextIndex;
 
-        const status = this.currentStatus;
+        const status = this.selectedStatus;
 
         if (wasForward) {
             this.showFeedback(status, 'forward');
