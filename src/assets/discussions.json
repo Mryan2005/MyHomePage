@@ -1,6 +1,6 @@
 [
   {
-    "title": "减少考研复习速度",
+    "title": "降低考研复习速度",
     "url": "https://github.com/Mryan2005/MyHomePage/discussions/81",
     "createdAt": "2026-09-25T03:17:31Z",
     "closed": false,
@@ -106,6 +106,28 @@
       "login": "Mryan2005"
     },
     "labels": [],
+    "progress": {
+      "total": 0,
+      "completed": 0
+    }
+  },
+  {
+    "title": "考研结束后，我一定会干的事情",
+    "url": "https://github.com/Mryan2005/MyHomePage/discussions/88",
+    "createdAt": "2026-10-06T05:08:52Z",
+    "closed": false,
+    "body": "考研结束后（复试结束才算），我一定会干的事情：\r\n1. 继续游历上海\r\n2. 找找实习吧\r\n3. 修正我广东话的错误发音\r\n4. 继续 [Yozakura Gekka](https://github.com/YohooSoft/Yozakura-Gekka) 的开发\r\n5. 继续 [Cantonese Language Dictionary](https://github.com/CantoneseLanguageDictionary) 的开发\r\n6. 我要提升英语口语\r\n7. 我要学日语\r\n\r\n算了，就这么多吧，在规划就要做不完了",
+    "category": {
+      "name": "Announcements"
+    },
+    "author": {
+      "login": "Mryan2005"
+    },
+    "labels": [
+      {
+        "name": "Pause"
+      }
+    ],
     "progress": {
       "total": 0,
       "completed": 0
