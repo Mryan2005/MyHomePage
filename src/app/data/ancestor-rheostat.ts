@@ -7,7 +7,7 @@ export interface AncestorRank {
 }
 
 // 初始风评档位；当前状态由该档位对应的 ANCESTOR_FORWARD_HINT 获取。
-export const ANCESTOR_CURRENT_VIBE = 0;
+export const ANCESTOR_CURRENT_VIBE = 1;
 
 // 是否允许拉到低于“当前风评”档位的位置。设为 false 时，滑片最低只能回到当前风评档位。
 export const ANCESTOR_ALLOW_PULL_BACK = false;
@@ -20,7 +20,7 @@ export const ANCESTOR_BLOCKED_BACKWARD_MESSAGES = [
 // 成功往前拉时显示的提示，键为目标档位（0-5）。
 export const ANCESTOR_FORWARD_HINT: Record<number, string> = {
     0: '被考研试题折磨得死去活来',
-    1: '勉强上岸',
+    1: '我要上岸',
     2: '阿海，今后也请多多指教啦',
     3: '该弃code炒股了',
     4: '立足港沪，神性初显。',
