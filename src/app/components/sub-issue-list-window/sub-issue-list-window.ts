@@ -1,6 +1,7 @@
 import {ChangeDetectorRef, Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {HttpClient} from '@angular/common/http';
+import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {GithubDiscussionsService} from '../../services/github-discussions.service';
 import {WebsitePramasService} from '../../services/Website-pramas';
 import {GithubDiscussion} from '../../interfaces/github-discussion';
@@ -19,18 +20,19 @@ const DEFAULT_TASK_CATEGORY = 'Task';
 })
 export class SubIssueListComponent implements OnInit, OnDestroy {
 
-    private md = new MarkdownIt();
+    private md = new MarkdownIt({iframe: true, taskLists: true});
 
     allDiscussions: GithubDiscussion[] = [];
     discussions: GithubDiscussion[] = [];
     selectedDiscussion?: GithubDiscussion;
-    selectedDiscussionBodyHtml = '';
+    selectedDiscussionBodyHtml: SafeHtml = '';
 
     loading = false;
     error = '';
     lastUpdated = '';
 
     private http = inject(HttpClient);
+    private sanitizer = inject(DomSanitizer);
 
     /** 当前选中的分类筛选（空字符串 = 全部） */
     selectedCategory = DEFAULT_TASK_CATEGORY;
@@ -233,6 +235,10 @@ export class SubIssueListComponent implements OnInit, OnDestroy {
 
     private updateSelectedDiscussionBody(): void {
         const content = this.selectedDiscussion?.body?.trim() || '暂无详情描述';
-        this.selectedDiscussionBodyHtml = this.md.render(content);
+        // markdown-it-new escapes arbitrary HTML and only emits restricted HTTPS
+        // iframe markup. Trust that rendered result so Angular does not remove the
+        // safe iframe and task-list input elements during innerHTML binding.
+        const rendered = this.md.render(content);
+        this.selectedDiscussionBodyHtml = this.sanitizer.bypassSecurityTrustHtml(rendered);
     }
 }
