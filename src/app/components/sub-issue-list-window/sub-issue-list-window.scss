@@ -281,6 +281,35 @@
             list-style: decimal;
         }
 
+        ol.contains-task-list {
+            list-style: decimal;
+        }
+
+        li.task-list-item {
+            padding-left: 2px;
+        }
+
+        .task-list-item-checkbox {
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            margin: 0 .5em 0 .1em;
+            vertical-align: -.12em;
+            opacity: 1;
+            accent-color: var(--liquid-blue);
+        }
+
+        iframe {
+            display: block;
+            width: 100%;
+            max-width: 800px;
+            height: clamp(240px, 38vw, 420px);
+            margin: 8px 0;
+            border: 0;
+            border-radius: 10px;
+            background: rgba(47, 58, 78, .08);
+        }
+
         pre,
         code {
             font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
