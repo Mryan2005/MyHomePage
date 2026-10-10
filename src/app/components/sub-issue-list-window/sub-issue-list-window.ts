@@ -5,7 +5,7 @@ import {GithubDiscussionsService} from '../../services/github-discussions.servic
 import {WebsitePramasService} from '../../services/Website-pramas';
 import {GithubDiscussion} from '../../interfaces/github-discussion';
 import {firstValueFrom, Subscription} from 'rxjs';
-import MarkdownIt from 'markdown-it';
+import MarkdownIt from '@mryan2005/markdown-it-new';
 
 /** 在 Task 页面默认展示的分类名称（与 GitHub Discussion Category 的 name 一致） */
 const DEFAULT_TASK_CATEGORY = 'Task';
