@@ -22,7 +22,7 @@
     "@angular/platform-server": "^20.0.0",
     "@angular/router": "^20.0.0",
     "@angular/ssr": "^20.0.0",
-    "@mryan2005/markdown-it-new": "^15.0.3",
+    "@mryan2005/markdown-it-new": "^15.0.4",
     "@tailwindcss/cli": "^4.1.8",
     "@tailwindcss/postcss": "^4.1.8",
     "angular": "^1.8.3",
