@@ -121,7 +121,7 @@ export const fileslist: FileTree = {
     },
     'Agent Plugin': {
         'Codex Plugin': {
-            'gpt-skill-chinese-student': {
+            '中式学生': {
                 url: 'https://github.com/Mryan2005/gpt-skill-chinese-student',
                 create_date: '2026-10-18',
                 type: 'code',
