@@ -177,3 +177,9 @@ app-sub-travelling-window,
 body:has(#rheostat-toggle:checked) > canvas {
     visibility: hidden !important;
 }
+
+/* The glass renderer sits outside app-root's stacking context. On Travel,
+   keep it behind the navigation so the Wanderlist button remains visible. */
+body:has(.wanderlist-button) > canvas {
+    z-index: 0 !important;
+}

@@ -5,6 +5,7 @@ import {WebsitePramasService} from '../../services/Website-pramas';
 import {Router, NavigationEnd} from '@angular/router';
 import {filter} from 'rxjs/operators';
 import {RoadmapComponent} from '../roadmap/roadmap';
+import {WanderlistComponent} from '../wanderlist/wanderlist';
 
 interface HelpMenuItem {
     label: string;
@@ -13,7 +14,7 @@ interface HelpMenuItem {
 
 @Component({
     selector: 'app-topbar',
-    imports: [RoadmapComponent],
+    imports: [RoadmapComponent, WanderlistComponent],
     standalone: true,
     templateUrl: './topbar.component.html',
     styleUrl: './topbar.component.scss'
@@ -26,6 +27,7 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
 
     isFilesPage: boolean = false;
     isTaskPage: boolean = false;
+    isTravelPage = false;
     showHelpMenu = false;
     showAboutModal = false;
     aboutModalTitle = '';
@@ -33,6 +35,7 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
     currentPage = 'home';
     helpMenuItems: HelpMenuItem[] = [];
     @ViewChild('roadmapDialog') private roadmapDialog?: ElementRef<HTMLDialogElement>;
+    @ViewChild(WanderlistComponent) private wanderlist?: WanderlistComponent;
     private backgroundReadyHandler = () => this.refreshLiquidSnapshot();
     private liquidBoundsHandler = () => this.syncCssLensBounds();
 
@@ -69,6 +72,11 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
     onProgressClick(event: Event): void {
         event.stopPropagation();
         this.websitePramas.toggleProgressOverlay();
+    }
+
+    openWanderlist(): void {
+        this.closeHelpMenu();
+        this.wanderlist?.open();
     }
 
     toggleShowPause(event: Event): void {
@@ -188,12 +196,16 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
         const isFiles = url.startsWith('/files');
         const isTask = url.startsWith('/now');
         if (!isTask) this.roadmapDialog?.nativeElement.close();
-        if (this.isFilesPage !== isFiles || this.isTaskPage !== isTask) {
+        const isTravel = url.split(/[?#]/)[0] === '/travel';
+        if (this.isFilesPage !== isFiles || this.isTaskPage !== isTask || this.isTravelPage !== isTravel) {
             this.zone.run(() => {
                 this.isFilesPage = isFiles;
                 this.isTaskPage = isTask;
+                this.isTravelPage = isTravel;
             });
         }
+
+        if (!isTravel) this.wanderlist?.close();
 
         // 提取当前页面名
         const page = url.split('/')[1] || 'home';

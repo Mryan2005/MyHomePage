@@ -621,6 +621,29 @@
     text-decoration: none;
 }
 
+.wanderlist-button {
+    appearance: none;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    white-space: nowrap;
+
+    &:focus-visible {
+        outline: 2px solid white;
+        outline-offset: 2px;
+    }
+}
+
+@media (max-width: 720px) {
+    .bar-content:has(.wanderlist-button) {
+        overflow-y: hidden;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar { display: none; }
+    }
+}
+
 .roadmap-button {
     appearance: none;
     background: transparent;
