@@ -1,9 +1,10 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ChangeDetectorRef, NgZone, HostListener, Inject, PLATFORM_ID} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ChangeDetectorRef, NgZone, HostListener, Inject, PLATFORM_ID, ViewChild} from '@angular/core';
 import {isPlatformBrowser} from '@angular/common';
 import html2canvas from 'html2canvas';
 import {WebsitePramasService} from '../../services/Website-pramas';
 import {Router, NavigationEnd} from '@angular/router';
 import {filter} from 'rxjs/operators';
+import {RoadmapComponent} from '../roadmap/roadmap';
 
 interface HelpMenuItem {
     label: string;
@@ -12,7 +13,7 @@ interface HelpMenuItem {
 
 @Component({
     selector: 'app-topbar',
-    imports: [],
+    imports: [RoadmapComponent],
     standalone: true,
     templateUrl: './topbar.component.html',
     styleUrl: './topbar.component.scss'
@@ -31,6 +32,7 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
     aboutModalContent = '';
     currentPage = 'home';
     helpMenuItems: HelpMenuItem[] = [];
+    @ViewChild('roadmapDialog') private roadmapDialog?: ElementRef<HTMLDialogElement>;
     private backgroundReadyHandler = () => this.refreshLiquidSnapshot();
     private liquidBoundsHandler = () => this.syncCssLensBounds();
 
@@ -136,6 +138,22 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
         this.showAboutModal = false;
     }
 
+    openRoadmapModal(): void {
+        this.closeHelpMenu();
+        this.roadmapDialog?.nativeElement.showModal();
+    }
+
+    onRoadmapBackdropClick(event: MouseEvent): void {
+        const dialog = this.roadmapDialog?.nativeElement;
+        if (!dialog || event.target !== dialog) return;
+
+        const bounds = dialog.getBoundingClientRect();
+        if (event.clientX < bounds.left || event.clientX > bounds.right ||
+            event.clientY < bounds.top || event.clientY > bounds.bottom) {
+            dialog.close();
+        }
+    }
+
     private updateHelpMenu(): void {
         const openDiscussions = () => window.open('https://github.com/Mryan2005/MyHomePage/discussions', '_blank');
         const openNowNowNowPersonalPage = () => window.open('https://nownownow.com/p/OPSc', '_blank');
@@ -169,6 +187,7 @@ export class TopbarComponent implements OnInit, AfterViewInit, OnDestroy {
     private updatePageFlags(url: string) {
         const isFiles = url.startsWith('/files');
         const isTask = url.startsWith('/now');
+        if (!isTask) this.roadmapDialog?.nativeElement.close();
         if (this.isFilesPage !== isFiles || this.isTaskPage !== isTask) {
             this.zone.run(() => {
                 this.isFilesPage = isFiles;

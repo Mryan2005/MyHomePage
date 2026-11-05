@@ -1,0 +1,105 @@
+// Roadmap cards reference:
+// https://github.com/YohooSoft/markdown-it-new/blob/codex/neural-model-preview/src/roadmap_renderer.ts
+:host {
+    display: block;
+}
+
+.roadmap {
+    container-type: inline-size;
+    box-sizing: border-box;
+    max-width: 100%;
+    margin: 16px 0 0;
+    border: 1px solid #dedede;
+    border-radius: 20px;
+    background: #fcfcfc;
+    color: #111;
+    text-align: left;
+}
+
+.roadmap-content {
+    box-sizing: border-box;
+    padding: .7333em .7em .6333em;
+    font: 400 20px/1.3 Arial, Helvetica, sans-serif;
+    font-size: clamp(16px, 2.2556cqi, 30px);
+    overflow-wrap: anywhere;
+}
+
+[data-roadmap-header] {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: .5em 1em;
+    min-height: 1.4em;
+    margin: 0 0 .9667em;
+    padding: 0;
+}
+
+[data-roadmap-title],
+[data-roadmap-step-title] {
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    color: inherit;
+    font-family: inherit;
+    font-size: 1em;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: normal;
+}
+
+[data-roadmap-items] {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+[data-roadmap-step] {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.3333em minmax(0, 1fr);
+    column-gap: .5em;
+    margin: 0;
+    padding: 0 0 .9333em;
+    border: 0;
+    list-style: none;
+
+    &:last-child {
+        padding-bottom: .7667em;
+    }
+}
+
+[data-roadmap-connector] {
+    position: absolute;
+    top: 1.4333em;
+    bottom: .3em;
+    left: .6667em;
+    width: .1em;
+    border-radius: 999px;
+    background: #e3e3e3;
+    transform: translateX(-50%);
+}
+
+[data-roadmap-number] {
+    text-align: center;
+}
+
+.roadmap-step-content {
+    min-width: 0;
+}
+
+[data-roadmap-description] {
+    margin: 1.1333em 0 0;
+    padding: 0;
+    color: inherit;
+    font: inherit;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.roadmap-empty {
+    margin: 0 0 .7667em;
+    color: #666;
+    font: inherit;
+}

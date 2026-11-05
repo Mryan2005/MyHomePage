@@ -51,6 +51,15 @@
             >
                 <span class="bar_p">滑动变祖器</span>
             </label>
+            <button
+                type="button"
+                class="barItemBox roadmap-button"
+                aria-haspopup="dialog"
+                aria-controls="roadmap-modal"
+                (click)="openRoadmapModal()"
+            >
+                <span class="bar_p">roadmap</span>
+            </button>
             <div
                 class="barItemBox topbar-filter"
                 [class.active]="websitePramas.showPause"
@@ -77,6 +86,30 @@
         </div> -->
     </div>
 </header>
+
+<dialog
+    #roadmapDialog
+    id="roadmap-modal"
+    class="about-modal roadmap-modal"
+    aria-labelledby="roadmap-title"
+    aria-describedby="roadmap-description"
+    (click)="onRoadmapBackdropClick($event)"
+>
+    <div class="about-modal-header">
+        <h3 id="roadmap-title">roadmap</h3>
+        <button
+            type="button"
+            class="about-modal-close"
+            aria-label="关闭 roadmap"
+            autofocus
+            (click)="roadmapDialog.close()"
+        >✕</button>
+    </div>
+    <div class="about-modal-body">
+        <p id="roadmap-description">按年份与月份记录接下来要做的事情。</p>
+        <app-roadmap></app-roadmap>
+    </div>
+</dialog>
 
 @if (showAboutModal) {
     <div class="about-modal-overlay" (click)="closeAboutModal()">

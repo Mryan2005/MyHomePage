@@ -1,0 +1,25 @@
+<section class="roadmap" data-roadmap aria-label="My Life Roadmap">
+    <div class="roadmap-content">
+        <header data-roadmap-header>
+            <h3 data-roadmap-title>My Life Roadmap</h3>
+        </header>
+        @if (items.length) {
+            <ol data-roadmap-items role="list">
+                @for (item of items; track item.period + item.title; let index = $index; let last = $last) {
+                    <li data-roadmap-step>
+                        @if (!last) {
+                            <span data-roadmap-connector aria-hidden="true"></span>
+                        }
+                        <span data-roadmap-number aria-hidden="true">{{ index + 1 }}</span>
+                        <div class="roadmap-step-content">
+                            <h4 data-roadmap-step-title>{{ item.period }} • {{ item.title }}</h4>
+                            <p data-roadmap-description>{{ item.description }}</p>
+                        </div>
+                    </li>
+                }
+            </ol>
+        } @else {
+            <p class="roadmap-empty">路线图内容待更新。</p>
+        }
+    </div>
+</section>
