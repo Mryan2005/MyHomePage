@@ -1,8 +1,5 @@
-<section class="roadmap" data-roadmap aria-label="My Life Roadmap">
+<section class="roadmap" data-roadmap aria-label="路线图">
     <div class="roadmap-content">
-        <header data-roadmap-header>
-            <h3 data-roadmap-title>My Life Roadmap</h3>
-        </header>
         @if (items.length) {
             <ol data-roadmap-items role="list">
                 @for (item of items; track item.period + item.title; let index = $index; let last = $last) {
