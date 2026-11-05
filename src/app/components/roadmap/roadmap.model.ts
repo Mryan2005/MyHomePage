@@ -50,6 +50,7 @@ export function buildRoadmap(data: RoadmapData): RoadmapDisplayStage[] {
         choices: (stage.choices ?? []).filter(choice => choice.title.trim()).map(choice => ({
             ...choice,
             label: choice.id === stage.selectedChoice ? '已作选择' :
+                stage.selectedChoice ? '未选走向' :
                 choice.id === stage.preferredChoice ? '暂定选择' : '备选方向'
         })),
         tasks: (stage.items ?? []).map(normalizeTask).filter(task => task.title.length > 0)
