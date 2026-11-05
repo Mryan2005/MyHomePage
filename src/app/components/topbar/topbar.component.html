@@ -37,6 +37,11 @@
             }
         </div>
         <div class="bar_right"></div>
+        @if (isTravelPage) {
+            <button type="button" class="barItemBox wanderlist-button" aria-haspopup="dialog" (click)="openWanderlist()">
+                <span class="bar_p">Wanderlist</span>
+            </button>
+        }
         @if (isFilesPage) {
             <div class="barItemBox ping-button" (click)="onPingClick($event)">
                 <div class="bar_p ping-label">Ping</div>
@@ -86,6 +91,8 @@
         </div> -->
     </div>
 </header>
+
+<app-wanderlist />
 
 <dialog
     #roadmapDialog

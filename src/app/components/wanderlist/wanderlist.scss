@@ -1,0 +1,250 @@
+:host { display: contents; }
+
+.wanderlist-modal {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    inset: 0;
+    width: min(1680px, 94vw);
+    height: min(960px, 88dvh);
+    max-width: none;
+    max-height: 92dvh;
+    margin: auto;
+    padding: 0;
+    min-height: 0;
+    overflow: hidden;
+    color: #1b263b;
+    border: 1px solid rgba(255, 255, 255, .88);
+    border-radius: 24px;
+    background:
+        repeating-radial-gradient(ellipse at -12% -18%, transparent 0 47px, rgba(105, 145, 137, .075) 48px 49px, transparent 50px 78px),
+        #eff4f0;
+    box-shadow: 0 28px 100px rgba(12, 28, 46, .3);
+
+    &:not([open]) { display: none; }
+    &::backdrop { background: rgba(18, 33, 47, .42); }
+}
+
+.wanderlist-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 30px 34px 0;
+}
+
+.eyebrow {
+    margin: 0 0 9px;
+    color: #61776f;
+    font-size: 10px;
+    font-weight: 650;
+    letter-spacing: .18em;
+}
+
+h2 {
+    margin: 0;
+    font-size: clamp(32px, 3.4vw, 48px);
+    font-weight: 750;
+    letter-spacing: -.055em;
+    line-height: 1.1;
+
+    span { color: #8b293b; }
+}
+
+#wanderlist-description {
+    margin: 10px 0 0;
+    color: #63716e;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.close-button {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    color: #43524e;
+    border: 1px solid #d5dfd9;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .65);
+    cursor: pointer;
+    transition: background .18s;
+
+    &:hover { background: #fff; }
+}
+
+button:focus-visible,
+.wanderlist-body:focus-visible {
+    outline: 2px solid #8b293b;
+    outline-offset: 4px;
+}
+
+.wanderlist-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 24px 34px 22px;
+}
+
+.journey-count {
+    margin: 0;
+    color: #63716e;
+    font-size: 12px;
+
+    span { margin: 0 8px; color: #a0aca5; }
+}
+
+.filters {
+    display: flex;
+    overflow: hidden;
+    border: 1px solid #cdd7d0;
+    border-radius: 7px;
+    background: rgba(255, 255, 255, .8);
+
+    button {
+        min-height: 40px;
+        padding: 8px 22px;
+        color: #1b263b;
+        border: 0;
+        background: transparent;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background .18s, color .18s;
+
+        + button { border-left: 1px solid #cdd7d0; }
+        &:hover { background: #e2eae3; }
+        &.active { color: white; background: #1b263b; }
+        &:focus-visible { outline-offset: -4px; }
+    }
+}
+
+.wanderlist-body {
+    flex: 1;
+    min-height: 0;
+    padding: 0 34px 34px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: #bac8be transparent;
+}
+
+.destination-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 32px 24px;
+}
+
+.destination-card { min-width: 0; }
+
+.destination-image {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 3 / 2;
+    border-radius: 7px;
+    background: linear-gradient(145deg, #d6e4da, #e7e9dd);
+
+    img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform .35s ease;
+    }
+
+    img[hidden] { display: none; }
+}
+
+.image-placeholder {
+    position: absolute;
+    inset: 0;
+    width: 30%;
+    height: 100%;
+    margin: auto;
+    color: #9bb0a0;
+}
+
+.destination-card:hover img { transform: scale(1.035); }
+
+h3 {
+    margin: 13px 0 5px;
+    font-size: clamp(17px, 1.4vw, 21px);
+    font-weight: 650;
+    letter-spacing: -.025em;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+}
+
+.destination-location {
+    margin: 0;
+    color: #687772;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.destination-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 11px 0 0;
+    color: #4c6b68;
+    font-size: 14px;
+    font-weight: 650;
+
+    svg { width: 17px; height: 17px; flex-shrink: 0; }
+    &.visited { color: #872438; }
+    .status-divider { margin: 0 3px; color: #a2aca6; font-weight: 400; }
+    .category { color: #6c7875; font-weight: 400; }
+}
+
+.empty-state {
+    grid-column: 1 / -1;
+    padding: 80px 20px;
+    text-align: center;
+    color: #63716e;
+    font-size: 14px;
+
+    .empty-title { color: #1b263b; font-size: 22px; font-weight: 600; }
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+@media (min-width: 1600px) {
+    .destination-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+}
+
+@media (max-width: 1100px) {
+    .destination-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 760px) {
+    .wanderlist-modal { border-radius: 18px; }
+    .wanderlist-header { padding: 24px 20px 0; }
+    .wanderlist-toolbar { padding: 20px; }
+    .wanderlist-body { padding: 0 20px 24px; }
+    .destination-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px 16px; }
+    .eyebrow { font-size: 9px; letter-spacing: .12em; }
+    .filters button { padding-inline: 18px; }
+}
+
+@media (max-width: 430px) {
+    .destination-grid { grid-template-columns: minmax(0, 1fr); }
+    .wanderlist-toolbar { gap: 14px; }
+    .filters { width: 100%; }
+    .filters button { flex: 1; }
+    .journey-count span { margin-inline: 5px; }
+    h3 { font-size: 20px; }
+}
