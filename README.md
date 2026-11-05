@@ -2,6 +2,30 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.0.
 
+## Roadmap 配置
+
+`/now` 右上角的 `roadmap` 按钮会打开路线图卡片。编辑
+`src/app/data/roadmap.ts` 中的 `ROADMAP`，按「年份 → 月份（1–12）→ 事项数组」配置：
+
+```ts
+export const ROADMAP: RoadmapData = {
+    2026: {
+        11: ['要做的事情', '另一件要做的事情'],
+        12: ['要做的事情'],
+    },
+    2027: {
+        1: ['要做的事情'],
+    },
+};
+```
+
+年份、月份自动升序排列，每个月份显示为一个编号节点，事项按数组顺序展示。
+空年份、空月份和空白事项会跳过；未配置内容时显示待更新提示。
+配置修改后需要重新构建部署。
+
+卡片布局参考 [markdown-it-new 的 Roadmap cards](https://github.com/YohooSoft/markdown-it-new/tree/codex/neural-model-preview#roadmap-cards)，
+当前使用 Angular 模板渲染。
+
 ## Development server
 
 To start a local development server, run:
