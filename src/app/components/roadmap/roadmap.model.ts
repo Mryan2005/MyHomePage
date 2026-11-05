@@ -1,4 +1,4 @@
-import {RoadmapData, RoadmapStage, RoadmapTask} from '../../data/roadmap';
+import {RoadmapChoice, RoadmapData, RoadmapStage, RoadmapTask} from '../../data/roadmap';
 
 export interface RoadmapDisplayTask {
     title: string;
@@ -12,6 +12,8 @@ export interface RoadmapDisplayStage {
     period: string;
     description: string;
     tasks: RoadmapDisplayTask[];
+    state: RoadmapStage['state'];
+    choices: (RoadmapChoice & {label: string})[];
 }
 
 function normalizeTask(task: RoadmapTask): RoadmapDisplayTask {
@@ -44,6 +46,12 @@ export function buildRoadmap(data: RoadmapData): RoadmapDisplayStage[] {
         title: stage.title.trim(),
         period: stage.period?.trim() ?? '',
         description: stage.description?.trim() ?? '',
+        state: stage.state,
+        choices: (stage.choices ?? []).filter(choice => choice.title.trim()).map(choice => ({
+            ...choice,
+            label: choice.id === stage.selectedChoice ? '已作选择' :
+                choice.id === stage.preferredChoice ? '暂定选择' : '备选方向'
+        })),
         tasks: (stage.items ?? []).map(normalizeTask).filter(task => task.title.length > 0)
-    })).filter(stage => stage.title.length > 0 && (stage.description.length > 0 || stage.tasks.length > 0));
+    })).filter(stage => stage.title.length > 0 && (stage.description.length > 0 || stage.tasks.length > 0 || stage.choices.length > 0));
 }
