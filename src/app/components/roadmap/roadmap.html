@@ -2,15 +2,30 @@
     <div class="roadmap-content">
         @if (items.length) {
             <ol data-roadmap-items role="list">
-                @for (item of items; track item.period + item.title; let index = $index; let last = $last) {
+                @for (item of items; track $index; let index = $index; let last = $last) {
                     <li data-roadmap-step>
                         @if (!last) {
                             <span data-roadmap-connector aria-hidden="true"></span>
                         }
                         <span data-roadmap-number aria-hidden="true">{{ index + 1 }}</span>
                         <div class="roadmap-step-content">
-                            <h4 data-roadmap-step-title>{{ item.period }} • {{ item.title }}</h4>
-                            <p data-roadmap-description>{{ item.description }}</p>
+                            <h4 data-roadmap-step-title>@if (item.period) { {{ item.period }} • }{{ item.title }}</h4>
+                            @if (item.description) {
+                                <p data-roadmap-description>{{ item.description }}</p>
+                            }
+                            @if (item.tasks.length) {
+                                <ul class="roadmap-tasks">
+                                    @for (task of item.tasks; track $index) {
+                                        <li>
+                                            @if (task.link) {
+                                                <a [href]="task.link" target="_blank" rel="noopener noreferrer">{{ task.title }}</a>
+                                            } @else { {{ task.title }} }
+                                            @if (task.status) { <span class="roadmap-status">{{ task.status }}</span> }
+                                            @if (task.description) { <p class="task-description">{{ task.description }}</p> }
+                                        </li>
+                                    }
+                                </ul>
+                            }
                         </div>
                     </li>
                 }
