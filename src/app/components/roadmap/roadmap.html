@@ -3,13 +3,18 @@
         @if (items.length) {
             <ol data-roadmap-items role="list">
                 @for (item of items; track $index; let index = $index; let last = $last) {
-                    <li data-roadmap-step>
+                    <li data-roadmap-step [class.current-stage]="item.state === 'current'">
                         @if (!last) {
                             <span data-roadmap-connector aria-hidden="true"></span>
                         }
                         <span data-roadmap-number aria-hidden="true">{{ index + 1 }}</span>
-                        <div class="roadmap-step-content">
+                        <details class="roadmap-step-content" [open]="item.state === 'current'">
+                            <summary class="roadmap-stage-summary">
                             <h4 data-roadmap-step-title>@if (item.period) { {{ item.period }} • }{{ item.title }}</h4>
+                            @if (item.state) {
+                                <span class="roadmap-status">{{ item.state === 'current' ? '当前节点' : item.state === 'past' ? '已走过' : '未来计划' }}</span>
+                            }
+                            </summary>
                             @if (item.description) {
                                 <p data-roadmap-description>{{ item.description }}</p>
                             }
@@ -26,7 +31,14 @@
                                     }
                                 </ul>
                             }
-                        </div>
+                            @for (choice of item.choices; track $index) {
+                                <div class="roadmap-choice" [class.preferred-choice]="choice.label !== '备选方向'">
+                                    <div class="choice-header"><strong>{{ choice.title }}</strong><span class="roadmap-status">{{ choice.label }}</span></div>
+                                    @if (choice.description) { <p class="task-description">{{ choice.description }}</p> }
+                                    @if (choice.reason) { <p class="task-description">选择理由：{{ choice.reason }}</p> }
+                                </div>
+                            }
+                        </details>
                     </li>
                 }
             </ol>

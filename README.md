@@ -73,6 +73,35 @@ export const ROADMAP: RoadmapData = [
 空白事项、没有说明或有效事项的阶段会跳过；没有有效内容时显示待更新提示。
 配置文件内附有可直接修改的注释示例。
 
+### 章节、未来选择与当前节点
+
+每个阶段都是可折叠章节，点击章节标题即可展开或收起；默认展开
+`state: 'current'` 的章节，其余章节默认收起。
+章节与选择卡片内边距为 8px，正文和状态为 16px，章节标题为 18px。
+
+- `state`: `past`（已走过）、`current`（当前节点）、`future`（未来计划）。手动维护，不会因日期到来自动改变。
+- `choices`: 可提前填写多个可能的方向，每项包含唯一 `id`、`title`，可选 `description` 和 `reason`（选择理由）。
+- `preferredChoice`: 填写倾向选项的 `id`，显示「暂定选择」，可随时修改。
+- `selectedChoice`: 只有实际决定后才填写，显示「已作选择」；同一选项同时被标记时以此为准。
+
+没有被标记的选项显示「备选方向」。选项和当前节点互相独立：到达节点不代表已经作出决定。
+这些内容通过配置文件维护，不在页面内编辑或自动保存。
+
+```ts
+{
+    period: '未来',
+    title: 'DECISION · 下一步怎么走？',
+    state: 'future',
+    choices: [
+        {id: 'research', title: '继续深造', description: '先填写大致设想。'},
+        {id: 'alternative', title: '另一种可能', reason: '可以补充考虑这个方向的理由。'},
+    ],
+    preferredChoice: 'research',
+    // 到达这个节点时，将 state 改为 'current'。
+    // 实际决定后可添加 selectedChoice: 'research'。
+}
+```
+
 卡片布局参考 [markdown-it-new 的 Roadmap cards](https://github.com/YohooSoft/markdown-it-new/tree/codex/neural-model-preview#roadmap-cards)，
 当前使用 Angular 模板渲染。
 
