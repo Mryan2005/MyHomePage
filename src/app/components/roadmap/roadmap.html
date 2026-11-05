@@ -10,33 +10,13 @@
                         <span data-roadmap-number aria-hidden="true">{{ index + 1 }}</span>
                         <details class="roadmap-step-content" [open]="item.state === 'current'">
                             <summary class="roadmap-stage-summary">
-                            <h4 data-roadmap-step-title>@if (item.period) { {{ item.period }} • }{{ item.title }}</h4>
+                            <h4 data-roadmap-step-title><button type="button" class="event-title" aria-haspopup="dialog" aria-controls="roadmap-event-dialog" (click)="openEvent($event, item)">{{ item.title }}</button></h4>
                             @if (item.state) {
                                 <span class="roadmap-status">{{ item.state === 'current' ? '当前节点' : item.state === 'past' ? '已走过' : '未来计划' }}</span>
                             }
                             </summary>
                             @if (item.description) {
                                 <p data-roadmap-description>{{ item.description }}</p>
-                            }
-                            @if (item.tasks.length) {
-                                <ul class="roadmap-tasks">
-                                    @for (task of item.tasks; track $index) {
-                                        <li>
-                                            @if (task.link) {
-                                                <a [href]="task.link" target="_blank" rel="noopener noreferrer">{{ task.title }}</a>
-                                            } @else { {{ task.title }} }
-                                            @if (task.status) { <span class="roadmap-status">{{ task.status }}</span> }
-                                            @if (task.description) { <p class="task-description">{{ task.description }}</p> }
-                                        </li>
-                                    }
-                                </ul>
-                            }
-                            @for (choice of item.choices; track $index) {
-                                <div class="roadmap-choice" [class.preferred-choice]="choice.label !== '备选方向'">
-                                    <div class="choice-header"><strong>{{ choice.title }}</strong><span class="roadmap-status">{{ choice.label }}</span></div>
-                                    @if (choice.description) { <p class="task-description">{{ choice.description }}</p> }
-                                    @if (choice.reason) { <p class="task-description">选择理由：{{ choice.reason }}</p> }
-                                </div>
                             }
                         </details>
                     </li>
@@ -47,3 +27,41 @@
         }
     </div>
 </section>
+
+<dialog #eventDialog id="roadmap-event-dialog" class="roadmap-event-dialog"
+    aria-labelledby="roadmap-event-title" (click)="onEventBackdropClick($event)">
+    <header class="event-dialog-header">
+        <h3 id="roadmap-event-title">{{ selectedEvent?.title }}</h3>
+        <button type="button" class="event-dialog-close" aria-label="关闭事件详情" autofocus (click)="eventDialog.close()">✕</button>
+    </header>
+    @if (selectedEvent) {
+        <div class="event-dialog-body">
+            @if (selectedEvent.period) { <p class="event-period">{{ selectedEvent.period }}</p> }
+            @if (selectedEvent.state) {
+                <span class="roadmap-status">{{ selectedEvent.state === 'current' ? '当前节点' : selectedEvent.state === 'past' ? '已走过' : '未来计划' }}</span>
+            }
+            @if (selectedEvent.description) { <p data-roadmap-description>{{ selectedEvent.description }}</p> }
+                            @if (selectedEvent.tasks.length) {
+                                <ul class="roadmap-tasks">
+                                    @for (task of selectedEvent.tasks; track $index) {
+                                        <li>
+                                            @if (task.link) {
+                                                <a [href]="task.link" target="_blank" rel="noopener noreferrer">{{ task.title }}</a>
+                                            } @else { {{ task.title }} }
+                                            @if (task.status) { <span class="roadmap-status">{{ task.status }}</span> }
+                                            @if (task.description) { <p class="task-description">{{ task.description }}</p> }
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                            @for (choice of selectedEvent.choices; track $index) {
+                                <div class="roadmap-choice" [class.preferred-choice]="choice.label === '已作选择' || choice.label === '暂定选择'">
+                                    <div class="choice-header"><strong>{{ choice.title }}</strong><span class="roadmap-status">{{ choice.label }}</span></div>
+                                    @if (choice.retrospective) { <span class="roadmap-status">回看补充的可能性</span> }
+                                    @if (choice.description) { <p class="task-description">{{ choice.description }}</p> }
+                                    @if (choice.reason) { <p class="task-description">选择理由：{{ choice.reason }}</p> }
+                                </div>
+                            }
+        </div>
+    }
+</dialog>

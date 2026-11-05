@@ -130,3 +130,55 @@
 .roadmap-stage-summary:focus-visible { outline: 2px solid #0867b5; outline-offset: 4px; border-radius: 4px; }
 .current-stage .roadmap-stage-summary h4 { color: #0867b5; }
 .current-stage > [data-roadmap-number] { color: #0867b5; font-weight: 700; }
+
+.event-title {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    &:hover { text-decoration: underline; }
+    &:focus-visible { outline: 2px solid #0867b5; outline-offset: 3px; }
+}
+
+.roadmap-event-dialog {
+    width: min(960px, calc(100vw - 32px));
+    max-height: calc(88dvh - 16px);
+    margin: auto;
+    padding: 8px;
+    border: 1px solid #dce2e8;
+    border-radius: 16px;
+    background: #fcfcfc;
+    color: #111;
+    font: 400 16px/1.6 Arial, Helvetica, sans-serif;
+    overflow: auto;
+    &::backdrop { background: rgba(15, 25, 40, .35); backdrop-filter: blur(6px); }
+}
+
+.event-dialog-header {
+    position: sticky;
+    top: -8px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 8px;
+    background: #fcfcfc;
+    z-index: 1;
+    h3 { margin: 0; font-size: 18px; }
+}
+
+.event-dialog-close {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border: 1px solid #dce2e8;
+    border-radius: 50%;
+    background: #f0f3f6;
+    cursor: pointer;
+}
+
+.event-dialog-body { padding: 8px; }
+.event-period { margin: 0 0 8px; color: #666; }
