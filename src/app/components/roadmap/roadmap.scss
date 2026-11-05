@@ -19,23 +19,10 @@
 .roadmap-content {
     box-sizing: border-box;
     padding: .7333em .7em .6333em;
-    font: 400 20px/1.3 Arial, Helvetica, sans-serif;
-    font-size: clamp(16px, 2.2556cqi, 30px);
+    font: 400 14px/1.6 Arial, Helvetica, sans-serif;
     overflow-wrap: anywhere;
 }
 
-[data-roadmap-header] {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: .5em 1em;
-    min-height: 1.4em;
-    margin: 0 0 .9667em;
-    padding: 0;
-}
-
-[data-roadmap-title],
 [data-roadmap-step-title] {
     min-width: 0;
     margin: 0;
