@@ -48,7 +48,7 @@ export const ROADMAP: RoadmapData = [
             {
                 title: '18 岁入沪上大学',
                 description:
-                    '进入上海第二工业大学，开始智能科学与技术专业的本科学习。',
+                    '进入大学，开始智能科学与技术专业的本科学习。',
             },
         ],
     },
